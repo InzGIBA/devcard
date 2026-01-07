@@ -4,6 +4,7 @@
 	interface Option {
 		value: string;
 		label: string;
+		mobileLabel?: string;
 		icon?: Snippet;
 	}
 
@@ -70,7 +71,12 @@
 			{disabled}
 		>
 			<span class={!selectedOption ? 'text-[var(--color-text-placeholder)]' : ''}>
-				{selectedOption?.label || placeholder}
+				{#if selectedOption}
+					<span class="sm:hidden">{selectedOption.mobileLabel || selectedOption.label}</span>
+					<span class="hidden sm:inline">{selectedOption.label}</span>
+				{:else}
+					{placeholder}
+				{/if}
 			</span>
 			<svg
 				class="h-4 w-4 text-[var(--color-text-tertiary)] transition-transform {isOpen

@@ -22,25 +22,25 @@
 		<img
 			src={profile.user.avatarUrl}
 			alt={profile.user.login}
-			class="h-[296px] w-[296px] rounded-full border-4 border-[var(--color-border-default)] bg-[var(--color-bg-tertiary)]"
+			class="h-74 w-74 rounded-full border-4 border-border-default bg-bg-tertiary"
 		/>
 	</div>
 
 	<!-- Name & Username -->
 	<div class="space-y-1">
 		{#if profile.user.name}
-			<h1 class="text-2xl font-semibold text-[var(--color-text-primary)]">
+			<h1 class="text-2xl font-semibold text-text-primary">
 				{profile.user.name}
 			</h1>
 		{/if}
-		<p class="text-xl text-[var(--color-text-secondary)]">
+		<p class="text-xl text-text-secondary">
 			@{profile.user.login}
 		</p>
 	</div>
 
 	<!-- Bio -->
 	{#if profile.user.bio}
-		<p class="text-[var(--color-text-secondary)]">
+		<p class="text-text-secondary">
 			{profile.user.bio}
 		</p>
 	{/if}
@@ -70,7 +70,7 @@
 	{/if}
 
 	<!-- Meta Info -->
-	<div class="space-y-2 text-sm text-[var(--color-text-secondary)]">
+	<div class="space-y-2 text-sm text-text-secondary">
 		{#if profile.user.company}
 			<div class="flex items-center justify-center lg:justify-start gap-2">
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +121,7 @@
 						: `https://${profile.user.websiteUrl}`}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-[var(--color-accent-green)] hover:underline"
+					class="text-accent-green hover:underline"
 				>
 					{profile.user.websiteUrl.replace(/^https?:\/\//, '')}
 				</a>
@@ -139,7 +139,7 @@
 					href="https://twitter.com/{profile.user.twitterUsername}"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-[var(--color-accent-green)] hover:underline"
+					class="text-accent-green hover:underline"
 				>
 					@{profile.user.twitterUsername}
 				</a>
@@ -163,30 +163,30 @@
 	<div class="flex items-center justify-center lg:justify-start gap-4 text-sm">
 		<a
 			href="https://github.com/{profile.user.login}?tab=followers"
-			class="flex items-center gap-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent-green)]"
+			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
 		>
 			<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
 				<path
 					d="M2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z"
 				/>
 			</svg>
-			<span><span class="font-semibold text-[var(--color-text-primary)]">{profile.stats.followers}</span> followers</span>
+			<span><span class="font-semibold text-text-primary">{profile.stats.followers}</span> followers</span>
 		</a>
-		<span class="text-[var(--color-text-tertiary)]">·</span>
+		<span class="text-text-tertiary">·</span>
 		<a
 			href="https://github.com/{profile.user.login}?tab=following"
-			class="flex items-center gap-2 text-[var(--color-text-secondary)] hover:text-[var(--color-accent-green)]"
+			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
 		>
-			<span><span class="font-semibold text-[var(--color-text-primary)]">{profile.stats.following}</span> following</span>
+			<span><span class="font-semibold text-text-primary">{profile.stats.following}</span> following</span>
 		</a>
 	</div>
 
 	<!-- Profile Views -->
-	<div class="flex items-center justify-center lg:justify-start gap-2 text-sm text-[var(--color-text-secondary)]">
+	<div class="flex items-center justify-center lg:justify-start gap-2 text-sm text-text-secondary">
 		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
 		</svg>
-		<span><span class="font-semibold text-[var(--color-text-primary)]">{views.toLocaleString()}</span> views</span>
+		<span><span class="font-semibold text-text-primary">{views.toLocaleString()}</span> views</span>
 	</div>
 </aside>

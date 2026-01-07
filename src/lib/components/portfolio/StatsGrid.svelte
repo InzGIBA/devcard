@@ -40,13 +40,13 @@
 	{#each stats as stat}
 		<Card variant="default" padding="md">
 			<div class="flex flex-col items-center text-center">
-				<div class="mb-2 text-[var(--color-text-tertiary)]">
+				<div class="mb-2 text-text-tertiary">
 					{@html stat.icon}
 				</div>
-				<div class="text-3xl font-bold text-[var(--color-text-primary)]">
+				<div class="text-3xl font-bold text-text-primary">
 					{formatNumber(stat.value)}
 				</div>
-				<div class="text-xs uppercase tracking-wider text-[var(--color-text-secondary)]">
+				<div class="text-xs uppercase tracking-wider text-text-secondary">
 					{stat.label}
 				</div>
 			</div>
@@ -54,11 +54,11 @@
 	{/each}
 </div>
 
-{#if totalContributions > 0}
-	<div class="mt-4 text-center text-sm text-[var(--color-text-secondary)]">
-		<span class="font-semibold text-[var(--color-accent-green)]">
+<!-- {#if totalContributions > 0}
+	<div class="mt-4 text-center text-sm text-text-secondary">
+		<span class="font-semibold text-accent-green">
 			{formatNumber(totalContributions)}
 		</span>
 		contributions in the last year
 	</div>
-{/if}
+{/if} -->

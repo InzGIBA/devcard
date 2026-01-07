@@ -10,8 +10,8 @@
 	let { template = 'github', onTemplateChange }: Props = $props();
 
 	const templateOptions = [
-		{ value: 'github', label: 'GitHub Style' },
-		{ value: 'bento', label: 'Bento Grid' },
+		{ value: 'github', label: 'GitHub Style', mobileLabel: 'GitHub' },
+		{ value: 'bento', label: 'Bento Grid', mobileLabel: 'Bento' },
 		{ value: 'minimal', label: 'Minimal' }
 	];
 

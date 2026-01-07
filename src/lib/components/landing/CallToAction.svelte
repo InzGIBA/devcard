@@ -2,10 +2,10 @@
 	import Button from '$lib/components/ui/Button.svelte';
 </script>
 
-<section class="relative z-10 border-t border-[var(--color-border-muted)] bg-[var(--color-bg-primary)] py-24 text-center">
+<section class="relative z-10 border-t border-border-muted bg-bg-primary py-24 text-center">
 	<div class="mx-auto max-w-4xl px-6">
-		<h2 class="mb-6 text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">Ready to stand out?</h2>
-		<p class="mx-auto mb-10 w-full max-w-3xl text-lg text-[var(--color-text-secondary)]">
+		<h2 class="mb-6 text-4xl font-bold tracking-tight text-text-primary">Ready to stand out?</h2>
+		<p class="mx-auto mb-10 w-full max-w-3xl text-lg text-text-secondary">
 			Join thousands of developers using CheckMyGit to showcase their work. Open source, privacy-focused, and free forever.
 		</p>
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">

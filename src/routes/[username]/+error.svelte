@@ -28,13 +28,13 @@
 
 <main class="flex min-h-[60vh] items-center justify-center px-4">
 	<Card variant="default" padding="lg" class="max-w-md text-center">
-		<div class="mb-4 text-6xl font-bold text-[var(--color-text-tertiary)]">
+		<div class="mb-4 text-6xl font-bold text-text-tertiary">
 			{status}
 		</div>
-		<h1 class="text-xl font-semibold text-[var(--color-text-primary)]">
+		<h1 class="text-xl font-semibold text-text-primary">
 			{message.title}
 		</h1>
-		<p class="mt-2 text-[var(--color-text-secondary)]">
+		<p class="mt-2 text-text-secondary">
 			{$page.error?.message || message.description}
 		</p>
 		<div class="mt-6 flex justify-center gap-3">

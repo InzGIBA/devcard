@@ -61,10 +61,10 @@
 
 <Card variant="default" padding="md" class={className}>
 	<div class="mb-4 flex items-center justify-between">
-		<h3 class="text-base font-semibold text-[var(--color-text-primary)]">Contributions</h3>
-		<div class="text-sm text-[var(--color-text-secondary)]">
+		<h3 class="text-base font-semibold text-text-primary">Contributions</h3>
+		<div class="text-sm text-text-secondary">
 			Total Contributions:
-			<span class="font-semibold text-[var(--color-text-primary)]">
+			<span class="font-semibold text-text-primary">
 				{formatNumber(totalContributions)}
 			</span>
 		</div>
@@ -73,7 +73,7 @@
 	{#if calendar}
 		<div class="w-full">
 			<!-- Month labels -->
-			<div class="mb-2 flex text-xs text-[var(--color-text-tertiary)]">
+			<div class="mb-2 flex text-xs text-text-tertiary">
 				<!-- Spacer for Day Labels -->
 				<div class="w-8 shrink-0"></div>
 				
@@ -98,7 +98,7 @@
 				<!-- Day labels -->
 				<div class="flex w-8 shrink-0 flex-col gap-0.5">
 					{#each dayLabels as label}
-						<div class="flex flex-1 items-center justify-end text-[10px] leading-none text-[var(--color-text-tertiary)]">
+						<div class="flex flex-1 items-center justify-end text-[10px] leading-none text-text-tertiary">
 							<span class="mr-1">{label}</span>
 						</div>
 					{/each}
@@ -120,12 +120,12 @@
 				</div>
 			</div>
 			
-			<div class="mt-4 text-xs text-[var(--color-text-tertiary)]">
+			<div class="mt-4 text-xs text-text-tertiary">
 				Last 52 weeks of activity.
 			</div>
 		</div>
 	{:else}
-		<div class="flex h-32 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
+		<div class="flex h-32 items-center justify-center text-sm text-text-tertiary">
 			<div class="text-center">
 				<svg
 					class="mx-auto mb-2 h-8 w-8"

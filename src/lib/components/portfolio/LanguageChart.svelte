@@ -44,7 +44,7 @@
 	<div class="flex items-center gap-6">
 		<!-- Donut Chart -->
 		{#if topLanguages.length > 0}
-			<div class="relative flex-shrink-0">
+			<div class="relative shrink-0">
 				<svg width={size} height={size} class="-rotate-90">
 					{#each segments as segment}
 						<circle
@@ -61,7 +61,7 @@
 					{/each}
 				</svg>
 				<div
-					class="absolute inset-0 flex items-center justify-center text-xs text-[var(--color-text-tertiary)]"
+					class="absolute inset-0 flex items-center justify-center text-xs text-text-tertiary"
 				>
 					{topLanguages.length} langs
 				</div>
@@ -76,21 +76,21 @@
 								class="h-3 w-3 rounded-full"
 								style="background-color: {lang.color}"
 							></div>
-							<span class="text-[var(--color-text-primary)]">{lang.name}</span>
+							<span class="text-text-primary">{lang.name}</span>
 						</div>
-						<span class="text-[var(--color-text-secondary)]">{lang.percentage}%</span>
+						<span class="text-text-secondary">{lang.percentage}%</span>
 					</div>
 				{/each}
 			</div>
 		{:else}
-			<div class="flex w-full items-center justify-center py-4 text-sm text-[var(--color-text-tertiary)]">
+			<div class="flex w-full items-center justify-center py-4 text-sm text-text-tertiary">
 				No language data available
 			</div>
 		{/if}
 	</div>
 
 	{#if topLanguages.length > 0}
-		<div class="mt-4 text-xs text-[var(--color-text-tertiary)]">
+		<div class="mt-4 text-xs text-text-tertiary">
 			Based on top {total} repos
 		</div>
 	{/if}

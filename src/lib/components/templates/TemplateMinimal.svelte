@@ -22,22 +22,22 @@
 		<img
 			src={profile.user.avatarUrl}
 			alt={profile.user.login}
-			class="mx-auto mb-6 h-32 w-32 rounded-full border-4 border-[var(--color-border-default)]"
+			class="mx-auto mb-6 h-32 w-32 rounded-full border-4 border-border-default"
 		/>
-		<h1 class="text-4xl font-bold text-[var(--color-text-primary)]">
+		<h1 class="text-4xl font-bold text-text-primary">
 			{profile.user.name || profile.user.login}
 		</h1>
-		<p class="mt-2 text-xl text-[var(--color-text-secondary)]">
+		<p class="mt-2 text-xl text-text-secondary">
 			@{profile.user.login}
 		</p>
 		{#if profile.user.bio}
-			<p class="mx-auto mt-4 max-w-xl text-[var(--color-text-secondary)]">
+			<p class="mx-auto mt-4 max-w-xl text-text-secondary">
 				{profile.user.bio}
 			</p>
 		{/if}
 
 		<!-- Social Links -->
-		<div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-[var(--color-text-tertiary)]">
+		<div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-text-tertiary">
 			{#if profile.user.location}
 				<span>{profile.user.location}</span>
 			{/if}
@@ -49,7 +49,7 @@
 					href={profile.user.websiteUrl.startsWith('http') ? profile.user.websiteUrl : `https://${profile.user.websiteUrl}`}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-[var(--color-accent-green)] hover:underline"
+					class="text-accent-green hover:underline"
 				>
 					{profile.user.websiteUrl.replace(/^https?:\/\//, '')}
 				</a>
@@ -61,32 +61,32 @@
 	<section class="mb-16">
 		<div class="flex flex-wrap items-center justify-center gap-8 text-center">
 			<div>
-				<div class="text-3xl font-bold text-[var(--color-text-primary)]">
+				<div class="text-3xl font-bold text-text-primary">
 					{profile.stats.totalRepos}
 				</div>
-				<div class="text-sm text-[var(--color-text-secondary)]">Repositories</div>
+				<div class="text-sm text-text-secondary">Repositories</div>
 			</div>
-			<div class="h-12 w-px bg-[var(--color-border-default)]"></div>
+			<div class="h-12 w-px bg-border-default"></div>
 			<div>
-				<div class="text-3xl font-bold text-[var(--color-text-primary)]">
+				<div class="text-3xl font-bold text-text-primary">
 					{formatNumber(profile.stats.totalStars)}
 				</div>
-				<div class="text-sm text-[var(--color-text-secondary)]">Stars</div>
+				<div class="text-sm text-text-secondary">Stars</div>
 			</div>
-			<div class="h-12 w-px bg-[var(--color-border-default)]"></div>
+			<div class="h-12 w-px bg-border-default"></div>
 			<div>
-				<div class="text-3xl font-bold text-[var(--color-text-primary)]">
+				<div class="text-3xl font-bold text-text-primary">
 					{formatNumber(profile.stats.followers)}
 				</div>
-				<div class="text-sm text-[var(--color-text-secondary)]">Followers</div>
+				<div class="text-sm text-text-secondary">Followers</div>
 			</div>
 			{#if totalContributions > 0}
-				<div class="h-12 w-px bg-[var(--color-border-default)]"></div>
+				<div class="h-12 w-px bg-border-default"></div>
 				<div>
-					<div class="text-3xl font-bold text-[var(--color-accent-green)]">
+					<div class="text-3xl font-bold text-accent-green">
 						{formatNumber(totalContributions)}
 					</div>
-					<div class="text-sm text-[var(--color-text-secondary)]">Contributions</div>
+					<div class="text-sm text-text-secondary">Contributions</div>
 				</div>
 			{/if}
 		</div>
@@ -95,7 +95,7 @@
 	<!-- Languages -->
 	{#if profile.languages.length > 0}
 		<section class="mb-16">
-			<h2 class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-[var(--color-text-tertiary)]">
+			<h2 class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-text-tertiary">
 				Technologies
 			</h2>
 			<div class="flex flex-wrap justify-center gap-2">
@@ -111,7 +111,7 @@
 	<!-- Featured Projects -->
 	{#if profile.pinnedRepositories.length > 0}
 		<section class="mb-16">
-			<h2 class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-[var(--color-text-tertiary)]">
+			<h2 class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-text-tertiary">
 				Featured Projects
 			</h2>
 			<div class="space-y-6">
@@ -120,20 +120,20 @@
 						href={repo.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="group block border-b border-[var(--color-border-muted)] pb-6 last:border-0"
+						class="group block border-b border-border-muted pb-6 last:border-0"
 					>
 						<div class="flex items-start justify-between">
 							<div>
-								<h3 class="text-lg font-semibold text-[var(--color-accent-green)] group-hover:underline">
+								<h3 class="text-lg font-semibold text-accent-green group-hover:underline">
 									{repo.name}
 								</h3>
 								{#if repo.description}
-									<p class="mt-1 text-[var(--color-text-secondary)]">
+									<p class="mt-1 text-text-secondary">
 										{repo.description}
 									</p>
 								{/if}
 							</div>
-							<div class="flex items-center gap-3 text-sm text-[var(--color-text-tertiary)]">
+							<div class="flex items-center gap-3 text-sm text-text-tertiary">
 								{#if repo.primaryLanguage}
 									<span class="flex items-center gap-1">
 										<span class="h-2 w-2 rounded-full" style="background-color: {repo.primaryLanguage.color}"></span>
@@ -155,24 +155,24 @@
 	{/if}
 
 	<!-- Footer -->
-	<footer class="text-center text-sm text-[var(--color-text-tertiary)]">
+	<footer class="text-center text-sm text-text-tertiary">
 		<p>{joinDate}</p>
 		<p class="mt-2">
 			<a
 				href="https://github.com/{profile.user.login}"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-[var(--color-accent-green)] hover:underline"
+				class="text-accent-green hover:underline"
 			>
 				View on GitHub →
 			</a>
 		</p>
-		<p class="mt-4 flex items-center justify-center gap-2 text-[var(--color-text-secondary)]">
+		<p class="mt-4 flex items-center justify-center gap-2 text-text-secondary">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
 			</svg>
-			<span><span class="font-semibold text-[var(--color-text-primary)]">{views.toLocaleString()}</span> viewers</span>
+			<span><span class="font-semibold text-text-primary">{views.toLocaleString()}</span> viewers</span>
 		</p>
 	</footer>
 </div>

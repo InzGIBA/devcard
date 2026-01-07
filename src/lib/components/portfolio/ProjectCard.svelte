@@ -16,9 +16,9 @@
 	target="_blank"
 	rel="noopener noreferrer"
 	class="
-		group block rounded-[var(--radius-md)] border border-[var(--color-border-default)]
-		bg-[var(--color-bg-secondary)] p-4 transition-all
-		hover:border-[var(--color-border-subtle)] hover:bg-[var(--color-bg-tertiary)]
+		group block rounded-md border border-border-default
+		bg-bg-secondary p-4 transition-all
+		hover:border-border-subtle hover:bg-bg-tertiary
 		{className}
 	"
 >
@@ -26,7 +26,7 @@
 	<div class="mb-2 flex items-start justify-between">
 		<div class="flex items-center gap-2">
 			<svg
-				class="h-4 w-4 text-[var(--color-text-tertiary)]"
+				class="h-4 w-4 text-text-tertiary"
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor"
@@ -38,7 +38,7 @@
 					d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
 				/>
 			</svg>
-			<h3 class="font-semibold text-[var(--color-accent-green)] group-hover:underline">
+			<h3 class="font-semibold text-accent-green group-hover:underline">
 				{repo.name}
 			</h3>
 		</div>
@@ -51,11 +51,11 @@
 
 	<!-- Description -->
 	{#if repo.description}
-		<p class="mb-3 line-clamp-2 text-sm text-[var(--color-text-secondary)]">
+		<p class="mb-3 line-clamp-2 text-sm text-text-secondary">
 			{repo.description}
 		</p>
 	{:else}
-		<p class="mb-3 text-sm italic text-[var(--color-text-tertiary)]">
+		<p class="mb-3 text-sm italic text-text-tertiary">
 			No description available for this repository.
 		</p>
 	{/if}
@@ -65,7 +65,7 @@
 		<div class="mb-3 flex flex-wrap gap-1">
 			{#each repo.topics.slice(0, 3) as topic}
 				<span
-					class="rounded-full bg-[var(--color-accent-green)]/10 px-2 py-0.5 text-xs text-[var(--color-accent-green)]"
+					class="rounded-full bg-accent-green/10 px-2 py-0.5 text-xs text-accent-green"
 				>
 					{topic}
 				</span>
@@ -74,7 +74,7 @@
 	{/if}
 
 	<!-- Stats -->
-	<div class="flex items-center gap-4 text-xs text-[var(--color-text-tertiary)]">
+	<div class="flex items-center gap-4 text-xs text-text-tertiary">
 		<div class="flex items-center gap-1">
 			<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
 				<path

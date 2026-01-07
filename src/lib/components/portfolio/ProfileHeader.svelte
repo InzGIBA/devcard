@@ -15,30 +15,30 @@
 	<img
 		src={profile.user.avatarUrl}
 		alt={profile.user.login}
-		class="h-24 w-24 rounded-full border-2 border-[var(--color-border-default)] bg-[var(--color-bg-tertiary)]"
+		class="h-24 w-24 rounded-full border-2 border-border-default bg-bg-tertiary"
 	/>
 
 	<!-- Info -->
 	<div class="flex-1">
 		<div class="flex items-center gap-3">
-			<h1 class="text-2xl font-bold text-[var(--color-text-primary)]">
+			<h1 class="text-2xl font-bold text-text-primary">
 				{profile.user.name || profile.user.login}
 			</h1>
 			{#if profile.user.name}
-				<span class="text-lg text-[var(--color-text-secondary)]">
+				<span class="text-lg text-text-secondary">
 					@{profile.user.login}
 				</span>
 			{/if}
 		</div>
 
 		{#if profile.user.bio}
-			<p class="mt-2 text-[var(--color-text-secondary)]">
+			<p class="mt-2 text-text-secondary">
 				{profile.user.bio}
 			</p>
 		{/if}
 
 		<!-- Quick stats -->
-		<div class="mt-3 flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-tertiary)]">
+		<div class="mt-3 flex flex-wrap items-center gap-4 text-sm text-text-tertiary">
 			{#if profile.user.location}
 				<div class="flex items-center gap-1">
 					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

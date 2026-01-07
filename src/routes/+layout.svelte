@@ -18,7 +18,7 @@
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </svelte:head>
 
-<div class="min-h-screen bg-[var(--color-bg-primary)]" class:page-exit={isExiting}>
+<div class="min-h-screen bg-bg-primary" class:page-exit={isExiting}>
 	{@render children()}
 </div>
 

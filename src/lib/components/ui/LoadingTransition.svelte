@@ -160,7 +160,6 @@
 	}
 
 	.loading-title {
-		font-family: var(--font-abril);
 		font-size: 1.75rem;
 		color: var(--color-text-primary);
 		margin: 0 0 0.5rem 0;

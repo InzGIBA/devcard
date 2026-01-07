@@ -24,7 +24,7 @@
 	}: Props = $props();
 </script>
 
-<header class="sticky top-0 z-50 w-full border-b border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+<header class="sticky top-0 z-50 w-full border-b border-border-default bg-bg-primary">
 	<div class="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
 		<Logo />
 

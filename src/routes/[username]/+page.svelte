@@ -106,7 +106,7 @@
 	onShare={handleShare}
 	/>
 
-	<main id="portfolio-container" class="min-h-screen bg-[var(--color-bg-primary)]">
+	<main id="portfolio-container" class="min-h-screen bg-bg-primary">
 		{#if generatorState.template === 'github'}
 			<TemplateGitHub profile={data.profile} views={data.views} />
 		{:else if generatorState.template === 'bento'}

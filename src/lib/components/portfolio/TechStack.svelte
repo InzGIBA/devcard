@@ -40,14 +40,14 @@
 <Card variant="default" padding="md" class={className}>
 	{#if bio}
 		<div class="mb-4">
-			<p class="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+			<p class="text-sm leading-relaxed text-text-secondary">
 				{bio}
 			</p>
 		</div>
 	{/if}
 
 	<div class="space-y-4">
-		<h3 class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+		<h3 class="text-xs font-semibold uppercase tracking-wider text-text-tertiary">
 			Core Technologies
 		</h3>
 		<div class="flex flex-wrap gap-2">

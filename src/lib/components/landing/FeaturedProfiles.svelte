@@ -12,11 +12,11 @@
 	}
 </script>
 
-<section class="animate-fade-in-delay-3 relative z-10 border-t border-[var(--color-border-muted)] bg-[var(--color-bg-secondary)] py-24">
+<section class="animate-fade-in-delay-3 relative z-10 border-t border-border-muted bg-bg-secondary py-24">
 	<div class="mx-auto max-w-5xl px-6">
 		<div class="mb-12 text-center">
-			<h2 class="mb-4 text-3xl font-bold text-[var(--color-text-primary)]">Featured Profiles</h2>
-			<p class="text-[var(--color-text-secondary)]">See what CheckMyGit can do for these legends</p>
+			<h2 class="mb-4 text-3xl font-bold text-text-primary">Featured Profiles</h2>
+			<p class="text-text-secondary">See what CheckMyGit can do for these legends</p>
 		</div>
 
 		<div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
@@ -24,23 +24,23 @@
 				<button
 					type="button"
 					onclick={() => handleProfileClick(profile.username)}
-					class="group relative overflow-hidden rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-tertiary)] p-6 text-left transition-all hover:border-[var(--color-border-highlight)] hover:shadow-xl cursor-pointer"
+					class="group relative overflow-hidden rounded-2xl border border-border-default bg-bg-tertiary p-6 text-left transition-all hover:border-border-highlight hover:shadow-xl cursor-pointer"
 				>
 					<div class="flex items-center gap-4">
 						<div class="relative">
 							<img
 								src="https://github.com/{profile.username}.png"
 								alt={profile.name}
-								class="h-12 w-12 rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]"
+								class="h-12 w-12 rounded-full border border-border-subtle bg-bg-secondary"
 							/>
-							<div class="absolute -bottom-1 -right-1 rounded-full border-2 border-[var(--color-bg-tertiary)] bg-[var(--color-accent-green)] p-1"></div>
+							<div class="absolute -bottom-1 -right-1 rounded-full border-2 border-bg-tertiary bg-accent-green p-1"></div>
 						</div>
 						<div>
-							<h3 class="font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-green)]">{profile.name}</h3>
-							<p class="text-xs text-[var(--color-text-tertiary)]">@{profile.username}</p>
+							<h3 class="font-semibold text-text-primary group-hover:text-accent-green">{profile.name}</h3>
+							<p class="text-xs text-text-tertiary">@{profile.username}</p>
 						</div>
 					</div>
-					<p class="mt-4 text-sm font-medium text-[var(--color-text-secondary)]">{profile.role}</p>
+					<p class="mt-4 text-sm font-medium text-text-secondary">{profile.role}</p>
 				</button>
 			{/each}
 		</div>
