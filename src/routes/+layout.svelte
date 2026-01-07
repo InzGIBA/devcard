@@ -1,0 +1,31 @@
+<script lang="ts">
+	import './layout.css';
+	import { toastState } from '$lib/stores/generator.svelte';
+	import Toast from '$lib/components/ui/Toast.svelte';
+
+	let { children } = $props();
+</script>
+
+<svelte:head>
+	<title>GitProfile - GitHub Portfolio Generator</title>
+	<meta name="description" content="Generate beautiful portfolio pages from your GitHub profile. Showcase your projects, contributions, and skills." />
+	<meta name="theme-color" content="#0d1117" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</svelte:head>
+
+<div class="min-h-screen bg-[var(--color-bg-primary)]">
+	{@render children()}
+</div>
+
+<!-- Toast Container -->
+{#if toastState.toasts.length > 0}
+	<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+		{#each toastState.toasts as toast (toast.id)}
+			<Toast
+				type={toast.type}
+				message={toast.message}
+				onclose={() => toastState.remove(toast.id)}
+			/>
+		{/each}
+	</div>
+{/if}
