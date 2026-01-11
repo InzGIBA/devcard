@@ -30,7 +30,7 @@ query TopRepositories($query: String!, $first: Int!) {
 }
 `;
 
-// GraphQL query for top users (includes star count from top 20 repos for performance)
+// GraphQL query for top users (includes star count from top 10 repos for performance)
 const TOP_USERS_QUERY = `
 query TopUsers($query: String!, $first: Int!) {
   search(query: $query, type: USER, first: $first) {
@@ -42,7 +42,7 @@ query TopUsers($query: String!, $first: Int!) {
         avatarUrl
         bio
         followers { totalCount }
-        repositories(privacy: PUBLIC, first: 20, orderBy: {field: STARGAZERS, direction: DESC}) {
+        repositories(privacy: PUBLIC, first: 10, orderBy: {field: STARGAZERS, direction: DESC}) {
           totalCount
           nodes { stargazerCount }
         }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { replaceState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
@@ -10,24 +10,44 @@
 	import LanguageFilter from '$lib/components/rankings/LanguageFilter.svelte';
 	import UserSortFilter from '$lib/components/rankings/UserSortFilter.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
-	import type { RankedUser } from '$lib/types/rankings';
+	import Button from '$lib/components/ui/Button.svelte';
+	import type { RankedUser, RankedRepository } from '$lib/types/rankings';
 
 	let { data } = $props();
 
-	// Derive active tab from URL for reactivity with replaceState
+	// Derive active tab from URL for reactivity
 	let activeTab = $derived($page.url.searchParams.get('tab') || 'repos');
 
 	// Client-side user sort state
 	let userSortBy = $state<'followers' | 'stars'>('followers');
 
-	// Store resolved users for client-side sorting
+	// Store resolved data for display
 	let resolvedUsers = $state<RankedUser[]>([]);
+	let resolvedRepos = $state<RankedRepository[]>([]);
 
-	// Track users loading state
+	// Track loading states
 	let usersResult = $state<{ success: boolean; data: RankedUser[]; error?: string } | null>(null);
+	let reposResult = $state<{ success: boolean; data: RankedRepository[]; error?: string } | null>(null);
+
+	// Load More state
+	let loadingMore = $state(false);
+	let hasMoreRepos = $derived(resolvedRepos.length > 0 && resolvedRepos.length < 25);
+	let hasMoreUsers = $derived(resolvedUsers.length > 0 && resolvedUsers.length < 25);
+
+	// Load repos data via effect
+	$effect(() => {
+		reposResult = null;
+		data.streamed.repos.then((result) => {
+			reposResult = result;
+			if (result.success) {
+				resolvedRepos = result.data;
+			}
+		});
+	});
 
 	// Load users data via effect
 	$effect(() => {
+		usersResult = null;
 		data.streamed.users.then((result) => {
 			usersResult = result;
 			if (result.success) {
@@ -44,8 +64,8 @@
 		} else {
 			users.sort((a, b) => b.followers - a.followers);
 		}
-		// Re-assign ranks and limit to 25
-		return users.slice(0, 25).map((user, index) => ({
+		// Re-assign ranks
+		return users.map((user, index) => ({
 			...user,
 			rank: index + 1
 		}));
@@ -57,10 +77,39 @@
 	];
 
 	function switchTab(tabId: string) {
-		// Update URL - activeTab derives from $page.url automatically
+		// Use goto to trigger server data reload for the new tab
 		const url = new URL($page.url);
 		url.searchParams.set('tab', tabId);
-		replaceState(url, {});
+		goto(url.toString(), { replaceState: true });
+	}
+
+	async function loadMore() {
+		loadingMore = true;
+		try {
+			const url = new URL('/api/rankings', window.location.origin);
+			url.searchParams.set('type', activeTab);
+			url.searchParams.set('limit', '25');
+			if (activeTab === 'repos' && data.language) {
+				url.searchParams.set('language', data.language);
+			}
+
+			const response = await fetch(url.toString());
+			const result = await response.json();
+
+			if (result.success) {
+				if (activeTab === 'repos') {
+					resolvedRepos = result.data;
+					reposResult = result;
+				} else {
+					resolvedUsers = result.data;
+					usersResult = result;
+				}
+			}
+		} catch (error) {
+			console.error('Failed to load more:', error);
+		} finally {
+			loadingMore = false;
+		}
 	}
 </script>
 
@@ -143,40 +192,34 @@
 		<!-- Content -->
 		<Card variant="default" padding="none">
 			{#if activeTab === 'repos'}
-				{#await data.streamed.repos}
+				{#if reposResult === null}
 					<ReposTableSkeleton />
-				{:then result}
-					{#if !result.success}
-						<div class="p-8 text-center">
-							<svg
-								class="mx-auto mb-4 h-12 w-12 text-accent-red"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-								/>
-							</svg>
-							<p class="text-text-secondary">
-								{result.error || 'Failed to load repositories'}
-							</p>
-						</div>
-					{:else if result.data.length === 0}
-						<div class="p-8 text-center">
-							<p class="text-text-secondary">No repositories found.</p>
-						</div>
-					{:else}
-						<ReposTable repos={result.data} />
-					{/if}
-				{:catch}
+				{:else if !reposResult.success}
 					<div class="p-8 text-center">
-						<p class="text-text-secondary">Failed to load repositories.</p>
+						<svg
+							class="mx-auto mb-4 h-12 w-12 text-accent-red"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						<p class="text-text-secondary">
+							{reposResult.error || 'Failed to load repositories'}
+						</p>
 					</div>
-				{/await}
+				{:else if resolvedRepos.length === 0}
+					<div class="p-8 text-center">
+						<p class="text-text-secondary">No repositories found.</p>
+					</div>
+				{:else}
+					<ReposTable repos={resolvedRepos} />
+				{/if}
 			{:else if usersResult === null}
 				<UsersTableSkeleton />
 			{:else if !usersResult.success}
@@ -206,6 +249,15 @@
 				<UsersTable users={sortedUsers} {userSortBy} />
 			{/if}
 		</Card>
+
+		<!-- Load More Button -->
+		{#if (activeTab === 'repos' && hasMoreRepos) || (activeTab === 'users' && hasMoreUsers)}
+			<div class="mt-6 flex justify-center">
+				<Button variant="secondary" onclick={loadMore} loading={loadingMore}>
+					Load More
+				</Button>
+			</div>
+		{/if}
 
 		<!-- Info -->
 		<p class="mt-6 text-center text-sm text-text-tertiary">
