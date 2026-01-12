@@ -44,15 +44,15 @@
 			<Card variant="default" padding="lg">
 				<div class="flex items-center justify-between">
 					<div>
-						<h2 class="text-xl font-semibold text-[var(--color-text-primary)]">
+						<h2 class="text-xl font-semibold text-text-primary">
 							Welcome to {profile.user.name || profile.user.login}'s Hub
 						</h2>
-						<p class="mt-1 text-sm text-[var(--color-text-secondary)]">
+						<p class="mt-1 text-sm text-text-secondary">
 							Explore their open source contributions and projects
 						</p>
 					</div>
-					<div class="text-right text-xs text-[var(--color-text-tertiary)]">
-						Powered by <span class="font-semibold text-[var(--color-accent-green)]">CheckMyGit</span>
+					<div class="text-right text-xs text-text-tertiary">
+						Powered by <span class="font-semibold text-accent-green">CheckMyGit</span>
 					</div>
 				</div>
 			</Card>
@@ -68,10 +68,10 @@
 			<!-- Tech Stack & Languages -->
 			<div>
 				<div class="mb-4 flex items-center gap-2">
-					<svg class="h-5 w-5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
 					</svg>
-					<h3 class="text-lg font-semibold text-[var(--color-text-primary)]">Tech Stack & Languages</h3>
+					<h3 class="text-lg font-semibold text-text-primary">Tech Stack & Languages</h3>
 				</div>
 				<div class="grid gap-4 md:grid-cols-2">
 					<TechStack languages={profile.languages} bio={profile.user.bio} />
@@ -93,10 +93,10 @@
 				<div>
 					<div class="mb-4 flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<svg class="h-5 w-5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
 							</svg>
-							<h3 class="text-lg font-semibold text-[var(--color-text-primary)]">Notable Projects</h3>
+							<h3 class="text-lg font-semibold text-text-primary">Notable Projects</h3>
 						</div>
 						<Dropdown options={sortOptions} bind:value={sortBy} />
 					</div>

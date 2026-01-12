@@ -63,13 +63,13 @@
 	<!-- Header (outside card, like Notable Projects) -->
 	<div class="mb-4 flex items-center justify-between">
 		<div class="flex items-center gap-2">
-			<svg class="h-5 w-5 text-[var(--color-text-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
 			</svg>
-			<h3 class="text-lg font-semibold text-[var(--color-text-primary)]">Contributions</h3>
+			<h3 class="text-lg font-semibold text-text-primary">Contributions</h3>
 		</div>
-		<div class="text-sm text-[var(--color-text-secondary)]">
-			<span class="font-semibold text-[var(--color-text-primary)]">
+		<div class="text-sm text-text-secondary">
+			<span class="font-semibold text-text-primary">
 				{formatNumber(totalContributions)}
 			</span>
 			<span class="ml-1">in the last year</span>
