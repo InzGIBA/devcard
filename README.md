@@ -101,10 +101,10 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
    Edit `.env` and add your configuration:
    ```env
    # Required: GitHub Personal Access Token with 'read:user' scope
-   GITHUB_TOKEN=ghp_your_token_here
+   GH_TOKEN=ghp_your_token_here
    
    # Required: Your GitHub username
-   GITHUB_USERNAME=your-username
+   GH_USERNAME=your-username
    
    # Optional: Base path if deploying to a subdirectory (e.g., /repo-name)
    BASE_PATH=
@@ -118,7 +118,7 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
    Edit `site.config.js` to customize your portfolio:
    ```javascript
    export default {
-     username: process.env.GITHUB_USERNAME || 'your-username',
+     username: process.env.GH_USERNAME || 'your-username',
      defaultTemplate: 'github', // 'github' | 'bento' | 'minimal'
      basePath: process.env.BASE_PATH || '',
      customDomain: process.env.CUSTOM_DOMAIN || '',
@@ -150,8 +150,8 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `GITHUB_TOKEN` | GitHub Personal Access Token with `read:user` scope | `ghp_abc123...` |
-| `GITHUB_USERNAME` | Your GitHub username to display | `octocat` |
+| `GH_TOKEN` | GitHub Personal Access Token with `read:user` scope | `ghp_abc123...` |
+| `GH_USERNAME` | Your GitHub username to display | `octocat` |
 
 ### Optional Variables
 
@@ -315,7 +315,7 @@ defaultTemplate: 'bento' // or 'minimal' or 'github'
 
 ## Troubleshooting
 
-### Build Fails with "GITHUB_TOKEN is required"
+### Build Fails with "GH_TOKEN is required"
 
 Make sure you've added the `GH_TOKEN` secret in your repository settings.
 

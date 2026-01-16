@@ -7,7 +7,7 @@
 
 export default {
   // GitHub username для отображения (может быть переопределен через env)
-  username: process.env.GITHUB_USERNAME || 'your-username',
+  username: process.env.GH_USERNAME || 'your-username',
   
   // Шаблон по умолчанию: 'github' | 'bento' | 'minimal'
   defaultTemplate: 'github',

@@ -14,12 +14,12 @@ import { fetchGitHubProfile } from '$lib/server/github';
 export async function fetchProfileDataAtBuildTime(
 	username: string
 ): Promise<GitHubProfile> {
-	const GITHUB_TOKEN = env.GITHUB_TOKEN;
+	const GH_TOKEN = env.GH_TOKEN;
 
-	// Check for required GITHUB_TOKEN
-	if (!GITHUB_TOKEN) {
+	// Check for required GH_TOKEN
+	if (!GH_TOKEN) {
 		throw new Error(
-			'GITHUB_TOKEN environment variable is required for build-time data fetching. ' +
+			'GH_TOKEN environment variable is required for build-time data fetching. ' +
 			'Please set it in your environment or GitHub Secrets. ' +
 			'You can create a token at: https://github.com/settings/tokens'
 		);
@@ -29,7 +29,7 @@ export async function fetchProfileDataAtBuildTime(
 	if (!username || username.trim() === '') {
 		throw new Error(
 			'GitHub username is required for build-time data fetching. ' +
-			'Please set GITHUB_USERNAME in your environment or site.config.js'
+			'Please set GH_USERNAME in your environment or site.config.js'
 		);
 	}
 
@@ -57,7 +57,7 @@ export async function fetchProfileDataAtBuildTime(
 			case 'UNAUTHORIZED':
 				throw new Error(
 					'Failed to fetch GitHub profile: Invalid or expired GitHub token. ' +
-					'Please verify your GITHUB_TOKEN is correct and has the required permissions (read:user). ' +
+					'Please verify your GH_TOKEN is correct and has the required permissions (read:user). ' +
 					'You can create a new token at: https://github.com/settings/tokens'
 				);
 			

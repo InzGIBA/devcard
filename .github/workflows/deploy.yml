@@ -42,8 +42,8 @@ jobs:
       
       - name: Build site
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
           BASE_PATH: ${{ secrets.BASE_PATH || '' }}
           CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN || '' }}
         run: npm run build
