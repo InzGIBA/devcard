@@ -1,10 +1,10 @@
 <script lang="ts">
-	import './layout.css';
-	import { toastState } from '$lib/stores/generator.svelte';
-	import { navigationState } from '$lib/stores/navigation.svelte';
-	import { themeState } from '$lib/stores/theme.svelte';
-	import Toast from '$lib/components/ui/Toast.svelte';
-	import LoadingTransition from '$lib/components/ui/LoadingTransition.svelte';
+	import '$appStyles/layout.css';
+	import { toastState } from '$entities/portfolio/model/store.svelte';
+	import { navigationState } from '$appConfig/navigation-store.svelte';
+	import { themeState } from '$features/theme-toggle/model/store.svelte';
+	import Toast from '$shared/ui/Toast.svelte';
+	import LoadingTransition from '$shared/ui/LoadingTransition.svelte';
 
 	let { children } = $props();
 

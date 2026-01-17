@@ -14,5 +14,11 @@ export default defineConfig({
 			username: siteConfig.username,
 			enabled: siteConfig.build.generateSitemap
 		})
-	]
+	],
+	server: {
+		fs: {
+			// Allow serving files from project root
+			allow: ['..']
+		}
+	}
 });

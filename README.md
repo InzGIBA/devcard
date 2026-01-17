@@ -53,15 +53,15 @@ Open [localhost:5173](http://localhost:5173)
 
 1. **Add Secrets** — Go to Settings → Secrets and variables → Actions
 
-   | Secret | Required | Description |
-   |--------|----------|-------------|
-   | `GH_TOKEN` | ✅ | GitHub Personal Access Token |
-   | `GH_USERNAME` | ✅ | Your GitHub username |
-   | `JSONRESUME_URL` | ❌ | URL to JSON Resume file |
-   | `LINKEDIN_USERNAME` | ❌ | LinkedIn username |
-   | `TELEGRAM_USERNAME` | ❌ | Telegram username |
-   | `BASE_PATH` | ❌ | Base path for subdirectory |
-   | `CUSTOM_DOMAIN` | ❌ | Custom domain |
+   | Secret              | Required | Description                  |
+   | ------------------- | -------- | ---------------------------- |
+   | `GH_TOKEN`          | ✅       | GitHub Personal Access Token |
+   | `GH_USERNAME`       | ✅       | Your GitHub username         |
+   | `JSONRESUME_URL`    | ❌       | URL to JSON Resume file      |
+   | `LINKEDIN_USERNAME` | ❌       | LinkedIn username            |
+   | `TELEGRAM_USERNAME` | ❌       | Telegram username            |
+   | `BASE_PATH`         | ❌       | Base path for subdirectory   |
+   | `CUSTOM_DOMAIN`     | ❌       | Custom domain                |
 
 2. **Enable Pages** — Settings → Pages → Source: "GitHub Actions"
 
@@ -80,6 +80,7 @@ Your site: `https://username.github.io` or `https://username.github.io/repo-name
 DevCard supports [JSON Resume](https://jsonresume.org/) format for CV data.
 
 **Hosting options:**
+
 - GitHub repository (raw file URL)
 - [registry.jsonresume.org](https://registry.jsonresume.org/)
 - GitHub Gist
@@ -123,7 +124,7 @@ Switch templates via URL parameter:
 Or set default in `site.config.js`:
 
 ```javascript
-defaultTemplate: 'github'
+defaultTemplate: 'github';
 ```
 
 ## Auto-Updates
@@ -134,8 +135,8 @@ Site rebuilds automatically **daily at 00:00 UTC** to keep GitHub data fresh.
 
 ```yaml
 schedule:
-  - cron: '0 */6 * * *'  # Every 6 hours
-  - cron: '0 0 * * 1'    # Weekly on Monday
+  - cron: '0 */6 * * *' # Every 6 hours
+  - cron: '0 0 * * 1' # Weekly on Monday
 ```
 
 **Manual trigger** — Actions tab → "Deploy to GitHub Pages" → Run workflow
@@ -163,13 +164,13 @@ Edit `site.config.js`:
 
 ```javascript
 export default {
-  username: process.env.GH_USERNAME || 'your-username',
-  defaultTemplate: 'github',
-  basePath: process.env.BASE_PATH || '',
-  customDomain: process.env.CUSTOM_DOMAIN || '',
-  siteTitle: 'DevCard - Developer Portfolio',
-  siteDescription: 'GitHub profile + CV in one portfolio'
-}
+	username: process.env.GH_USERNAME || 'your-username',
+	defaultTemplate: 'github',
+	basePath: process.env.BASE_PATH || '',
+	customDomain: process.env.CUSTOM_DOMAIN || '',
+	siteTitle: 'DevCard - Developer Portfolio',
+	siteDescription: 'GitHub profile + CV in one portfolio'
+};
 ```
 
 ## Tech Stack
@@ -203,20 +204,25 @@ npm run format
 ## Troubleshooting
 
 **Build fails with "GH_TOKEN is required"**
+
 - Add `GH_TOKEN` secret in repository settings
 
 **Build fails with "User not found"**
+
 - Check `GH_USERNAME` is valid
 
 **Site shows 404**
+
 - Verify Pages is enabled (Settings → Pages)
 - Check workflow completed successfully (Actions tab)
 
 **Data not updating**
+
 - Check Actions tab for failed runs
 - Manually trigger workflow to force update
 
 **Custom domain not working**
+
 - Verify DNS records are correct
 - Wait up to 24h for DNS propagation
 - Check `CUSTOM_DOMAIN` secret is set

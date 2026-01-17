@@ -5,18 +5,21 @@
  * Environment variables can override these default values.
  */
 
+// Check if we're in a Node.js environment (build time) or browser (runtime)
+const isNode = typeof process !== 'undefined' && process.env;
+
 export default {
 	// GitHub username для отображения (может быть переопределен через env)
-	username: process.env.GH_USERNAME || 'your-username',
+	username: isNode ? process.env.GH_USERNAME || 'your-username' : 'your-username',
 
 	// Шаблон по умолчанию: 'github' | 'bento' | 'minimal'
 	defaultTemplate: 'github',
 
 	// Base URL для GitHub Pages (если репозиторий не username.github.io)
-	basePath: process.env.BASE_PATH || '',
+	basePath: isNode ? process.env.BASE_PATH || '' : '',
 
 	// Custom domain (опционально)
-	customDomain: process.env.CUSTOM_DOMAIN || '',
+	customDomain: isNode ? process.env.CUSTOM_DOMAIN || '' : '',
 
 	// Метаданные сайта
 	siteTitle: 'DevCard - Developer Portfolio',

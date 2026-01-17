@@ -17,6 +17,15 @@ const config = {
 		},
 		prerender: {
 			entries: ['*']
+		},
+		alias: {
+			$shared: 'src/shared',
+			$entities: 'src/entities',
+			$features: 'src/features',
+			$widgets: 'src/widgets',
+			$pages: 'src/pages',
+			$appConfig: 'src/app/config',
+			$appStyles: 'src/app/styles'
 		}
 	}
 };

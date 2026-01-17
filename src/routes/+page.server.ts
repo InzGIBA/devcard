@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private';
-import { fetchProfileDataAtBuildTime } from '$lib/build/fetchProfileData';
+import { fetchProfileDataAtBuildTime } from '$shared/api/fetchProfileData';
 import siteConfig from '../../site.config';
 import type { PageServerLoad } from './$types';
 
