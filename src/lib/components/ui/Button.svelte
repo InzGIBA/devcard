@@ -47,11 +47,19 @@
 		lg: 'h-12 px-5 text-base rounded-[var(--radius-lg)] gap-2'
 	};
 
-	const classes = $derived(`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`);
+	const classes = $derived(
+		`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
+	);
 </script>
 
 {#if href}
-	<a {href} {target} class={classes} class:opacity-50={disabled} rel={target === '_blank' ? 'noopener noreferrer' : undefined}>
+	<a
+		{href}
+		{target}
+		class={classes}
+		class:opacity-50={disabled}
+		rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+	>
 		{#if loading}
 			<svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
 				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"

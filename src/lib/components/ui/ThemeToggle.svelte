@@ -8,12 +8,14 @@
 
 <button
 	onclick={handleToggle}
-	class="relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-saas-green)] focus-visible:ring-offset-2"
+	class="relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--color-saas-green)] focus-visible:ring-offset-2 focus-visible:outline-none"
 	aria-label={themeState.isDark ? 'Switch to light mode' : 'Switch to dark mode'}
 >
 	<!-- Sun icon (shown in dark mode) -->
 	<svg
-		class="h-5 w-5 transition-all duration-200 {themeState.isDark ? 'rotate-0 scale-100' : 'rotate-90 scale-0'} absolute"
+		class="h-5 w-5 transition-all duration-200 {themeState.isDark
+			? 'scale-100 rotate-0'
+			: 'scale-0 rotate-90'} absolute"
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke="currentColor"
@@ -28,7 +30,9 @@
 
 	<!-- Moon icon (shown in light mode) -->
 	<svg
-		class="h-5 w-5 transition-all duration-200 {themeState.isLight ? 'rotate-0 scale-100' : '-rotate-90 scale-0'} absolute"
+		class="h-5 w-5 transition-all duration-200 {themeState.isLight
+			? 'scale-100 rotate-0'
+			: 'scale-0 -rotate-90'} absolute"
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke="currentColor"

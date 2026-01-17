@@ -58,7 +58,7 @@
 			'#9be9a8': '#0e4429', // Level 1
 			'#40c463': '#006d32', // Level 2
 			'#30a14e': '#26a641', // Level 3
-			'#216e39': '#39d353'  // Level 4
+			'#216e39': '#39d353' // Level 4
 		};
 
 		return darkColorMap[color.toLowerCase()] || color;
@@ -72,7 +72,12 @@
 	<div class="mb-4 flex items-center justify-between">
 		<div class="flex items-center gap-2">
 			<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+				/>
 			</svg>
 			<h3 class="text-lg font-semibold text-text-primary">Contributions</h3>
 		</div>
@@ -96,7 +101,7 @@
 					<!-- Months Grid -->
 					<div class="flex flex-1 justify-between gap-0.5">
 						{#each weeks as week, i}
-							<div class="relative flex-1 min-w-0">
+							<div class="relative min-w-0 flex-1">
 								{#each monthLabels as month}
 									{#if month.col === i}
 										<span class="absolute bottom-0 left-0 truncate text-[10px]">
@@ -114,7 +119,9 @@
 					<!-- Day labels -->
 					<div class="flex w-8 shrink-0 flex-col gap-0.5">
 						{#each dayLabels as label}
-							<div class="flex flex-1 items-center justify-end text-[10px] leading-none text-text-tertiary">
+							<div
+								class="flex flex-1 items-center justify-end text-[10px] leading-none text-text-tertiary"
+							>
 								<span class="mr-1">{label}</span>
 							</div>
 						{/each}
@@ -123,12 +130,17 @@
 					<!-- Contribution squares -->
 					<div class="flex flex-1 justify-between gap-0.5">
 						{#each weeks as week}
-							<div class="flex flex-1 min-w-0 flex-col gap-0.5">
+							<div class="flex min-w-0 flex-1 flex-col gap-0.5">
 								{#each week.contributionDays as day}
 									<div
 										class="aspect-square w-full rounded-sm transition-opacity hover:opacity-80"
-										style="background-color: {getContributionColor(day.color, day.contributionCount)}"
-										title="{day.contributionCount} contributions on {new Date(day.date).toLocaleDateString()}"
+										style="background-color: {getContributionColor(
+											day.color,
+											day.contributionCount
+										)}"
+										title="{day.contributionCount} contributions on {new Date(
+											day.date
+										).toLocaleDateString()}"
 									></div>
 								{/each}
 							</div>
@@ -136,19 +148,12 @@
 					</div>
 				</div>
 
-				<div class="mt-4 text-xs text-text-tertiary">
-					Last 52 weeks of activity
-				</div>
+				<div class="mt-4 text-xs text-text-tertiary">Last 52 weeks of activity</div>
 			</div>
 		{:else}
 			<div class="flex h-32 items-center justify-center text-sm text-text-tertiary">
 				<div class="text-center">
-					<svg
-						class="mx-auto mb-2 h-8 w-8"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
+					<svg class="mx-auto mb-2 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"

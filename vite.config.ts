@@ -4,9 +4,9 @@ import { defineConfig } from 'vite';
 import { sitemapPlugin } from './src/lib/build/sitemapPlugin';
 import siteConfig from './site.config';
 
-export default defineConfig({ 
+export default defineConfig({
 	plugins: [
-		tailwindcss(), 
+		tailwindcss(),
 		sveltekit(),
 		sitemapPlugin({
 			basePath: siteConfig.basePath,
@@ -14,5 +14,5 @@ export default defineConfig({
 			username: siteConfig.username,
 			enabled: siteConfig.build.generateSitemap
 		})
-	] 
+	]
 });

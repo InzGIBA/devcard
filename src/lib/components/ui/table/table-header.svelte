@@ -9,6 +9,6 @@
 	let { class: className = '', children }: Props = $props();
 </script>
 
-<thead class="[&_tr]:border-b border-[var(--color-border-default)] {className}">
+<thead class="border-[var(--color-border-default)] [&_tr]:border-b {className}">
 	{@render children()}
 </thead>

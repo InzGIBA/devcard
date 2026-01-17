@@ -11,7 +11,7 @@
 
 	// Take top 5 languages for the chart
 	const topLanguages = $derived(languages.slice(0, 5));
-	const total = $derived(topLanguages.reduce((sum, lang) => sum + lang.size, 0));
+	const totalRepos = $derived(languages.reduce((sum, lang) => sum + lang.size, 0));
 
 	// Calculate cumulative offsets for the donut chart
 	function calculateSegments(langs: LanguageStats[]) {
@@ -19,7 +19,7 @@
 		let cumulativeOffset = 0;
 
 		for (const lang of langs) {
-			const percentage = (lang.size / total) * 100;
+			const percentage = (lang.size / totalRepos) * 100;
 			segments.push({
 				lang,
 				offset: cumulativeOffset,
@@ -55,14 +55,12 @@
 							stroke={segment.lang.color}
 							stroke-width={strokeWidth}
 							stroke-dasharray="{(segment.percentage / 100) * circumference} {circumference}"
-							stroke-dashoffset="{-(segment.offset / 100) * circumference}"
+							stroke-dashoffset={-(segment.offset / 100) * circumference}
 							class="transition-all duration-300"
 						/>
 					{/each}
 				</svg>
-				<div
-					class="absolute inset-0 flex items-center justify-center text-xs text-text-tertiary"
-				>
+				<div class="absolute inset-0 flex items-center justify-center text-xs text-text-tertiary">
 					{topLanguages.length} langs
 				</div>
 			</div>
@@ -72,10 +70,7 @@
 				{#each topLanguages as lang}
 					<div class="flex items-center justify-between text-sm">
 						<div class="flex items-center gap-2">
-							<div
-								class="h-3 w-3 rounded-full"
-								style="background-color: {lang.color}"
-							></div>
+							<div class="h-3 w-3 rounded-full" style="background-color: {lang.color}"></div>
 							<span class="text-text-primary">{lang.name}</span>
 						</div>
 						<span class="text-text-secondary">{lang.percentage}%</span>
@@ -91,7 +86,8 @@
 
 	{#if topLanguages.length > 0}
 		<div class="mt-4 text-xs text-text-tertiary">
-			Based on top {total} repos
+			Based on {totalRepos}
+			{totalRepos === 1 ? 'repository' : 'repositories'}
 		</div>
 	{/if}
 </Card>

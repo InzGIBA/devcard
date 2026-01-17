@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$lib/types/github';
 	import Badge from '$lib/components/ui/Badge.svelte';
+	import LinkedInButton from '$lib/components/ui/LinkedInButton.svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -66,8 +67,53 @@
 				</div>
 			{/if}
 			<Badge variant="outline" size="sm">
-				{profile.stats.yearsActive} {profile.stats.yearsActive === 1 ? 'year' : 'years'} on GitHub
+				{profile.stats.yearsActive}
+				{profile.stats.yearsActive === 1 ? 'year' : 'years'} on GitHub
 			</Badge>
 		</div>
+
+		<!-- Social Links -->
+		{#if profile.user.websiteUrl || profile.user.twitterUsername || profile.user.linkedinUrl}
+			<div class="mt-3 flex flex-wrap gap-2">
+				{#if profile.user.websiteUrl}
+					<a
+						href={profile.user.websiteUrl.startsWith('http')
+							? profile.user.websiteUrl
+							: `https://${profile.user.websiteUrl}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="border-border-primary inline-flex items-center gap-2 rounded-lg border bg-bg-secondary px-3 py-1.5 text-sm font-medium text-text-primary transition-colors hover:bg-bg-tertiary"
+					>
+						<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+							/>
+						</svg>
+						Website
+					</a>
+				{/if}
+				{#if profile.user.twitterUsername}
+					<a
+						href="https://twitter.com/{profile.user.twitterUsername}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="border-border-primary inline-flex items-center gap-2 rounded-lg border bg-bg-secondary px-3 py-1.5 text-sm font-medium text-text-primary transition-colors hover:bg-bg-tertiary"
+					>
+						<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+							<path
+								d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+							/>
+						</svg>
+						Twitter
+					</a>
+				{/if}
+				{#if profile.user.linkedinUrl}
+					<LinkedInButton linkedinUrl={profile.user.linkedinUrl} />
+				{/if}
+			</div>
+		{/if}
 	</div>
 </div>

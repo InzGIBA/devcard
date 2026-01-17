@@ -1,5 +1,6 @@
 import { env } from '$env/dynamic/private';
 const GITHUB_TOKEN = env.GH_TOKEN;
+const LINKEDIN_URL = env.LINKEDIN_URL;
 import type {
 	GitHubProfile,
 	GitHubUser,
@@ -158,11 +159,18 @@ async function fetchUserGraphQL(username: string): Promise<GitHubResult<GitHubPr
 			}
 			return {
 				success: false,
-				error: { type: 'UNKNOWN', message: `GitHub API error: ${response.statusText}`, status: response.status }
+				error: {
+					type: 'UNKNOWN',
+					message: `GitHub API error: ${response.statusText}`,
+					status: response.status
+				}
 			};
 		}
 
-		const json = (await response.json()) as { data?: GraphQLUserResponse; errors?: Array<{ message: string }> };
+		const json = (await response.json()) as {
+			data?: GraphQLUserResponse;
+			errors?: Array<{ message: string }>;
+		};
 
 		if (json.errors) {
 			const notFound = json.errors.some((e) => e.message.includes('Could not resolve'));
@@ -229,7 +237,11 @@ async function fetchUserREST(username: string): Promise<GitHubResult<GitHubProfi
 			}
 			return {
 				success: false,
-				error: { type: 'UNKNOWN', message: `GitHub API error: ${userResponse.statusText}`, status: userResponse.status }
+				error: {
+					type: 'UNKNOWN',
+					message: `GitHub API error: ${userResponse.statusText}`,
+					status: userResponse.status
+				}
 			};
 		}
 
@@ -358,8 +370,9 @@ function transformGraphQLResponse(data: GraphQLUserResponse): GitHubProfile {
 		}
 	}
 
-	const externalContributions = Array.from(externalContributionsMap.values())
-		.sort((a, b) => (b.prCount + b.commitCount) - (a.prCount + a.commitCount));
+	const externalContributions = Array.from(externalContributionsMap.values()).sort(
+		(a, b) => b.prCount + b.commitCount - (a.prCount + a.commitCount)
+	);
 
 	const externalPRCount = externalContributions.reduce((sum, c) => sum + c.prCount, 0);
 	const externalCommitCount = externalContributions.reduce((sum, c) => sum + c.commitCount, 0);
@@ -368,7 +381,8 @@ function transformGraphQLResponse(data: GraphQLUserResponse): GitHubProfile {
 		totalCommitContributions: user.contributionsCollection.totalCommitContributions,
 		totalIssueContributions: user.contributionsCollection.totalIssueContributions,
 		totalPullRequestContributions: user.contributionsCollection.totalPullRequestContributions,
-		totalPullRequestReviewContributions: user.contributionsCollection.totalPullRequestReviewContributions,
+		totalPullRequestReviewContributions:
+			user.contributionsCollection.totalPullRequestReviewContributions,
 		contributionCalendar: user.contributionsCollection.contributionCalendar,
 		externalContributions,
 		externalPRCount,
@@ -395,13 +409,15 @@ function transformGraphQLResponse(data: GraphQLUserResponse): GitHubProfile {
 			websiteUrl: user.websiteUrl,
 			twitterUsername: user.twitterUsername,
 			email: user.email,
+			linkedinUrl: LINKEDIN_URL || null,
 			followers: user.followers.totalCount,
 			following: user.following.totalCount,
 			createdAt: user.createdAt,
 			updatedAt: user.updatedAt
 		},
 		repositories,
-		pinnedRepositories: pinnedRepositories.length > 0 ? pinnedRepositories : originalRepos.slice(0, 6),
+		pinnedRepositories:
+			pinnedRepositories.length > 0 ? pinnedRepositories : originalRepos.slice(0, 6),
 		contributions,
 		languages,
 		stats: {
@@ -417,7 +433,10 @@ function transformGraphQLResponse(data: GraphQLUserResponse): GitHubProfile {
 }
 
 // Transform REST response to normalized profile
-function transformRESTResponse(userData: RESTUserResponse, reposData: RESTRepoResponse[]): GitHubProfile {
+function transformRESTResponse(
+	userData: RESTUserResponse,
+	reposData: RESTRepoResponse[]
+): GitHubProfile {
 	// Include all public repos (both original and forks)
 	const repositories: GitHubRepository[] = reposData
 		.filter((repo) => !repo.private)
@@ -459,6 +478,7 @@ function transformRESTResponse(userData: RESTUserResponse, reposData: RESTRepoRe
 			websiteUrl: userData.blog,
 			twitterUsername: userData.twitter_username,
 			email: userData.email,
+			linkedinUrl: LINKEDIN_URL || null,
 			followers: userData.followers,
 			following: userData.following,
 			createdAt: userData.created_at,
@@ -507,8 +527,7 @@ function calculateLanguageStats(repositories: GitHubRepository[]): LanguageStats
 			percentage: Math.round((data.count / total) * 100),
 			size: data.count
 		}))
-		.sort((a, b) => b.size - a.size)
-		.slice(0, 10); // Top 10 languages
+		.sort((a, b) => b.size - a.size);
 
 	return stats;
 }

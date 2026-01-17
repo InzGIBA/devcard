@@ -67,8 +67,18 @@
 			<!-- Tech Stack & Languages -->
 			<div>
 				<div class="mb-4 flex items-center gap-2">
-					<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+					<svg
+						class="h-5 w-5 text-text-tertiary"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+						/>
 					</svg>
 					<h3 class="text-lg font-semibold text-text-primary">Tech Stack & Languages</h3>
 				</div>
@@ -92,8 +102,18 @@
 				<div>
 					<div class="mb-4 flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+							<svg
+								class="h-5 w-5 text-text-tertiary"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+								/>
 							</svg>
 							<h3 class="text-lg font-semibold text-text-primary">Notable Projects</h3>
 						</div>

@@ -29,7 +29,6 @@
 </script>
 
 <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 {className}">
-
 	<!-- Header -->
 	<header class="mb-16 text-center">
 		<img
@@ -59,7 +58,9 @@
 			{/if}
 			{#if profile.user.websiteUrl}
 				<a
-					href={profile.user.websiteUrl.startsWith('http') ? profile.user.websiteUrl : `https://${profile.user.websiteUrl}`}
+					href={profile.user.websiteUrl.startsWith('http')
+						? profile.user.websiteUrl
+						: `https://${profile.user.websiteUrl}`}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="text-accent-green hover:underline"
@@ -108,7 +109,9 @@
 	<!-- Languages -->
 	{#if profile.languages.length > 0}
 		<section class="mb-16">
-			<h2 class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-text-tertiary">
+			<h2
+				class="mb-6 text-center text-xs font-semibold tracking-widest text-text-tertiary uppercase"
+			>
 				Technologies
 			</h2>
 			<div class="flex flex-wrap justify-center gap-2">
@@ -136,7 +139,7 @@
 	{#if profile.pinnedRepositories.length > 0}
 		<section class="mb-16">
 			<div class="mb-8 flex items-center justify-between">
-				<h2 class="text-xs font-semibold uppercase tracking-widest text-text-tertiary">
+				<h2 class="text-xs font-semibold tracking-widest text-text-tertiary uppercase">
 					Featured Projects
 				</h2>
 				<Dropdown options={sortOptions} bind:value={sortBy} />
@@ -163,13 +166,18 @@
 							<div class="flex items-center gap-3 text-sm text-text-tertiary">
 								{#if repo.primaryLanguage}
 									<span class="flex items-center gap-1">
-										<span class="h-2 w-2 rounded-full" style="background-color: {repo.primaryLanguage.color}"></span>
+										<span
+											class="h-2 w-2 rounded-full"
+											style="background-color: {repo.primaryLanguage.color}"
+										></span>
 										{repo.primaryLanguage.name}
 									</span>
 								{/if}
 								<span class="flex items-center gap-1">
 									<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
-										<path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/>
+										<path
+											d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"
+										/>
 									</svg>
 									{repo.stargazerCount}
 								</span>

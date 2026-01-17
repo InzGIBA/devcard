@@ -3,6 +3,7 @@
 	import { formatJoinDate, generateProfileTags } from '$lib/utils/github-transform';
 	import Badge from '$lib/components/ui/Badge.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
+	import LinkedInButton from '$lib/components/ui/LinkedInButton.svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -15,7 +16,7 @@
 	const joinDate = $derived(formatJoinDate(profile.user.createdAt));
 </script>
 
-<aside class="flex flex-col gap-4 items-center lg:items-start text-center lg:text-left {className}">
+<aside class="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left {className}">
 	<!-- Avatar -->
 	<div class="relative">
 		<img
@@ -61,7 +62,7 @@
 
 	<!-- Tags -->
 	{#if tags.length > 0}
-		<div class="flex flex-wrap justify-center lg:justify-start gap-2">
+		<div class="flex flex-wrap justify-center gap-2 lg:justify-start">
 			{#each tags as tag}
 				<span class="shrink-0"><Badge variant="outline" size="sm">{tag}</Badge></span>
 			{/each}
@@ -71,7 +72,7 @@
 	<!-- Meta Info -->
 	<div class="space-y-2 text-sm text-text-secondary">
 		{#if profile.user.company}
-			<div class="flex items-center justify-center lg:justify-start gap-2">
+			<div class="flex items-center justify-center gap-2 lg:justify-start">
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path
 						stroke-linecap="round"
@@ -85,7 +86,7 @@
 		{/if}
 
 		{#if profile.user.location}
-			<div class="flex items-center justify-center lg:justify-start gap-2">
+			<div class="flex items-center justify-center gap-2 lg:justify-start">
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path
 						stroke-linecap="round"
@@ -105,7 +106,7 @@
 		{/if}
 
 		{#if profile.user.websiteUrl}
-			<div class="flex items-center justify-center lg:justify-start gap-2">
+			<div class="flex items-center justify-center gap-2 lg:justify-start">
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path
 						stroke-linecap="round"
@@ -128,7 +129,7 @@
 		{/if}
 
 		{#if profile.user.twitterUsername}
-			<div class="flex items-center justify-center lg:justify-start gap-2">
+			<div class="flex items-center justify-center gap-2 lg:justify-start">
 				<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
 					<path
 						d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
@@ -145,7 +146,27 @@
 			</div>
 		{/if}
 
-		<div class="flex items-center justify-center lg:justify-start gap-2">
+		{#if profile.user.linkedinUrl}
+			<div class="flex items-center justify-center gap-2 lg:justify-start">
+				<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+					<path
+						d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+					/>
+				</svg>
+				<a
+					href={profile.user.linkedinUrl.startsWith('http')
+						? profile.user.linkedinUrl
+						: `https://www.linkedin.com/in/${profile.user.linkedinUrl}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-accent-green hover:underline"
+				>
+					LinkedIn
+				</a>
+			</div>
+		{/if}
+
+		<div class="flex items-center justify-center gap-2 lg:justify-start">
 			<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path
 					stroke-linecap="round"
@@ -159,7 +180,7 @@
 	</div>
 
 	<!-- Followers/Following -->
-	<div class="flex items-center justify-center lg:justify-start gap-4 text-sm">
+	<div class="flex items-center justify-center gap-4 text-sm lg:justify-start">
 		<a
 			href="https://github.com/{profile.user.login}?tab=followers"
 			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
@@ -169,14 +190,18 @@
 					d="M2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z"
 				/>
 			</svg>
-			<span><span class="font-semibold text-text-primary">{profile.stats.followers}</span> followers</span>
+			<span
+				><span class="font-semibold text-text-primary">{profile.stats.followers}</span> followers</span
+			>
 		</a>
 		<span class="text-text-tertiary">·</span>
 		<a
 			href="https://github.com/{profile.user.login}?tab=following"
 			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
 		>
-			<span><span class="font-semibold text-text-primary">{profile.stats.following}</span> following</span>
+			<span
+				><span class="font-semibold text-text-primary">{profile.stats.following}</span> following</span
+			>
 		</a>
 	</div>
 </aside>

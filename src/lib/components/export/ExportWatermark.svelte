@@ -12,7 +12,7 @@
 	const textColorClass = $derived(themeState.isDark ? 'text-white/50' : 'text-black/40');
 </script>
 
-<div class="absolute bottom-4 right-5 flex items-center gap-2 {className}">
+<div class="absolute right-5 bottom-4 flex items-center gap-2 {className}">
 	<!-- Logo: simplified version of favicon with theme-aware colors -->
 	<svg width="22" height="22" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect width="512" height="512" rx="96" fill={logoBgColor} />

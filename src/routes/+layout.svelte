@@ -19,7 +19,10 @@
 
 <svelte:head>
 	<title>CheckMyGit - GitHub Portfolio Generator</title>
-	<meta name="description" content="Generate beautiful portfolio pages from your GitHub profile. Showcase your projects, contributions, and skills." />
+	<meta
+		name="description"
+		content="Generate beautiful portfolio pages from your GitHub profile. Showcase your projects, contributions, and skills."
+	/>
 	<meta name="theme-color" content={themeState.isDark ? '#030303' : '#FFFFFF'} />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </svelte:head>
@@ -33,7 +36,7 @@
 
 <!-- Toast Container -->
 {#if toastState.toasts.length > 0}
-	<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+	<div class="fixed right-4 bottom-4 z-50 flex flex-col gap-2">
 		{#each toastState.toasts as toast (toast.id)}
 			<Toast
 				type={toast.type}

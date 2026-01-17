@@ -42,7 +42,9 @@
 			: ''
 	);
 
-	const classes = $derived(`${baseClasses} ${variantClasses[variant]} ${paddingClasses[padding]} ${hoverClasses} ${className}`);
+	const classes = $derived(
+		`${baseClasses} ${variantClasses[variant]} ${paddingClasses[padding]} ${hoverClasses} ${className}`
+	);
 </script>
 
 {#if onclick}

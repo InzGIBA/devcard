@@ -6,12 +6,7 @@
 		class?: string;
 	}
 
-	let {
-		variant = 'text',
-		width,
-		height,
-		class: className = ''
-	}: Props = $props();
+	let { variant = 'text', width, height, class: className = '' }: Props = $props();
 
 	const variantClasses = {
 		text: 'h-4 w-full rounded',

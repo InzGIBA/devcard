@@ -1,5 +1,3 @@
-
-
 <h1 align="center">CheckMyGit</h1>
 
 <p align="center">
@@ -83,60 +81,69 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
 ### Local Development
 
 1. **Clone the repo**
+
    ```bash
    git clone https://github.com/whoisyurii/checkmygit.git
    cd checkmygit
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Edit `.env` and add your configuration:
+
    ```env
    # Required: GitHub Personal Access Token with 'read:user' scope
    GH_TOKEN=ghp_your_token_here
-   
+
    # Required: Your GitHub username
    GH_USERNAME=your-username
-   
+
    # Optional: Base path if deploying to a subdirectory (e.g., /repo-name)
    BASE_PATH=
-   
+
    # Optional: Custom domain for GitHub Pages
    CUSTOM_DOMAIN=
    ```
 
 4. **Configure your site**
-   
+
    Edit `site.config.js` to customize your portfolio:
+
    ```javascript
    export default {
-     username: process.env.GH_USERNAME || 'your-username',
-     defaultTemplate: 'github', // 'github' | 'bento' | 'minimal'
-     basePath: process.env.BASE_PATH || '',
-     customDomain: process.env.CUSTOM_DOMAIN || '',
-     siteTitle: 'GitHub Portfolio',
-     siteDescription: 'My GitHub Profile Portfolio'
+   	username: process.env.GH_USERNAME || 'your-username',
+   	defaultTemplate: 'github', // 'github' | 'bento' | 'minimal'
+   	basePath: process.env.BASE_PATH || '',
+   	customDomain: process.env.CUSTOM_DOMAIN || '',
+   	siteTitle: 'GitHub Portfolio',
+   	siteDescription: 'My GitHub Profile Portfolio'
    };
    ```
 
 5. **Start the dev server**
+
    ```bash
    npm run dev
    ```
+
    Open [localhost:5173](http://localhost:5173) in your browser.
 
 6. **Build the static site**
+
    ```bash
    npm run build
    ```
+
    The static files will be generated in the `build/` directory.
 
 7. **Preview the build**
@@ -148,17 +155,17 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
 
 ### Required Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `GH_TOKEN` | GitHub Personal Access Token with `read:user` scope | `ghp_abc123...` |
-| `GH_USERNAME` | Your GitHub username to display | `octocat` |
+| Variable      | Description                                         | Example         |
+| ------------- | --------------------------------------------------- | --------------- |
+| `GH_TOKEN`    | GitHub Personal Access Token with `read:user` scope | `ghp_abc123...` |
+| `GH_USERNAME` | Your GitHub username to display                     | `octocat`       |
 
 ### Optional Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `BASE_PATH` | Base path for subdirectory deployment | `/my-portfolio` |
-| `CUSTOM_DOMAIN` | Custom domain for GitHub Pages | `portfolio.example.com` |
+| Variable        | Description                           | Example                 |
+| --------------- | ------------------------------------- | ----------------------- |
+| `BASE_PATH`     | Base path for subdirectory deployment | `/my-portfolio`         |
+| `CUSTOM_DOMAIN` | Custom domain for GitHub Pages        | `portfolio.example.com` |
 
 ### Creating a GitHub Token
 
@@ -176,33 +183,33 @@ CheckMyGit generates a static portfolio site for a single GitHub profile. The si
 1. **Fork or push this repository to your GitHub account**
 
 2. **Configure GitHub Secrets**
-   
+
    Go to your repository Settings → Secrets and variables → Actions → New repository secret
-   
+
    Add the following secrets:
-   
-   | Secret Name | Value | Required |
-   |-------------|-------|----------|
-   | `GH_TOKEN` | Your GitHub Personal Access Token | ✅ Yes |
-   | `GH_USERNAME` | Your GitHub username | ✅ Yes |
-   | `BASE_PATH` | Base path (if needed) | ❌ Optional |
-   | `CUSTOM_DOMAIN` | Custom domain (if using) | ❌ Optional |
+
+   | Secret Name     | Value                             | Required    |
+   | --------------- | --------------------------------- | ----------- |
+   | `GH_TOKEN`      | Your GitHub Personal Access Token | ✅ Yes      |
+   | `GH_USERNAME`   | Your GitHub username              | ✅ Yes      |
+   | `BASE_PATH`     | Base path (if needed)             | ❌ Optional |
+   | `CUSTOM_DOMAIN` | Custom domain (if using)          | ❌ Optional |
 
 3. **Enable GitHub Pages**
-   
+
    Go to Settings → Pages:
    - **Source**: Select "GitHub Actions"
    - The workflow will automatically deploy on the next push
 
 4. **Trigger the first deployment**
-   
+
    Push a commit to the `main` branch or manually trigger the workflow:
    - Go to Actions tab
    - Select "Deploy to GitHub Pages" workflow
    - Click "Run workflow"
 
 5. **Access your site**
-   
+
    Your site will be available at:
    - User/Organization site: `https://username.github.io`
    - Project site: `https://username.github.io/repository-name`
@@ -215,7 +222,7 @@ If deploying to a project repository (not `username.github.io`), you need to set
 1. Add `BASE_PATH` secret in GitHub: `/repository-name`
 2. Or update `site.config.js`:
    ```javascript
-   basePath: '/repository-name'
+   basePath: '/repository-name';
    ```
 
 ### Custom Domain Setup
@@ -251,21 +258,22 @@ Edit `.github/workflows/deploy.yml` to change the schedule:
 schedule:
   # Daily at midnight UTC
   - cron: '0 0 * * *'
-  
+
   # Every 6 hours
   - cron: '0 */6 * * *'
-  
+
   # Weekly on Monday at 00:00 UTC
   - cron: '0 0 * * 1'
-  
+
   # Monthly on the 1st at 00:00 UTC
   - cron: '0 0 1 * *'
-  
+
   # Weekdays at 09:00 UTC
   - cron: '0 9 * * 1-5'
 ```
 
 **Cron Syntax Reference:**
+
 ```
 ┌───────────── minute (0 - 59)
 │ ┌───────────── hour (0 - 23)
@@ -300,6 +308,7 @@ Your portfolio supports three templates:
 ### Switching Templates
 
 **Via URL Parameter:**
+
 ```
 https://username.github.io?template=bento
 https://username.github.io?template=minimal
@@ -309,8 +318,9 @@ https://username.github.io?template=github
 **Via Configuration:**
 
 Edit `site.config.js`:
+
 ```javascript
-defaultTemplate: 'bento' // or 'minimal' or 'github'
+defaultTemplate: 'bento'; // or 'minimal' or 'github'
 ```
 
 ## Troubleshooting

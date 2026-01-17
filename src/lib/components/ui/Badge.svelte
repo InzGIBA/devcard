@@ -22,14 +22,18 @@
 		md: 'px-2.5 py-1 text-xs'
 	};
 
-	const baseClasses = $derived(`inline-flex items-center rounded-full font-medium whitespace-nowrap ${sizeClasses[size]}`);
+	const baseClasses = $derived(
+		`inline-flex items-center rounded-full font-medium whitespace-nowrap ${sizeClasses[size]}`
+	);
 
 	// Generate style if custom color is provided
-	const style = $derived(color
-		? variant === 'solid'
-			? `background-color: ${color}; color: white;`
-			: `background-color: ${color}20; color: ${color}; border-color: ${color}40;`
-		: '');
+	const style = $derived(
+		color
+			? variant === 'solid'
+				? `background-color: ${color}; color: white;`
+				: `background-color: ${color}20; color: ${color}; border-color: ${color}40;`
+			: ''
+	);
 </script>
 
 {#if variant === 'default'}
@@ -47,10 +51,7 @@
 		{@render children()}
 	</span>
 {:else}
-	<span
-		class="{baseClasses} bg-[var(--color-accent-green)] text-white {className}"
-		{style}
-	>
+	<span class="{baseClasses} bg-[var(--color-accent-green)] text-white {className}" {style}>
 		{@render children()}
 	</span>
 {/if}

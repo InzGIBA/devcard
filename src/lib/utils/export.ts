@@ -62,10 +62,7 @@ export async function exportToJpeg(
 }
 
 // Export element to SVG
-export async function exportToSvg(
-	element: HTMLElement,
-	filename: string
-): Promise<boolean> {
+export async function exportToSvg(element: HTMLElement, filename: string): Promise<boolean> {
 	try {
 		const { toSvg } = await import('html-to-image');
 
@@ -178,11 +175,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 // Share using Web Share API
-export async function shareUrl(
-	url: string,
-	title: string,
-	text: string
-): Promise<boolean> {
+export async function shareUrl(url: string, title: string, text: string): Promise<boolean> {
 	if (navigator.share) {
 		try {
 			await navigator.share({ url, title, text });

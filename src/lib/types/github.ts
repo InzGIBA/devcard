@@ -10,6 +10,7 @@ export interface GitHubUser {
 	websiteUrl: string | null;
 	twitterUsername: string | null;
 	email: string | null;
+	linkedinUrl: string | null;
 	followers: number;
 	following: number;
 	createdAt: string;

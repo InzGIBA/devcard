@@ -12,7 +12,9 @@
 	}
 </script>
 
-<section class="animate-fade-in-delay-3 relative z-10 border-t border-border-muted bg-bg-secondary py-24">
+<section
+	class="animate-fade-in-delay-3 relative z-10 border-t border-border-muted bg-bg-secondary py-24"
+>
 	<div class="mx-auto max-w-5xl px-6">
 		<div class="mb-12 text-center">
 			<h2 class="mb-4 text-3xl font-bold text-text-primary">Featured Profiles</h2>
@@ -24,7 +26,7 @@
 				<button
 					type="button"
 					onclick={() => handleProfileClick(profile.username)}
-					class="group relative overflow-hidden rounded-2xl border border-border-default bg-bg-tertiary p-6 text-left transition-all hover:border-border-highlight hover:shadow-xl cursor-pointer"
+					class="group relative cursor-pointer overflow-hidden rounded-2xl border border-border-default bg-bg-tertiary p-6 text-left transition-all hover:border-border-highlight hover:shadow-xl"
 				>
 					<div class="flex items-center gap-4">
 						<div class="relative">
@@ -33,10 +35,14 @@
 								alt={profile.name}
 								class="h-12 w-12 rounded-full border border-border-subtle bg-bg-secondary"
 							/>
-							<div class="absolute -bottom-1 -right-1 rounded-full border-2 border-bg-tertiary bg-accent-green p-1"></div>
+							<div
+								class="absolute -right-1 -bottom-1 rounded-full border-2 border-bg-tertiary bg-accent-green p-1"
+							></div>
 						</div>
 						<div>
-							<h3 class="font-semibold text-text-primary group-hover:text-accent-green">{profile.name}</h3>
+							<h3 class="font-semibold text-text-primary group-hover:text-accent-green">
+								{profile.name}
+							</h3>
 							<p class="text-xs text-text-tertiary">@{profile.username}</p>
 						</div>
 					</div>

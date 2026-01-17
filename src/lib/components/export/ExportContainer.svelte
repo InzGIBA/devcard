@@ -13,14 +13,12 @@
 	const bgColor = $derived(themeState.isDark ? '#030303' : '#FFFFFF');
 	// For light theme: no visible gradients to keep pure white background
 	const gradientOpacity = $derived(themeState.isDark ? 0.08 : 0);
-	const bottomGradientColor = $derived(themeState.isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0)');
+	const bottomGradientColor = $derived(
+		themeState.isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0)'
+	);
 </script>
 
-<div
-	id="export-container"
-	class="relative"
-	style="background-color: {bgColor}; width: 1320px;"
->
+<div id="export-container" class="relative" style="background-color: {bgColor}; width: 1320px;">
 	<!-- Background gradients as inline SVG for html-to-image compatibility -->
 	<svg
 		class="pointer-events-none absolute inset-0 h-full w-full"

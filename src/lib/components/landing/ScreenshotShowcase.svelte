@@ -31,17 +31,14 @@
 
 <svelte:window bind:scrollY />
 
-<section
-	bind:this={sectionEl}
-	class="relative z-10 px-4 pb-20 pt-4 sm:px-6 md:pb-32"
->
+<section bind:this={sectionEl} class="relative z-10 px-4 pt-4 pb-20 sm:px-6 md:pb-32">
 	<div class="mx-auto max-w-6xl" style="perspective: 1200px;">
 		<div
 			class="relative"
 			style="transform: rotateX({rotateX}deg); transform-origin: center bottom; will-change: transform;"
 		>
 			<!-- Subtle green glow at bottom -->
-			<div class="absolute -bottom-6 inset-x-16 h-20 bg-saas-green blur-3xl opacity-70"></div>
+			<div class="absolute inset-x-16 -bottom-6 h-20 bg-saas-green opacity-70 blur-3xl"></div>
 
 			<div
 				class="screenshot-card relative overflow-hidden rounded-2xl border border-border-subtle bg-bg-tertiary shadow-2xl md:rounded-3xl"
@@ -50,11 +47,13 @@
 				<img
 					src={screenshotImg}
 					alt="CheckMyGit portfolio preview showing GitHub stats, contributions, and projects"
-					class="block w-full h-auto"
+					class="block h-auto w-full"
 				/>
 
 				<!-- Subtle overlay gradient at bottom -->
-				<div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-primary/50 to-transparent"></div>
+				<div
+					class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-primary/50 to-transparent"
+				></div>
 			</div>
 		</div>
 	</div>

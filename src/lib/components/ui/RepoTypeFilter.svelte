@@ -17,10 +17,5 @@
 
 <div class="flex items-center gap-2">
 	<span class="text-sm text-[var(--color-text-secondary)]">{label}</span>
-	<Dropdown
-		{options}
-		{value}
-		onchange={(v) => onchange(v as 'all' | 'original')}
-		class="w-36"
-	/>
+	<Dropdown {options} {value} onchange={(v) => onchange(v as 'all' | 'original')} class="w-36" />
 </div>

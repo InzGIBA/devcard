@@ -42,7 +42,13 @@
 				onclick={onclose}
 				aria-label="Dismiss notification"
 			>
-				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+				<svg
+					class="h-4 w-4"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					aria-hidden="true"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"

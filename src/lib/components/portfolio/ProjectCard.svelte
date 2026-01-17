@@ -25,12 +25,7 @@
 	<!-- Header -->
 	<div class="mb-2 flex items-start justify-between">
 		<div class="flex items-center gap-2">
-			<svg
-				class="h-4 w-4 text-text-tertiary"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
+			<svg class="h-4 w-4 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -55,7 +50,7 @@
 			{repo.description}
 		</p>
 	{:else}
-		<p class="mb-3 text-sm italic text-text-tertiary">
+		<p class="mb-3 text-sm text-text-tertiary italic">
 			No description available for this repository.
 		</p>
 	{/if}
@@ -64,9 +59,7 @@
 	{#if repo.topics && repo.topics.length > 0}
 		<div class="mb-3 flex flex-wrap gap-1">
 			{#each repo.topics.slice(0, 3) as topic}
-				<span
-					class="rounded-full bg-accent-green/10 px-2 py-0.5 text-xs text-accent-green"
-				>
+				<span class="rounded-full bg-accent-green/10 px-2 py-0.5 text-xs text-accent-green">
 					{topic}
 				</span>
 			{/each}
