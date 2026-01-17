@@ -116,7 +116,7 @@ describe('TemplateGitHub Integration Tests', () => {
 			// Verify copywriting updates
 			expect(container.textContent).toContain("Welcome to Test User's Portfolio");
 			expect(container.textContent).toContain('professional profile');
-			expect(container.textContent).toContain('CheckMyGit');
+			expect(container.textContent).toContain('DevCard');
 			expect(container.textContent).toContain('JSON Resume');
 
 			// Verify resume sections are displayed

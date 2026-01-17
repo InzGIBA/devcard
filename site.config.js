@@ -19,8 +19,8 @@ export default {
 	customDomain: process.env.CUSTOM_DOMAIN || '',
 
 	// Метаданные сайта
-	siteTitle: 'GitHub Portfolio',
-	siteDescription: 'My GitHub Profile Portfolio',
+	siteTitle: 'DevCard - Developer Portfolio',
+	siteDescription: 'GitHub profile + CV in one beautiful static portfolio',
 
 	// Опции сборки
 	build: {

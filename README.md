@@ -1,374 +1,239 @@
-<h1 align="center">CheckMyGit</h1>
+# DevCard
 
-<p align="center">
-  <strong>Transform your GitHub profile into a stunning static portfolio.</strong>
-</p>
+> Your GitHub profile + CV in one beautiful static portfolio
 
-<p align="center">
-  <a href="#features">Features</a> •
-  <a href="#static-site-setup">Static Site Setup</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#deployment">Deployment</a>
-</p>
-
----
-
-<p align="center">
-  <img src="src/lib/assets/readme_img.png" alt="CheckMyGit" width="100%" />
-</p>
-
----
+[![Deploy](https://github.com/InzGIBA/devcard/actions/workflows/deploy.yml/badge.svg)](https://github.com/InzGIBA/devcard/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
-- **Static Portfolio** — Your GitHub profile as a fast, static website
-- **3 Templates** — GitHub-style sidebar, Bento grid, or Minimal CV layout
-- **Contribution Graph** — Full year heatmap visualization
-- **Language Stats** — Donut chart breakdown of your tech stack
-- **Pinned Projects** — Showcase your best repositories
-- **PNG Export** — Download your portfolio as an image
-- **Auto-Sync** — Scheduled builds keep your data fresh
-- **GitHub Pages** — Free hosting with automatic deployment
+- 🎨 **3 Templates** — GitHub-style, Bento grid, or Minimal CV
+- 📊 **GitHub Stats** — Contributions, languages, pinned repos
+- 📄 **JSON Resume** — Full CV integration with work, education, projects
+- 🌐 **Social Links** — LinkedIn, Telegram, Twitter support
+- 📸 **PNG Export** — Download your portfolio as image
+- 🔄 **Auto-Sync** — Scheduled builds keep data fresh
+- 🚀 **GitHub Pages** — Free hosting with one-click deploy
 
-## Static Site Setup
+## Quick Start
 
-CheckMyGit generates a static portfolio site for a single GitHub profile. The site is built at deploy time with your latest GitHub data and automatically updates on a schedule.
+### 1. Fork & Clone
 
-### Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     GitHub Repository                        │
-│                                                              │
-│  Source Code ──▶ GitHub Actions ──▶ Build Process          │
-│                                      │                       │
-│                                      ▼                       │
-│                              Fetch GitHub Data               │
-│                                      │                       │
-│                                      ▼                       │
-│                              Static Files (build/)           │
-│                                      │                       │
-│                                      ▼                       │
-│                              Deploy to GitHub Pages          │
-└─────────────────────────────────────────────────────────────┘
+```bash
+git clone https://github.com/InzGIBA/devcard.git
+cd devcard
+npm install
 ```
 
-**Key Concepts:**
+### 2. Configure
 
-- **Build-Time Data Fetching**: GitHub profile data is fetched during the build process and embedded into static HTML files
-- **Scheduled Builds**: GitHub Actions automatically rebuilds your site on a schedule (default: daily) to keep data fresh
-- **No Runtime API Calls**: The deployed site is purely static with no server-side processing
-- **Template Switching**: Switch between templates using URL parameters (`?template=bento`)
+Create `.env` file:
 
-## Tech Stack
+```env
+GH_TOKEN=ghp_your_token_here
+GH_USERNAME=your-username
+JSONRESUME_URL=https://raw.githubusercontent.com/user/repo/main/resume.json
+LINKEDIN_USERNAME=your-linkedin
+TELEGRAM_USERNAME=your-telegram
+```
 
-- **Framework:** SvelteKit 2 + Svelte 5 Runes
-- **Styling:** Tailwind CSS 4
-- **API:** GitHub GraphQL + REST fallback
-- **Deployment:** GitHub Pages with GitHub Actions
-- **Adapter:** @sveltejs/adapter-static
-- **Export:** html-to-image
+Get your GitHub token: [github.com/settings/tokens](https://github.com/settings/tokens) (scope: `read:user`)
 
-## Getting Started
+### 3. Run
 
-### Prerequisites
+```bash
+npm run dev
+```
 
-- Node.js 20 or higher
-- GitHub account
-- GitHub Personal Access Token
+Open [localhost:5173](http://localhost:5173)
 
-### Local Development
+## Deploy to GitHub Pages
 
-1. **Clone the repo**
+### Setup
 
-   ```bash
-   git clone https://github.com/whoisyurii/checkmygit.git
-   cd checkmygit
-   ```
+1. **Add Secrets** — Go to Settings → Secrets and variables → Actions
 
-2. **Install dependencies**
+   | Secret | Required | Description |
+   |--------|----------|-------------|
+   | `GH_TOKEN` | ✅ | GitHub Personal Access Token |
+   | `GH_USERNAME` | ✅ | Your GitHub username |
+   | `JSONRESUME_URL` | ❌ | URL to JSON Resume file |
+   | `LINKEDIN_USERNAME` | ❌ | LinkedIn username |
+   | `TELEGRAM_USERNAME` | ❌ | Telegram username |
+   | `BASE_PATH` | ❌ | Base path for subdirectory |
+   | `CUSTOM_DOMAIN` | ❌ | Custom domain |
 
-   ```bash
-   npm install
-   ```
+2. **Enable Pages** — Settings → Pages → Source: "GitHub Actions"
 
-3. **Set up environment variables**
+3. **Deploy** — Push to `main` or trigger manually in Actions tab
 
-   ```bash
-   cp .env.example .env
-   ```
+Your site: `https://username.github.io` or `https://username.github.io/repo-name`
 
-   Edit `.env` and add your configuration:
+### Custom Domain
 
-   ```env
-   # Required: GitHub Personal Access Token with 'read:user' scope
-   GH_TOKEN=ghp_your_token_here
+1. Add `CUSTOM_DOMAIN` secret with your domain
+2. Configure DNS: CNAME → `username.github.io`
+3. Wait for DNS propagation (up to 24h)
 
-   # Required: Your GitHub username
-   GH_USERNAME=your-username
+## JSON Resume
 
-   # Optional: Base path if deploying to a subdirectory (e.g., /repo-name)
-   BASE_PATH=
+DevCard supports [JSON Resume](https://jsonresume.org/) format for CV data.
 
-   # Optional: Custom domain for GitHub Pages
-   CUSTOM_DOMAIN=
-   ```
+**Hosting options:**
+- GitHub repository (raw file URL)
+- [registry.jsonresume.org](https://registry.jsonresume.org/)
+- GitHub Gist
 
-4. **Configure your site**
+**Example structure:**
 
-   Edit `site.config.js` to customize your portfolio:
+```json
+{
+  "basics": {
+    "name": "John Doe",
+    "label": "Full Stack Developer",
+    "email": "john@example.com",
+    "summary": "Passionate developer..."
+  },
+  "work": [
+    {
+      "name": "Company",
+      "position": "Senior Developer",
+      "startDate": "2020-01-01",
+      "highlights": ["Achievement 1", "Achievement 2"]
+    }
+  ],
+  "education": [...],
+  "skills": [...],
+  "projects": [...]
+}
+```
 
-   ```javascript
-   export default {
-   	username: process.env.GH_USERNAME || 'your-username',
-   	defaultTemplate: 'github', // 'github' | 'bento' | 'minimal'
-   	basePath: process.env.BASE_PATH || '',
-   	customDomain: process.env.CUSTOM_DOMAIN || '',
-   	siteTitle: 'GitHub Portfolio',
-   	siteDescription: 'My GitHub Profile Portfolio'
-   };
-   ```
+Full schema: [jsonresume.org/schema](https://jsonresume.org/schema/)
 
-5. **Start the dev server**
+## Templates
 
-   ```bash
-   npm run dev
-   ```
+Switch templates via URL parameter:
 
-   Open [localhost:5173](http://localhost:5173) in your browser.
+```
+?template=github   # Default GitHub-style layout
+?template=bento    # Modern grid layout
+?template=minimal  # Clean CV layout
+```
 
-6. **Build the static site**
+Or set default in `site.config.js`:
 
-   ```bash
-   npm run build
-   ```
+```javascript
+defaultTemplate: 'github'
+```
 
-   The static files will be generated in the `build/` directory.
+## Auto-Updates
 
-7. **Preview the build**
-   ```bash
-   npm run preview
-   ```
+Site rebuilds automatically **daily at 00:00 UTC** to keep GitHub data fresh.
 
-## Environment Variables
-
-### Required Variables
-
-| Variable      | Description                                         | Example         |
-| ------------- | --------------------------------------------------- | --------------- |
-| `GH_TOKEN`    | GitHub Personal Access Token with `read:user` scope | `ghp_abc123...` |
-| `GH_USERNAME` | Your GitHub username to display                     | `octocat`       |
-
-### Optional Variables
-
-| Variable        | Description                           | Example                 |
-| --------------- | ------------------------------------- | ----------------------- |
-| `BASE_PATH`     | Base path for subdirectory deployment | `/my-portfolio`         |
-| `CUSTOM_DOMAIN` | Custom domain for GitHub Pages        | `portfolio.example.com` |
-
-### Creating a GitHub Token
-
-1. Go to [github.com/settings/tokens](https://github.com/settings/tokens)
-2. Click "Generate new token" → "Generate new token (classic)"
-3. Give it a descriptive name (e.g., "CheckMyGit Portfolio")
-4. Select the `read:user` scope
-5. Click "Generate token"
-6. Copy the token immediately (you won't see it again!)
-
-## Deployment
-
-### GitHub Pages Setup
-
-1. **Fork or push this repository to your GitHub account**
-
-2. **Configure GitHub Secrets**
-
-   Go to your repository Settings → Secrets and variables → Actions → New repository secret
-
-   Add the following secrets:
-
-   | Secret Name     | Value                             | Required    |
-   | --------------- | --------------------------------- | ----------- |
-   | `GH_TOKEN`      | Your GitHub Personal Access Token | ✅ Yes      |
-   | `GH_USERNAME`   | Your GitHub username              | ✅ Yes      |
-   | `BASE_PATH`     | Base path (if needed)             | ❌ Optional |
-   | `CUSTOM_DOMAIN` | Custom domain (if using)          | ❌ Optional |
-
-3. **Enable GitHub Pages**
-
-   Go to Settings → Pages:
-   - **Source**: Select "GitHub Actions"
-   - The workflow will automatically deploy on the next push
-
-4. **Trigger the first deployment**
-
-   Push a commit to the `main` branch or manually trigger the workflow:
-   - Go to Actions tab
-   - Select "Deploy to GitHub Pages" workflow
-   - Click "Run workflow"
-
-5. **Access your site**
-
-   Your site will be available at:
-   - User/Organization site: `https://username.github.io`
-   - Project site: `https://username.github.io/repository-name`
-   - Custom domain: `https://your-custom-domain.com` (if configured)
-
-### Base Path Configuration
-
-If deploying to a project repository (not `username.github.io`), you need to set the base path:
-
-1. Add `BASE_PATH` secret in GitHub: `/repository-name`
-2. Or update `site.config.js`:
-   ```javascript
-   basePath: '/repository-name';
-   ```
-
-### Custom Domain Setup
-
-To use a custom domain:
-
-1. **Add domain to GitHub Pages**
-   - Go to Settings → Pages
-   - Enter your custom domain
-   - Follow GitHub's DNS configuration instructions
-
-2. **Add CUSTOM_DOMAIN secret**
-   - Add `CUSTOM_DOMAIN` secret with your domain (e.g., `portfolio.example.com`)
-   - The workflow will automatically create a CNAME file
-
-3. **Configure DNS**
-   - Add a CNAME record pointing to `username.github.io`
-   - Or add A records for GitHub Pages IPs (see [GitHub docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site))
-
-## Automatic Updates
-
-Your portfolio automatically updates on a schedule to keep your GitHub data fresh.
-
-### Default Schedule
-
-By default, the site rebuilds **daily at 00:00 UTC**.
-
-### Custom Schedule Examples
-
-Edit `.github/workflows/deploy.yml` to change the schedule:
+**Custom schedule** — Edit `.github/workflows/deploy.yml`:
 
 ```yaml
 schedule:
-  # Daily at midnight UTC
-  - cron: '0 0 * * *'
-
-  # Every 6 hours
-  - cron: '0 */6 * * *'
-
-  # Weekly on Monday at 00:00 UTC
-  - cron: '0 0 * * 1'
-
-  # Monthly on the 1st at 00:00 UTC
-  - cron: '0 0 1 * *'
-
-  # Weekdays at 09:00 UTC
-  - cron: '0 9 * * 1-5'
+  - cron: '0 */6 * * *'  # Every 6 hours
+  - cron: '0 0 * * 1'    # Weekly on Monday
 ```
 
-**Cron Syntax Reference:**
+**Manual trigger** — Actions tab → "Deploy to GitHub Pages" → Run workflow
 
-```
-┌───────────── minute (0 - 59)
-│ ┌───────────── hour (0 - 23)
-│ │ ┌───────────── day of month (1 - 31)
-│ │ │ ┌───────────── month (1 - 12)
-│ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday)
-│ │ │ │ │
-* * * * *
-```
+## Configuration
 
-### Manual Deployment
+### Environment Variables
 
-You can manually trigger a rebuild anytime:
+```env
+# Required
+GH_TOKEN=ghp_xxx              # GitHub API token
+GH_USERNAME=username          # GitHub username
 
-1. Go to your repository on GitHub
-2. Click the **Actions** tab
-3. Select **"Deploy to GitHub Pages"** workflow
-4. Click **"Run workflow"** button
-5. Select the `main` branch
-6. Click **"Run workflow"**
-
-The workflow will fetch your latest GitHub data and redeploy your site.
-
-## Template Switching
-
-Your portfolio supports three templates:
-
-- **GitHub** (default): Classic GitHub profile layout with sidebar
-- **Bento**: Modern grid layout with cards
-- **Minimal**: Clean CV-style layout
-
-### Switching Templates
-
-**Via URL Parameter:**
-
-```
-https://username.github.io?template=bento
-https://username.github.io?template=minimal
-https://username.github.io?template=github
+# Optional
+JSONRESUME_URL=https://...    # JSON Resume URL
+LINKEDIN_USERNAME=username    # LinkedIn profile
+TELEGRAM_USERNAME=username    # Telegram handle
+BASE_PATH=/repo-name          # For subdirectory deployment
+CUSTOM_DOMAIN=example.com     # Custom domain
 ```
 
-**Via Configuration:**
+### Site Config
 
 Edit `site.config.js`:
 
 ```javascript
-defaultTemplate: 'bento'; // or 'minimal' or 'github'
+export default {
+  username: process.env.GH_USERNAME || 'your-username',
+  defaultTemplate: 'github',
+  basePath: process.env.BASE_PATH || '',
+  customDomain: process.env.CUSTOM_DOMAIN || '',
+  siteTitle: 'DevCard - Developer Portfolio',
+  siteDescription: 'GitHub profile + CV in one portfolio'
+}
+```
+
+## Tech Stack
+
+- **Framework** — SvelteKit 2 + Svelte 5 Runes
+- **Styling** — Tailwind CSS 4
+- **Data** — GitHub GraphQL API + JSON Resume
+- **Deploy** — GitHub Pages + Actions
+- **Export** — html-to-image
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview build
+npm run preview
+
+# Lint & format
+npm run lint
+npm run format
 ```
 
 ## Troubleshooting
 
-### Build Fails with "GH_TOKEN is required"
+**Build fails with "GH_TOKEN is required"**
+- Add `GH_TOKEN` secret in repository settings
 
-Make sure you've added the `GH_TOKEN` secret in your repository settings.
+**Build fails with "User not found"**
+- Check `GH_USERNAME` is valid
 
-### Build Fails with "User not found"
+**Site shows 404**
+- Verify Pages is enabled (Settings → Pages)
+- Check workflow completed successfully (Actions tab)
 
-Check that `GH_USERNAME` secret contains a valid GitHub username.
+**Data not updating**
+- Check Actions tab for failed runs
+- Manually trigger workflow to force update
 
-### Site Shows 404
-
-1. Verify GitHub Pages is enabled in Settings → Pages
-2. Check that Source is set to "GitHub Actions"
-3. Ensure the workflow completed successfully in the Actions tab
-
-### Custom Domain Not Working
-
-1. Verify DNS records are configured correctly
-2. Check that CUSTOM_DOMAIN secret is set
-3. Wait up to 24 hours for DNS propagation
-
-### Data Not Updating
-
-1. Check the Actions tab for failed workflow runs
-2. Verify the schedule trigger is configured correctly
-3. Manually trigger a workflow run to force an update
-
-## Roadmap
-
-- [ ] **Dynamic OG Images** — Satori + Resvg for custom social preview cards
-- [ ] **New Templates** — Developer card, Resume/CV, Portfolio grid
-- [ ] **UI Polish** — Dark/light theme toggle, animation refinements
-- [ ] **PDF Export** — Download portfolio as PDF document
-- [ ] **Custom Themes** — User-defined accent colors and fonts
-
-## Contributing
-
-Contributions welcome! Feel free to open issues or submit PRs.
+**Custom domain not working**
+- Verify DNS records are correct
+- Wait up to 24h for DNS propagation
+- Check `CUSTOM_DOMAIN` secret is set
 
 ## License
 
-MIT
+MIT © [InzGIBA](https://github.com/InzGIBA)
 
 ---
 
-<p align="center">
-  Built with SvelteKit & deployed on GitHub Pages
-</p>
+## About
+
+DevCard is built with modern web technologies and open source tools:
+
+- Based on [CheckMyGit](https://github.com/whoisyurii/checkmygit) by [@whoisyurii](https://github.com/whoisyurii)
+- CV data powered by [JSON Resume](https://jsonresume.org/) open standard
+- Built with [SvelteKit](https://kit.svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/)
+- Deployed on [GitHub Pages](https://pages.github.com/)
+
+Special thanks to the open source community for making this possible.

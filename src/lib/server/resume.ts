@@ -17,7 +17,7 @@ export async function fetchResumeData(url: string): Promise<ResumeData | null> {
 			signal: controller.signal,
 			headers: {
 				Accept: 'application/json',
-				'User-Agent': 'CheckMyGit'
+				'User-Agent': 'DevCard'
 			}
 		});
 

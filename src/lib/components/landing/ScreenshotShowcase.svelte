@@ -46,7 +46,7 @@
 				<!-- Screenshot image -->
 				<img
 					src={screenshotImg}
-					alt="CheckMyGit portfolio preview showing GitHub stats, contributions, and projects"
+					alt="DevCard portfolio preview showing GitHub stats, contributions, and CV"
 					class="block h-auto w-full"
 				/>
 

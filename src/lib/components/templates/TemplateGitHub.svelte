@@ -59,7 +59,7 @@
 					</div>
 					<div class="flex items-center gap-2 text-xs text-text-tertiary">
 						<span>Powered by
-						<span class="font-semibold text-accent-green">CheckMyGit</span>
+						<span class="font-semibold text-accent-green">DevCard</span>
 						&
 						<span class="font-semibold text-accent-green">JSON Resume</span>
 						</span>

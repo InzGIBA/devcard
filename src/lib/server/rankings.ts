@@ -91,7 +91,7 @@ export async function fetchTopRepositories(
 			headers: {
 				Authorization: `Bearer ${GITHUB_TOKEN}`,
 				'Content-Type': 'application/json',
-				'User-Agent': 'CheckMyGit'
+				'User-Agent': 'DevCard'
 			},
 			body: JSON.stringify({
 				query: TOP_REPOS_QUERY,
@@ -165,7 +165,7 @@ export async function fetchTopUsers(
 			headers: {
 				Authorization: `Bearer ${GITHUB_TOKEN}`,
 				'Content-Type': 'application/json',
-				'User-Agent': 'CheckMyGit'
+				'User-Agent': 'DevCard'
 			},
 			body: JSON.stringify({
 				query: getTopUsersQuery(excludeForks),

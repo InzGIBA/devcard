@@ -1,6 +1,6 @@
 // Repository
-export const REPO_URL = 'https://github.com/whoisyurii/checkmygit';
-export const GITHUB_API_URL = 'https://api.github.com/repos/whoisyurii/checkmygit';
+export const REPO_URL = 'https://github.com/InzGIBA/devcard';
+export const GITHUB_API_URL = 'https://api.github.com/repos/InzGIBA/devcard';
 
 // Author
 export const AUTHOR_GITHUB_URL = 'https://github.com/whoisyurii';

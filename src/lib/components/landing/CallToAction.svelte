@@ -6,7 +6,7 @@
 	<div class="mx-auto max-w-4xl px-6">
 		<h2 class="mb-6 text-4xl font-bold tracking-tight text-text-primary">Ready to stand out?</h2>
 		<p class="mx-auto mb-10 w-full max-w-3xl text-lg text-text-secondary">
-			Join thousands of developers using CheckMyGit to showcase their work. Open source,
+			Join thousands of developers using DevCard to showcase their work. Open source,
 			privacy-focused, and free forever.
 		</p>
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -21,7 +21,7 @@
 			<Button
 				variant="secondary"
 				size="lg"
-				href="https://github.com/whoisyurii/checkmygit"
+				href="https://github.com/InzGIBA/devcard"
 				target="_blank"
 				class="w-full sm:w-auto"
 			>

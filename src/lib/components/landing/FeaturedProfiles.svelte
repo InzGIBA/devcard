@@ -18,7 +18,7 @@
 	<div class="mx-auto max-w-5xl px-6">
 		<div class="mb-12 text-center">
 			<h2 class="mb-4 text-3xl font-bold text-text-primary">Featured Profiles</h2>
-			<p class="text-text-secondary">See what CheckMyGit can do for these legends</p>
+			<p class="text-text-secondary">See what DevCard can do for these legends</p>
 		</div>
 
 		<div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">

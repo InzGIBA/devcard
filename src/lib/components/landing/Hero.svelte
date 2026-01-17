@@ -55,14 +55,14 @@
 		{/if}
 
 		<h1 class="mb-6 text-4xl font-bold tracking-tight md:text-7xl">
-			Transform your GitHub
+			GitHub + CV
 			<br />
-			<span class="text-gradient">into a portfolio</span>
+			<span class="text-gradient">in one portfolio</span>
 		</h1>
 
 		<p class="mx-auto mb-10 w-full max-w-150 text-base text-text-secondary md:text-xl">
-			Generate beautiful, shareable portfolio pages from any GitHub profile. Showcase your
-			contributions, projects, and skills in seconds.
+			Beautiful developer portfolios combining GitHub profile with CV data. Showcase your
+			contributions, projects, and career in one place.
 		</p>
 
 		<!-- Input Container -->

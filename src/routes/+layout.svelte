@@ -18,10 +18,10 @@
 </script>
 
 <svelte:head>
-	<title>CheckMyGit - GitHub Portfolio Generator</title>
+	<title>DevCard - GitHub Profile + CV Portfolio</title>
 	<meta
 		name="description"
-		content="Generate beautiful portfolio pages from your GitHub profile. Showcase your projects, contributions, and skills."
+		content="Create beautiful developer portfolios combining GitHub profile with CV data. Showcase your projects, contributions, and career in one place."
 	/>
 	<meta name="theme-color" content={themeState.isDark ? '#030303' : '#FFFFFF'} />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />

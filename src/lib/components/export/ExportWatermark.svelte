@@ -23,5 +23,5 @@
 			clip-rule="evenodd"
 		/>
 	</svg>
-	<span class="text-sm font-medium {textColorClass}">checkmygit.com</span>
+	<span class="text-sm font-medium {textColorClass}">inzgiba.me</span>
 </div>
