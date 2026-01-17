@@ -44,7 +44,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
-          LINKEDIN_URL: ${{ secrets.LINKEDIN_URL || '' }}
+          LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME || '' }}
+          TELEGRAM_USERNAME: ${{ secrets.TELEGRAM_USERNAME || '' }}
           JSONRESUME_URL: ${{ secrets.JSONRESUME_URL || '' }}
           BASE_PATH: ${{ secrets.BASE_PATH || '' }}
           CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN || '' }}

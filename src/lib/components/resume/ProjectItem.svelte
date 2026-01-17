@@ -64,7 +64,7 @@
 		<ul class="mt-3 space-y-2 text-sm text-text-secondary">
 			{#each project.highlights as highlight}
 				<li class="flex gap-2">
-					<span class="mt-1 text-accent-green">•</span>
+					<span class="text-accent-green">•</span>
 					<span class="flex-1">{highlight}</span>
 				</li>
 			{/each}
