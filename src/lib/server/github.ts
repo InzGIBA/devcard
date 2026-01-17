@@ -36,7 +36,7 @@ query GetUserProfile($username: String!) {
     following { totalCount }
     createdAt
     updatedAt
-    repositories(first: 100, orderBy: {field: STARGAZERS, direction: DESC}, privacy: PUBLIC) {
+    repositories(first: 100, orderBy: {field: PUSHED_AT, direction: DESC}, privacy: PUBLIC) {
       totalCount
       nodes {
         name
@@ -389,9 +389,11 @@ function transformGraphQLResponse(data: GraphQLUserResponse): GitHubProfile {
 		externalCommitCount
 	};
 
-	// Filter out forks for language stats (only count original work)
+	// Calculate language stats from all repositories (including forks)
+	const languages = calculateLanguageStats(repositories);
+	
+	// Filter out forks for other stats (stars, etc.)
 	const originalRepos = repositories.filter((repo) => !repo.isFork);
-	const languages = calculateLanguageStats(originalRepos);
 	const yearsActive = calculateYearsActive(user.createdAt);
 
 	const totalStars = repositories.reduce((sum, repo) => sum + repo.stargazerCount, 0);
@@ -458,9 +460,11 @@ function transformRESTResponse(
 			createdAt: repo.created_at
 		}));
 
-	// Filter out forks for language stats
+	// Calculate language stats from all repositories (including forks)
+	const languages = calculateLanguageStats(repositories);
+	
+	// Filter out forks for other stats (stars, etc.)
 	const originalRepos = repositories.filter((repo) => !repo.isFork);
-	const languages = calculateLanguageStats(originalRepos);
 	const yearsActive = calculateYearsActive(userData.created_at);
 
 	const totalStars = repositories.reduce((sum, repo) => sum + repo.stargazerCount, 0);
