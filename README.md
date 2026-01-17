@@ -223,7 +223,7 @@ npm run format
 
 ## License
 
-MIT © [InzGIBA](https://github.com/InzGIBA)
+MIT License with commercial restriction — see [LICENSE](LICENSE) for details.
 
 ---
 
