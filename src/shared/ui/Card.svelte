@@ -22,10 +22,10 @@
 	const baseClasses = 'rounded-[var(--radius-md)] transition-all';
 
 	const variantClasses = {
-		default: 'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)]',
+		default: 'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl',
 		elevated:
-			'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] shadow-[var(--shadow-md)]',
-		outline: 'bg-transparent border border-[var(--color-border-default)]',
+			'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] shadow-[var(--shadow-md)] rounded-xl',
+		outline: 'bg-transparent border border-[var(--color-border-default)] rounded-xl',
 		ghost: 'bg-transparent'
 	};
 

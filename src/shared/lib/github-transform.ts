@@ -112,9 +112,9 @@ export function generateProfileTags(profile: GitHubProfile): string[] {
 	}
 
 	// Based on languages diversity
-	if (profile.languages.length > 10) {
+	if (profile.languages.length > 30) {
 		tags.push('Polyglot');
-	} else if (profile.languages.length > 5) {
+	} else if (profile.languages.length > 15) {
 		tags.push('Multi-Stack');
 	}
 

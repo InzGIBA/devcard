@@ -9,60 +9,64 @@
 
 	const formatDate = (date?: string) => {
 		if (!date) return '';
-		return new Date(date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+		return new Date(date).toLocaleDateString('en-US', { year: 'numeric' });
 	};
+
+	// Spotlight effect handler
+	function handleMouseMove(e: MouseEvent) {
+		const card = e.currentTarget as HTMLElement;
+		const rect = card.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const y = e.clientY - rect.top;
+		card.style.setProperty('--spotlight-x', `${x}px`);
+		card.style.setProperty('--spotlight-y', `${y}px`);
+	}
 </script>
 
 <div
-	class="group rounded-lg border border-border-default bg-bg-secondary p-4 transition-all hover:border-border-subtle hover:bg-bg-tertiary"
+	class="spotlight-card rounded-xl border border-border-default bg-bg-secondary p-5"
+	onmousemove={handleMouseMove}
+	role="presentation"
 >
-	<h3 class="text-lg font-semibold text-text-primary">
-		{edu.studyType || 'Degree'}
-		{edu.area ? `in ${edu.area}` : ''}
-	</h3>
-	<div class="mt-1 flex flex-wrap items-center gap-2 text-sm text-text-secondary">
-		{#if edu.institution}
-			{#if edu.url}
-				<a
-					href={edu.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					data-sveltekit-preload-data="off"
-					class="font-medium text-accent-green hover:underline"
-					aria-label="Visit {edu.institution} website"
-				>
-					{edu.institution}
-				</a>
-			{:else}
-				<span class="font-medium">{edu.institution}</span>
+	<div class="relative z-20">
+		<div class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between">
+			<h3 class="font-medium text-white">
+				{edu.studyType || 'Degree'}
+				{edu.area ? `in ${edu.area}` : ''}
+			</h3>
+			{#if edu.endDate}
+				<span class="font-mono text-xs text-text-tertiary">
+					Graduated {formatDate(edu.endDate)}
+				</span>
 			{/if}
-		{/if}
-		{#if edu.startDate || edu.endDate}
-			<span class="text-text-tertiary">•</span>
-			<span class="text-text-tertiary">{formatDate(edu.startDate)} - {formatDate(edu.endDate)}</span
-			>
-		{/if}
-	</div>
+		</div>
 
-	{#if edu.score}
-		<p class="mt-2 text-sm text-text-secondary">
-			<span class="font-medium text-text-primary">GPA:</span>
-			{edu.score}
-		</p>
-	{/if}
-
-	{#if edu.courses && edu.courses.length > 0}
-		<div class="mt-3">
-			<p class="mb-2 text-sm font-medium text-text-primary">Relevant Courses:</p>
-			<div class="flex flex-wrap gap-2">
-				{#each edu.courses as course (course)}
-					<span
-						class="rounded-md bg-bg-tertiary px-2.5 py-1 text-xs text-text-secondary transition-colors hover:bg-accent-green/10 hover:text-accent-green"
+		{#if edu.institution}
+			<p class="text-sm text-text-secondary">
+				{#if edu.url}
+					<a
+						href={edu.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						data-sveltekit-preload-data="off"
+						class="text-accent-green hover:underline"
 					>
+						{edu.institution}
+					</a>
+				{:else}
+					{edu.institution}
+				{/if}
+			</p>
+		{/if}
+
+		{#if edu.courses && edu.courses.length > 0}
+			<div class="mt-3 flex flex-wrap gap-2">
+				{#each edu.courses as course (course)}
+					<span class="rounded border border-border-default bg-bg-tertiary px-2 py-1 text-xs text-text-tertiary">
 						{course}
 					</span>
 				{/each}
 			</div>
-		</div>
-	{/if}
+		{/if}
+	</div>
 </div>

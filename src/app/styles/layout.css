@@ -1,17 +1,17 @@
 /* Inter font - must be at top */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
-/* Modern SaaS Palette - Vercel/Linear inspired */
+/* Modern SaaS Palette - Dark Minimal inspired */
 @theme {
 	/* Background colors */
-	--color-bg-primary: #030303; /* Deep void black */
-	--color-bg-secondary: #0a0a0a; /* Subtle surface */
-	--color-bg-tertiary: #161616; /* Card background */
+	--color-bg-primary: #050505; /* Deep void black */
+	--color-bg-secondary: #0a0a0a; /* Surface */
+	--color-bg-tertiary: #121212; /* Surface highlight */
 	--color-bg-canvas: #000000;
 
 	/* Border colors */
@@ -21,36 +21,43 @@
 	--color-border-highlight: #444444;
 
 	/* Text colors */
-	--color-text-primary: #ededed;
-	--color-text-secondary: #a1a1a1;
-	--color-text-tertiary: #666666;
+	--color-text-primary: #d4d4d8; /* Zinc 300 */
+	--color-text-secondary: #a1a1aa; /* Zinc 400 */
+	--color-text-tertiary: #52525b; /* Zinc 600 */
 	--color-text-placeholder: #555555;
 	--color-text-disabled: #333333;
 
 	/* Accent colors */
-	--color-accent-blue: #3291ff; /* Vercel Blue */
-	--color-accent-green: #2ea043; /* GitHub Green */
-	--color-accent-purple: #8b5cf6; /* Linear Purple */
-	--color-accent-yellow: #f5a623;
-	--color-accent-orange: #f97316;
-	--color-accent-red: #e00;
+	--color-accent-blue: #3b82f6; /* Blue 500 */
+	--color-accent-green: #10b981; /* Emerald 500 */
+	--color-accent-purple: #8b5cf6; /* Violet 500 */
+	--color-accent-yellow: #eab308; /* Yellow 500 */
+	--color-accent-orange: #f97316; /* Orange 500 */
+	--color-accent-red: #ef4444; /* Red 500 */
 	--color-accent-pink: #ec4899;
-	--color-saas-green: #0d3a20;
+	--color-accent-amber: #f59e0b; /* Amber 500 */
+	--color-accent-cyan: #06b6d4; /* Cyan 500 */
+	--color-saas-green: #10b981;
+
+	/* Design system colors */
+	--color-tertiary: #52525b; /* Zinc 600 */
 
 	/* Button colors */
-	--color-btn-primary-bg: #ededed;
+	--color-btn-primary-bg: #ffffff;
 	--color-btn-primary-text: #000000;
-	--color-btn-primary-hover: #ffffff;
-	--color-btn-secondary-bg: #1a1a1a;
-	--color-btn-secondary-text: #ededed;
-	--color-btn-secondary-hover: #222222;
+	--color-btn-primary-hover: #e4e4e7;
+	--color-btn-secondary-bg: #121212;
+	--color-btn-secondary-text: #d4d4d8;
+	--color-btn-secondary-hover: #1a1a1a;
 
 	/* Shadows & Glows */
 	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
 	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-	--shadow-glow: 0 0 40px -10px rgba(255, 255, 255, 0.15);
+	--shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+	--shadow-glow-hover: 0 0 25px rgba(255, 255, 255, 0.2);
 	--shadow-glow-blue: 0 0 40px -10px rgba(50, 145, 255, 0.3);
+	--shadow-glow-emerald: 0 0 8px rgba(16, 185, 129, 0.5);
 
 	/* Border radius */
 	--radius-sm: 4px;
@@ -313,4 +320,82 @@ a {
 body:has(.page-exit),
 body:has(.page-enter) {
 	overflow: hidden;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+	0% {
+		transform: translateY(10px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.animate-slide-up {
+	animation: slideUp 0.3s ease-out forwards;
+}
+
+/* Pulse Slow Animation */
+@keyframes pulseSlow {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+.animate-pulse-slow {
+	animation: pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Spotlight Card Effect */
+.spotlight-card {
+	position: relative;
+	overflow: hidden;
+}
+
+.spotlight-card::before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: radial-gradient(800px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(255, 255, 255, 0.06), transparent 40%);
+	opacity: 0;
+	transition: opacity 0.3s;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.spotlight-card:hover::before {
+	opacity: 1;
+}
+
+/* Contribution Grid */
+.contribution-grid {
+	display: grid;
+	grid-template-rows: repeat(7, 1fr);
+	grid-auto-flow: column;
+	gap: 3px;
+}
+
+/* Language Badge Glow Effects */
+.lang-badge-glow {
+	box-shadow: 0 0 8px var(--glow-color, rgba(255, 255, 255, 0.3));
+}
+
+/* Timeline Glow */
+.timeline-glow {
+	background: linear-gradient(to bottom, rgba(16, 185, 129, 0.5), transparent);
+}
+
+/* Selection color */
+::selection {
+	background-color: rgba(16, 185, 129, 0.2);
+	color: #10b981;
 }

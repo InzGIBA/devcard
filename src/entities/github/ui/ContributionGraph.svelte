@@ -1,8 +1,6 @@
 <script lang="ts">
-	import type { GitHubProfile, ContributionWeek } from '$entities/github/model/types';
+	import type { GitHubProfile } from '$entities/github/model/types';
 	import { formatNumber } from '$shared/lib/github-transform';
-	import { themeState } from '$features/theme-toggle/model/store.svelte';
-	import Card from '$shared/ui/Card.svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -17,162 +15,111 @@
 	// Get the last 52 weeks of contributions
 	const weeks = $derived(calendar?.weeks.slice(-52) ?? []);
 
-	// Days of week labels
-	const dayLabels = [
-		{ label: 'Sun', key: 'sun' },
-		{ label: 'Mon', key: 'mon' },
-		{ label: 'Tue', key: 'tue' },
-		{ label: 'Wed', key: 'wed' },
-		{ label: 'Thu', key: 'thu' },
-		{ label: 'Fri', key: 'fri' },
-		{ label: 'Sat', key: 'sat' }
-	];
+	// Flatten all days for grid display
+	const allDays = $derived(weeks.flatMap(week => week.contributionDays));
 
-	// Month labels based on weeks
-	function getMonthLabels(weeks: ContributionWeek[]): { label: string; col: number }[] {
-		const months: { label: string; col: number }[] = [];
-		let lastMonth = -1;
+	// Tooltip state
+	let tooltip = $state<{ text: string; x: number; y: number } | null>(null);
 
-		weeks.forEach((week, index) => {
-			if (week.contributionDays.length > 0) {
-				const date = new Date(week.contributionDays[0].date);
-				const month = date.getMonth();
-				if (month !== lastMonth) {
-					months.push({
-						label: date.toLocaleDateString('en-US', { month: 'short' }),
-						col: index
-					});
-					lastMonth = month;
-				}
-			}
-		});
-
-		return months;
-	}
-
-	// Get contribution color based on theme
-	function getContributionColor(color: string, count: number): string {
-		if (count === 0) {
-			return themeState.isDark ? '#161b22' : '#ebedf0';
-		}
-
-		// In light mode, use the original colors from GitHub API
-		if (themeState.isLight) {
-			return color;
-		}
-
-		// In dark mode, map light colors to dark equivalents
-		const darkColorMap: Record<string, string> = {
-			'#9be9a8': '#0e4429', // Level 1
-			'#40c463': '#006d32', // Level 2
-			'#30a14e': '#26a641', // Level 3
-			'#216e39': '#39d353' // Level 4
+	function showTooltip(e: MouseEvent, count: number) {
+		const rect = (e.target as HTMLElement).getBoundingClientRect();
+		tooltip = {
+			text: `${count} commits`,
+			x: rect.left + rect.width / 2,
+			y: rect.top
 		};
-
-		return darkColorMap[color.toLowerCase()] || color;
 	}
 
-	const monthLabels = $derived(getMonthLabels(weeks));
+	function hideTooltip() {
+		tooltip = null;
+	}
+
+	// Get contribution level (0-4) based on count
+	function getContributionLevel(count: number): number {
+		if (count === 0) return 0;
+		if (count <= 3) return 1;
+		if (count <= 6) return 2;
+		if (count <= 9) return 3;
+		return 4;
+	}
+
+	// Get color class based on level
+	function getContributionColorClass(level: number): string {
+		const colors = [
+			'bg-[#121212] hover:bg-zinc-800',
+			'bg-emerald-900',
+			'bg-emerald-700',
+			'bg-emerald-500',
+			'bg-emerald-400'
+		];
+		return colors[level] || colors[0];
+	}
+
+	// Get opacity based on level
+	function getContributionOpacity(level: number): number {
+		const opacities = [1, 0.4, 0.6, 0.8, 1];
+		return opacities[level] || 1;
+	}
 </script>
 
-<div class={className}>
-	<!-- Header (outside card, like Notable Projects) -->
+<style>
+	.contribution-grid {
+		display: grid;
+		grid-template-rows: repeat(7, 1fr);
+		grid-auto-flow: column;
+		gap: 3px;
+	}
+</style>
+
+<!-- Tooltip portal -->
+{#if tooltip}
+	<div
+		class="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-[4px] bg-[#222] px-2 py-1 text-xs text-white border border-[#333]"
+		style="left: {tooltip.x}px; top: {tooltip.y - 6}px;"
+	>
+		{tooltip.text}
+	</div>
+{/if}
+
+<section class="animate-slide-up {className}" style="animation-delay: 100ms;">
 	<div class="mb-4 flex items-center justify-between">
-		<div class="flex items-center gap-2">
-			<svg class="h-5 w-5 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-				/>
-			</svg>
-			<h3 class="text-lg font-semibold text-text-primary">Contributions</h3>
-		</div>
-		<div class="text-sm text-text-secondary">
-			<span class="font-semibold text-text-primary">
-				{formatNumber(totalContributions)}
-			</span>
-			<span class="ml-1">in the last year</span>
-		</div>
+		<h2 class="flex items-center gap-2 text-lg font-medium tracking-tight text-white">
+			<iconify-icon icon="solar:graph-new-linear" class="text-tertiary"></iconify-icon>
+			Contributions
+		</h2>
+		<span class="rounded-md border border-[#222222] bg-[#121212] px-2 py-1 text-xs font-medium text-[#52525b]">
+			{formatNumber(totalContributions)} in last year
+		</span>
 	</div>
 
-	<!-- Heatmap Card -->
-	<Card variant="default" padding="md">
-		{#if calendar}
-			<div class="w-full">
-				<!-- Month labels -->
-				<div class="mb-2 flex text-xs text-text-tertiary">
-					<!-- Spacer for Day Labels -->
-					<div class="w-8 shrink-0"></div>
+	<div class="group relative rounded-xl border border-[#222222] bg-[#0A0A0A] p-1">
+		<div class="overflow-x-auto">
+			<!-- Fade overlay for overflow hint -->
+			<div class="pointer-events-none absolute bottom-0 right-0 top-0 w-8 bg-gradient-to-l from-[#0A0A0A] to-transparent lg:hidden"></div>
 
-					<!-- Months Grid -->
-					<div class="flex flex-1 justify-between gap-0.5">
-						{#each weeks as week, i (week.contributionDays[0]?.date ?? i)}
-							<div class="relative min-w-0 flex-1">
-								{#each monthLabels as month (`${month.label}-${month.col}`)}
-									{#if month.col === i}
-										<span class="absolute bottom-0 left-0 truncate text-[10px]">
-											{month.label}
-										</span>
-									{/if}
-								{/each}
-							</div>
-						{/each}
-					</div>
-				</div>
-
-				<!-- Graph grid -->
-				<div class="flex w-full gap-2">
-					<!-- Day labels -->
-					<div class="flex w-8 shrink-0 flex-col gap-0.5">
-						{#each dayLabels as { label, key } (key)}
+			{#if calendar}
+				<div class="min-w-[700px] p-2">
+					<div class="contribution-grid h-[120px] w-full">
+						{#each allDays as day (day.date)}
+							{@const level = getContributionLevel(day.contributionCount)}
 							<div
-								class="flex flex-1 items-center justify-end text-[10px] leading-none text-text-tertiary"
-							>
-								<span class="mr-1">{label}</span>
-							</div>
-						{/each}
-					</div>
-
-					<!-- Contribution squares -->
-					<div class="flex flex-1 justify-between gap-0.5">
-						{#each weeks as week, weekIndex (week.contributionDays[0]?.date ?? `week-${weekIndex}`)}
-							<div class="flex min-w-0 flex-1 flex-col gap-0.5">
-								{#each week.contributionDays as day (day.date)}
-									<div
-										class="aspect-square w-full rounded-sm transition-opacity hover:opacity-80"
-										style="background-color: {getContributionColor(
-											day.color,
-											day.contributionCount
-										)}"
-										title="{day.contributionCount} contributions on {new Date(
-											day.date
-										).toLocaleDateString()}"
-									></div>
-								{/each}
-							</div>
+								class="cursor-pointer rounded-[2px] transition-all duration-200 hover:z-10 hover:scale-125 {getContributionColorClass(level)}"
+								style="opacity: {getContributionOpacity(level)}; width: 100%; height: 100%;"
+								onmouseenter={(e) => showTooltip(e, day.contributionCount)}
+								onmouseleave={hideTooltip}
+								role="gridcell"
+							></div>
 						{/each}
 					</div>
 				</div>
-
-				<div class="mt-4 text-xs text-text-tertiary">Last 52 weeks of activity</div>
-			</div>
-		{:else}
-			<div class="flex h-32 items-center justify-center text-sm text-text-tertiary">
-				<div class="text-center">
-					<svg class="mx-auto mb-2 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-						/>
-					</svg>
-					<p>Contribution data not available</p>
-					<p class="mt-1 text-[10px]">Sign in with GitHub for full data</p>
+			{:else}
+				<div class="flex h-32 items-center justify-center text-sm text-[#52525b]">
+					<div class="text-center">
+						<iconify-icon icon="solar:graph-new-linear" width="32" class="mx-auto mb-2"></iconify-icon>
+						<p>Contribution data not available</p>
+					</div>
 				</div>
-			</div>
-		{/if}
-	</Card>
-</div>
+			{/if}
+		</div>
+	</div>
+</section>

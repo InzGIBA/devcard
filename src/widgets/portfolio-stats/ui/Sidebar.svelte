@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$entities/github/model/types';
 	import { formatJoinDate, generateProfileTags } from '$shared/lib/github-transform';
-	import Badge from '$shared/ui/Badge.svelte';
-	import Button from '$shared/ui/Button.svelte';
+	import { onMount } from 'svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -13,228 +12,190 @@
 
 	const tags = $derived(generateProfileTags(profile));
 	const joinDate = $derived(formatJoinDate(profile.user.createdAt));
+
+	// Live time state
+	let currentTime = $state('--:--');
+
+	onMount(() => {
+		function updateTime() {
+			const now = new Date();
+			const hours = now.getHours().toString().padStart(2, '0');
+			const minutes = now.getMinutes().toString().padStart(2, '0');
+			currentTime = `${hours}:${minutes}`;
+		}
+		updateTime();
+		const interval = setInterval(updateTime, 1000);
+		return () => clearInterval(interval);
+	});
+
+	// Copy email function
+	function copyEmail() {
+		const email = profile.user.email || `${profile.user.login}@github.com`;
+		navigator.clipboard.writeText(email);
+	}
 </script>
 
-<aside
-	class="flex flex-col items-center gap-4 text-center lg:max-h-[calc(100vh-4rem)] lg:items-start lg:overflow-y-auto lg:pr-2 lg:text-left {className}"
-	style="scrollbar-width: thin;"
->
-	<!-- Avatar -->
-	<div class="relative">
-		<img
-			src={profile.user.avatarUrl}
-			alt={profile.user.login}
-			class="h-74 w-74 rounded-full border-4 border-border-default bg-bg-tertiary"
-		/>
-	</div>
+<aside class="flex w-full flex-col gap-6 lg:sticky lg:top-8 {className}">
+	<!-- Avatar & Intro -->
+	<div class="flex animate-fade-in flex-col items-center text-center lg:items-start lg:text-left">
+		<div class="group relative mb-4 cursor-pointer">
+			<div class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-accent-green/20 to-accent-blue/20 opacity-50 blur transition duration-700 group-hover:opacity-100"></div>
+			<img
+				src={profile.user.avatarUrl}
+				alt={profile.user.login}
+				class="relative h-32 w-32 rounded-full border border-border-default bg-bg-tertiary object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+			/>
+		</div>
 
-	<!-- Name & Username -->
-	<div class="space-y-1">
-		{#if profile.user.name}
-			<h1 class="text-2xl font-semibold text-text-primary">
-				{profile.user.name}
-			</h1>
-		{/if}
-		<p class="text-xl text-text-secondary">
+		<h1 class="text-2xl font-medium tracking-tight text-white">
+			{profile.user.name || profile.user.login}
+		</h1>
+		<p class="font-light tracking-tight text-text-secondary">
 			@{profile.user.login}
 		</p>
-	</div>
 
-	<!-- Bio -->
-	{#if profile.user.bio}
-		<p class="text-text-secondary">
-			{profile.user.bio}
-		</p>
-	{/if}
-
-	<!-- Follow Button -->
-	<Button
-		variant="secondary"
-		size="md"
-		href="https://github.com/{profile.user.login}"
-		class="w-full"
-	>
-		<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
-			<path
-				d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-			/>
-		</svg>
-		Follow on GitHub
-	</Button>
-
-	<!-- Tags -->
-	{#if tags.length > 0}
-		<div class="flex flex-wrap justify-center gap-2 lg:justify-start">
-			{#each tags as tag (tag)}
-				<span class="shrink-0"><Badge variant="outline" size="sm">{tag}</Badge></span>
-			{/each}
-		</div>
-	{/if}
-
-	<!-- Section 1: Location & Registration -->
-	<div class="space-y-2 text-sm text-text-secondary">
-		{#if profile.user.location}
-			<div class="flex items-center justify-center gap-2 lg:justify-start">
-				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-					/>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-					/>
-				</svg>
-				<span>{profile.user.location}</span>
+		<!-- Tags -->
+		{#if tags.length > 0}
+			<div class="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+				{#each tags as tag (tag)}
+					<span class="inline-flex cursor-default items-center rounded-md border border-border-default bg-bg-tertiary/50 px-2 py-1 text-xs font-medium text-text-secondary backdrop-blur-sm transition-colors hover:border-border-highlight hover:text-white">
+						{tag}
+					</span>
+				{/each}
 			</div>
 		{/if}
 
-		<div class="flex items-center justify-center gap-2 lg:justify-start">
-			<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-				/>
-			</svg>
+		<!-- Bio -->
+		{#if profile.user.bio}
+			<p class="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-text-secondary/80 lg:mx-0">
+				{profile.user.bio}
+			</p>
+		{/if}
+	</div>
+
+	<!-- Info List -->
+	<div class="w-full space-y-3 border-t border-border-default pt-6 text-sm">
+		<!-- Live Time Widget -->
+		<div class="group flex items-center justify-between">
+			<div class="flex items-center gap-3 text-text-tertiary transition-colors duration-200 group-hover:text-text-primary">
+				<iconify-icon icon="solar:clock-circle-linear" width="18"></iconify-icon>
+				<span>{currentTime}</span>
+			</div>
+			<span class="text-[10px] font-medium uppercase tracking-widest text-accent-green/80">Local</span>
+		</div>
+
+		<!-- Join Date -->
+		<div class="flex items-center gap-3 text-text-tertiary transition-colors duration-200 hover:text-text-primary">
+			<iconify-icon icon="solar:calendar-linear" width="18"></iconify-icon>
 			<span>{joinDate}</span>
+		</div>
+
+		<!-- Website -->
+		{#if profile.user.websiteUrl}
+			<div class="flex items-center gap-3 text-text-tertiary transition-colors duration-200 hover:text-accent-green">
+				<iconify-icon icon="solar:link-circle-linear" width="18"></iconify-icon>
+				<a
+					href={profile.user.websiteUrl.startsWith('http') ? profile.user.websiteUrl : `https://${profile.user.websiteUrl}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					data-sveltekit-preload-data="off"
+					class="hover:underline"
+				>
+					{profile.user.websiteUrl.replace(/^https?:\/\//, '')}
+				</a>
+			</div>
+		{/if}
+
+		<!-- Email (clickable to copy) -->
+		<button
+			onclick={copyEmail}
+			class="group flex w-full items-center gap-3 text-left text-text-tertiary transition-colors duration-200 hover:text-white"
+		>
+			<iconify-icon icon="solar:letter-linear" width="18" class="transition-colors group-hover:text-white"></iconify-icon>
+			<span class="truncate">{profile.user.email || `${profile.user.login}@github.com`}</span>
+			<iconify-icon icon="solar:copy-linear" width="14" class="ml-auto opacity-0 transition-opacity group-hover:opacity-100"></iconify-icon>
+		</button>
+
+		<!-- Social Links -->
+		<div class="flex gap-4 pt-2">
+			{#if profile.user.linkedinUsername}
+				<a
+					href="https://www.linkedin.com/in/{profile.user.linkedinUsername}"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-sveltekit-preload-data="off"
+					class="transition-colors duration-200"
+					style="color: #52525b;"
+					onmouseenter={(e) => e.currentTarget.style.color = '#60a5fa'}
+					onmouseleave={(e) => e.currentTarget.style.color = '#52525b'}
+				>
+					<iconify-icon icon="brandico:linkedin-rect" width="20" style="color: inherit;"></iconify-icon>
+				</a>
+			{/if}
+			{#if profile.user.telegramUsername}
+				<a
+					href="https://t.me/{profile.user.telegramUsername.replace(/^@/, '')}"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-sveltekit-preload-data="off"
+					class="transition-colors duration-200"
+					style="color: #52525b;"
+					onmouseenter={(e) => e.currentTarget.style.color = '#38bdf8'}
+					onmouseleave={(e) => e.currentTarget.style.color = '#52525b'}
+				>
+					<iconify-icon icon="iconoir:telegram" width="20" style="color: inherit;"></iconify-icon>
+				</a>
+			{/if}
+			{#if profile.user.twitterUsername}
+				<a
+					href="https://twitter.com/{profile.user.twitterUsername}"
+					target="_blank"
+					rel="noopener noreferrer"
+					data-sveltekit-preload-data="off"
+					class="transition-colors duration-200"
+					style="color: #52525b;"
+					onmouseenter={(e) => e.currentTarget.style.color = '#ffffff'}
+					onmouseleave={(e) => e.currentTarget.style.color = '#52525b'}
+				>
+					<iconify-icon icon="ri:twitter-x-fill" width="18" style="color: inherit;"></iconify-icon>
+				</a>
+			{/if}
 		</div>
 	</div>
 
-	<!-- Section 2: Contact Methods -->
-	{#if profile.user.company || profile.user.websiteUrl || profile.user.twitterUsername || profile.user.linkedinUsername || profile.user.telegramUsername}
-		<div class="space-y-2 text-sm text-text-secondary">
-			{#if profile.user.company}
-				<div class="flex items-center justify-center gap-2 lg:justify-start">
-					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-						/>
-					</svg>
-					<span>{profile.user.company.replace('@', '')}</span>
-				</div>
-			{/if}
+	<!-- Main CTA -->
+	<a
+		href="https://github.com/{profile.user.login}"
+		target="_blank"
+		rel="noopener noreferrer"
+		data-sveltekit-preload-data="off"
+		class="group flex w-full items-center justify-center gap-2 rounded-lg bg-white py-2.5 text-sm font-medium shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-200 hover:bg-zinc-200 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+		style="color: #000000;"
+	>
+		<iconify-icon icon="solar:cat-linear" width="18" style="color: inherit;" class="transition-transform group-hover:-translate-y-0.5"></iconify-icon>
+		Follow on GitHub
+	</a>
 
-			{#if profile.user.websiteUrl}
-				<div class="flex items-center justify-center gap-2 lg:justify-start">
-					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-						/>
-					</svg>
-					<a
-						href={profile.user.websiteUrl.startsWith('http')
-							? profile.user.websiteUrl
-							: `https://${profile.user.websiteUrl}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						data-sveltekit-preload-data="off"
-						class="text-accent-green hover:underline"
-					>
-						{profile.user.websiteUrl.replace(/^https?:\/\//, '')}
-					</a>
-				</div>
-			{/if}
-
-			{#if profile.user.twitterUsername}
-				<div class="flex items-center justify-center gap-2 lg:justify-start">
-					<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-						/>
-					</svg>
-					<a
-						href="https://twitter.com/{profile.user.twitterUsername}"
-						target="_blank"
-						rel="noopener noreferrer"
-						data-sveltekit-preload-data="off"
-						class="text-accent-green hover:underline"
-					>
-						@{profile.user.twitterUsername}
-					</a>
-				</div>
-			{/if}
-
-			{#if profile.user.linkedinUsername}
-				<div class="flex items-center justify-center gap-2 lg:justify-start">
-					<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-						/>
-					</svg>
-					<a
-						href="https://www.linkedin.com/in/{profile.user.linkedinUsername}"
-						target="_blank"
-						rel="noopener noreferrer"
-						data-sveltekit-preload-data="off"
-						class="text-accent-green hover:underline"
-					>
-						LinkedIn
-					</a>
-				</div>
-			{/if}
-
-			{#if profile.user.telegramUsername}
-				<div class="flex items-center justify-center gap-2 lg:justify-start">
-					<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-						<path
-							d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.232.171.326.016.093.036.306.02.472z"
-						/>
-					</svg>
-					<a
-						href="https://t.me/{profile.user.telegramUsername.replace(/^@/, '')}"
-						target="_blank"
-						rel="noopener noreferrer"
-						data-sveltekit-preload-data="off"
-						class="text-accent-green hover:underline"
-					>
-						Telegram
-					</a>
-				</div>
-			{/if}
-		</div>
-	{/if}
-
-	<!-- Section 3: Social Stats -->
-	<div class="flex items-center justify-center gap-4 text-sm lg:justify-start">
+	<!-- Followers Stats -->
+	<div class="flex items-center justify-center gap-4 text-xs text-text-tertiary lg:justify-start">
 		<a
 			href="https://github.com/{profile.user.login}?tab=followers"
 			target="_blank"
 			rel="noopener noreferrer"
 			data-sveltekit-preload-data="off"
-			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
+			class="flex items-center gap-1 transition-colors hover:text-white"
 		>
-			<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
-				<path
-					d="M2 5.5a3.5 3.5 0 115.898 2.549 5.507 5.507 0 013.034 4.084.75.75 0 11-1.482.235 4.001 4.001 0 00-7.9 0 .75.75 0 01-1.482-.236A5.507 5.507 0 013.102 8.05 3.49 3.49 0 012 5.5zM11 4a.75.75 0 100 1.5 1.5 1.5 0 01.666 2.844.75.75 0 00-.416.672v.352a.75.75 0 00.574.73c1.2.289 2.162 1.2 2.522 2.372a.75.75 0 101.434-.44 5.01 5.01 0 00-2.56-3.012A3 3 0 0011 4z"
-				/>
-			</svg>
-			<span
-				><span class="font-semibold text-text-primary">{profile.stats.followers}</span> followers</span
-			>
+			<span class="font-medium text-white">{profile.stats.followers}</span> followers
 		</a>
-		<span class="text-text-tertiary">·</span>
+		<span>·</span>
 		<a
 			href="https://github.com/{profile.user.login}?tab=following"
 			target="_blank"
 			rel="noopener noreferrer"
 			data-sveltekit-preload-data="off"
-			class="flex items-center gap-2 text-text-secondary hover:text-accent-green"
+			class="flex items-center gap-1 transition-colors hover:text-white"
 		>
-			<span
-				><span class="font-semibold text-text-primary">{profile.stats.following}</span> following</span
-			>
+			<span class="font-medium text-white">{profile.stats.following}</span> following
 		</a>
 	</div>
 </aside>

@@ -55,11 +55,11 @@
 		<button
 			type="button"
 			class="
-				flex h-9 w-full items-center justify-between rounded-[var(--radius-md)]
+				flex h-9 w-full items-center justify-between rounded-lg
 				border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]
 				px-3 text-sm text-[var(--color-text-primary)] transition-colors
-				hover:bg-[var(--color-bg-tertiary)]
-				focus:border-[var(--color-saas-green)] focus:ring-1 focus:ring-[var(--color-saas-green)] focus:outline-none
+				hover:bg-[var(--color-bg-tertiary)] hover:border-[var(--color-border-highlight)]
+				focus:border-[var(--color-accent-green)] focus:ring-1 focus:ring-[var(--color-accent-green)] focus:outline-none
 				disabled:cursor-not-allowed disabled:opacity-50
 			"
 			onclick={() => !disabled && (isOpen = !isOpen)}
@@ -95,7 +95,7 @@
 		></div>
 		<div
 			class="
-				absolute right-0 z-50 mt-1 min-w-[180px] overflow-hidden rounded-[var(--radius-md)]
+				absolute right-0 z-50 mt-1 min-w-[180px] overflow-hidden rounded-lg
 				border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]
 				shadow-[var(--shadow-lg)]
 			"

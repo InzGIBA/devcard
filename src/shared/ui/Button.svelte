@@ -32,11 +32,11 @@
 
 	const variantClasses = {
 		primary:
-			'bg-[var(--color-btn-primary-bg)] text-[var(--color-btn-primary-text)] hover:bg-[var(--color-btn-primary-hover)] focus-visible:ring-[var(--color-saas-green)]',
+			'bg-white text-black hover:bg-zinc-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] focus-visible:ring-[var(--color-accent-green)]',
 		secondary:
-			'bg-[var(--color-btn-secondary-bg)] text-[var(--color-btn-secondary-text)] border border-[var(--color-border-default)] hover:bg-[var(--color-btn-secondary-hover)] hover:border-[var(--color-border-muted)] focus-visible:ring-[var(--color-saas-green)]',
+			'bg-[var(--color-btn-secondary-bg)] text-[var(--color-btn-secondary-text)] border border-[var(--color-border-default)] hover:bg-[var(--color-btn-secondary-hover)] hover:border-[var(--color-border-highlight)] focus-visible:ring-[var(--color-accent-green)]',
 		ghost:
-			'text-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] focus-visible:ring-[var(--color-saas-green)]',
+			'text-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] focus-visible:ring-[var(--color-accent-green)]',
 		danger:
 			'bg-[var(--color-accent-red)] text-white hover:bg-red-600 focus-visible:ring-[var(--color-accent-red)]'
 	};

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$entities/github/model/types';
 	import { formatNumber } from '$shared/lib/github-transform';
-	import Card from '$shared/ui/Card.svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -19,131 +18,97 @@
 		repoType === 'original' ? profile.stats.originalStars : profile.stats.totalStars
 	);
 
-	const starsLabel = $derived(repoType === 'original' ? 'Own Stars' : 'All Stars');
-
-	const staticStats = $derived([
-		{
-			label: 'Total Repos',
-			value: profile.stats.totalRepos,
-			icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>`
-		},
-		{
-			label: 'Followers',
-			value: profile.stats.followers,
-			icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`
-		},
-		{
-			label: 'Years Active',
-			value: profile.stats.yearsActive,
-			icon: `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
-		}
-	]);
-
 	function toggleStarsType() {
 		repoType = repoType === 'original' ? 'all' : 'original';
 	}
+
+	// Spotlight effect handler
+	function handleMouseMove(e: MouseEvent) {
+		const card = e.currentTarget as HTMLElement;
+		const rect = card.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const y = e.clientY - rect.top;
+		card.style.setProperty('--spotlight-x', `${x}px`);
+		card.style.setProperty('--spotlight-y', `${y}px`);
+	}
 </script>
 
-<div class={className}>
-	<div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
-		<!-- Total Repos -->
-		<Card variant="default" padding="md">
-			<div class="flex flex-col items-center text-center">
-				<div class="mb-2 text-text-tertiary">
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					{@html staticStats[0].icon}
-				</div>
-				<div class="text-3xl font-bold text-text-primary">
-					{formatNumber(staticStats[0].value)}
-				</div>
-				<div class="text-xs tracking-wider text-text-secondary uppercase">
-					{staticStats[0].label}
-				</div>
+<div class="grid grid-cols-2 gap-4 md:grid-cols-4 {className}">
+	<!-- Repos -->
+	<div
+		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
+		onmousemove={handleMouseMove}
+		role="presentation"
+	>
+		<div class="relative z-20 flex flex-col gap-1">
+			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
+				<iconify-icon icon="solar:box-linear" width="20"></iconify-icon>
+				<span class="text-xs font-medium uppercase tracking-wider">Repos</span>
 			</div>
-		</Card>
+			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-accent-green">
+				{formatNumber(profile.stats.totalRepos)}
+			</span>
+		</div>
+	</div>
 
-		<!-- Stars Card with integrated toggle -->
-		<Card variant="default" padding="md">
-			<div class="flex flex-col items-center text-center">
-				<div class="mb-2 text-text-tertiary">
-					<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-						/></svg
-					>
-				</div>
-				<div class="text-3xl font-bold text-text-primary">
+	<!-- Stars -->
+	<div
+		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
+		onmousemove={handleMouseMove}
+		role="presentation"
+	>
+		<div class="relative z-20 flex flex-col gap-1">
+			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
+				<iconify-icon icon="solar:star-linear" width="20"></iconify-icon>
+				<span class="text-xs font-medium uppercase tracking-wider">Stars</span>
+			</div>
+			{#if showStarsFilter}
+				<button
+					onclick={toggleStarsType}
+					class="text-left text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-amber-400"
+					title="Click to toggle between own and all stars"
+				>
 					{formatNumber(displayStars)}
-				</div>
-				{#if showStarsFilter}
-					<button
-						onclick={toggleStarsType}
-						class="group flex items-center gap-1 text-xs tracking-wider text-text-secondary uppercase transition-colors hover:text-text-primary"
-						title="Click to toggle between own and all stars"
-					>
-						{starsLabel}
-						<svg
-							class="h-3 w-3 opacity-50 transition-opacity group-hover:opacity-100"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-							/>
-						</svg>
-					</button>
-				{:else}
-					<div class="text-xs tracking-wider text-text-secondary uppercase">Total Stars</div>
-				{/if}
-			</div>
-		</Card>
+				</button>
+			{:else}
+				<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-amber-400">
+					{formatNumber(displayStars)}
+				</span>
+			{/if}
+		</div>
+	</div>
 
-		<!-- Followers -->
-		<Card variant="default" padding="md">
-			<div class="flex flex-col items-center text-center">
-				<div class="mb-2 text-text-tertiary">
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					{@html staticStats[1].icon}
-				</div>
-				<div class="text-3xl font-bold text-text-primary">
-					{formatNumber(staticStats[1].value)}
-				</div>
-				<div class="text-xs tracking-wider text-text-secondary uppercase">
-					{staticStats[1].label}
-				</div>
+	<!-- Community (Followers) -->
+	<div
+		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
+		onmousemove={handleMouseMove}
+		role="presentation"
+	>
+		<div class="relative z-20 flex flex-col gap-1">
+			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
+				<iconify-icon icon="solar:users-group-rounded-linear" width="20"></iconify-icon>
+				<span class="text-xs font-medium uppercase tracking-wider">Community</span>
 			</div>
-		</Card>
+			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-blue-400">
+				{formatNumber(profile.stats.followers)}
+			</span>
+		</div>
+	</div>
 
-		<!-- Years Active -->
-		<Card variant="default" padding="md">
-			<div class="flex flex-col items-center text-center">
-				<div class="mb-2 text-text-tertiary">
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					{@html staticStats[2].icon}
-				</div>
-				<div class="text-3xl font-bold text-text-primary">
-					{formatNumber(staticStats[2].value)}
-				</div>
-				<div class="text-xs tracking-wider text-text-secondary uppercase">
-					{staticStats[2].label}
-				</div>
+	<!-- Years Active -->
+	<div
+		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
+		onmousemove={handleMouseMove}
+		role="presentation"
+	>
+		<div class="relative z-20 flex flex-col gap-1">
+			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
+				<iconify-icon icon="solar:clock-circle-linear" width="20"></iconify-icon>
+				<span class="text-xs font-medium uppercase tracking-wider">Years Exp</span>
 			</div>
-		</Card>
+			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-purple-400">
+				{formatNumber(profile.stats.yearsActive)}
+			</span>
+		</div>
 	</div>
 </div>
-
-<!-- {#if totalContributions > 0}
-	<div class="mt-4 text-center text-sm text-text-secondary">
-		<span class="font-semibold text-accent-green">
-			{formatNumber(totalContributions)}
-		</span>
-		contributions in the last year
-	</div>
-{/if} -->

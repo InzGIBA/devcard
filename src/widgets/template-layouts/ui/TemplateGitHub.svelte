@@ -7,11 +7,9 @@
 	import LanguageChart from '$entities/github/ui/LanguageChart.svelte';
 	import ProjectCard from '$entities/portfolio/ui/ProjectCard.svelte';
 	import TechStack from '$widgets/portfolio-content/ui/TechStack.svelte';
-	import Card from '$shared/ui/Card.svelte';
 	import Dropdown from '$shared/ui/Dropdown.svelte';
 	import WorkExperience from '$widgets/portfolio-content/ui/WorkExperience.svelte';
 	import Education from '$widgets/portfolio-content/ui/Education.svelte';
-	import _Skills from '$widgets/portfolio-content/ui/Skills.svelte';
 	import Projects from '$widgets/portfolio-content/ui/Projects.svelte';
 	import Volunteer from '$widgets/portfolio-content/ui/Volunteer.svelte';
 	import Awards from '$widgets/portfolio-content/ui/Awards.svelte';
@@ -38,36 +36,12 @@
 </script>
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 {className}">
-	<div class="flex flex-col gap-8 lg:flex-row lg:items-start">
+	<div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
 		<!-- Sidebar -->
-		<div class="w-full lg:sticky lg:top-8 lg:w-[296px] lg:flex-shrink-0 lg:self-start">
-			<Sidebar {profile} />
-		</div>
+		<Sidebar {profile} />
 
 		<!-- Main Content -->
-		<div class="flex-1 space-y-6">
-			<!-- Welcome Banner -->
-			<Card variant="default" padding="lg">
-				<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-					<div class="flex-1">
-						<h2 class="text-xl font-semibold text-text-primary">
-							Welcome to {profile.user.name || profile.user.login}'s Portfolio
-						</h2>
-						<p class="mt-1 text-sm text-text-secondary">
-							Explore their professional profile, open source contributions, and projects
-						</p>
-					</div>
-					<div class="flex items-center gap-2 text-xs text-text-tertiary">
-						<span
-							>Powered by
-							<span class="font-semibold text-accent-green">DevCard</span>
-							&
-							<span class="font-semibold text-accent-green">JSON Resume</span>
-						</span>
-					</div>
-				</div>
-			</Card>
-
+		<main class="space-y-12">
 			<!-- Stats Grid -->
 			<StatsGrid {profile} />
 
@@ -77,28 +51,17 @@
 			{/if}
 
 			<!-- Tech Stack & Languages -->
-			<div>
-				<div class="mb-4 flex items-center gap-2">
-					<svg
-						class="h-5 w-5 text-text-tertiary"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-						/>
-					</svg>
-					<h3 class="text-lg font-semibold text-text-primary">Tech Stack & Languages</h3>
+			<section class="animate-slide-up" style="animation-delay: 200ms;">
+				<div class="mb-6 flex items-center gap-2">
+					<iconify-icon icon="solar:code-circle-linear" width="20" class="text-text-tertiary"></iconify-icon>
+					<h2 class="text-lg font-medium tracking-tight text-white">Technologies</h2>
 				</div>
-				<div class="grid gap-4 md:grid-cols-2">
-					<TechStack languages={profile.languages} bio={profile.user.bio} />
+
+				<div class="grid gap-6 md:grid-cols-2">
+					<TechStack languages={profile.languages} />
 					<LanguageChart languages={profile.languages} />
 				</div>
-			</div>
+			</section>
 
 			<!-- External Open Source Contributions -->
 			{#if profile.contributions?.externalContributions && profile.contributions.externalContributions.length > 0}
@@ -111,32 +74,21 @@
 
 			<!-- Notable Projects -->
 			{#if profile.pinnedRepositories.length > 0}
-				<div>
-					<div class="mb-4 flex items-center justify-between">
+				<section class="animate-slide-up" style="animation-delay: 300ms;">
+					<div class="mb-6 flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<svg
-								class="h-5 w-5 text-text-tertiary"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-								/>
-							</svg>
-							<h3 class="text-lg font-semibold text-text-primary">Notable Projects</h3>
+							<iconify-icon icon="solar:rocket-2-linear" width="20" class="text-text-tertiary"></iconify-icon>
+							<h2 class="text-lg font-medium tracking-tight text-white">Notable Projects</h2>
 						</div>
 						<Dropdown options={sortOptions} bind:value={sortBy} />
 					</div>
+
 					<div class="grid gap-4 sm:grid-cols-2">
 						{#each sortedRepos as repo (repo.name)}
 							<ProjectCard {repo} />
 						{/each}
 					</div>
-				</div>
+				</section>
 			{/if}
 
 			<!-- Resume Section Divider -->
@@ -163,11 +115,6 @@
 				<Education education={profile.resumeData.education} />
 			{/if}
 
-			<!-- Skills -->
-			<!-- {#if profile.resumeData?.skills}
-				<Skills skills={profile.resumeData.skills} />
-			{/if} -->
-
 			<!-- Projects -->
 			{#if profile.resumeData?.projects}
 				<Projects projects={profile.resumeData.projects} />
@@ -187,6 +134,11 @@
 			{#if profile.resumeData?.publications}
 				<Publications publications={profile.resumeData.publications} />
 			{/if}
-		</div>
+
+			<!-- Footer -->
+			<footer class="animate-slide-up pt-12 text-center text-xs text-text-tertiary" style="animation-delay: 600ms;">
+				<p>© {new Date().getFullYear()} {profile.user.name || profile.user.login}. Built with DevCard.</p>
+			</footer>
+		</main>
 	</div>
 </div>
