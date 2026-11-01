@@ -50,9 +50,9 @@
 
 	/* Surface hierarchy (Snow Storm) */
 	--smui-surface-0: 218 27% 94%;
-	--smui-surface-1: 218 27% 92%;
-	--smui-surface-2: 219 28% 88%;
-	--smui-surface-3: 219 20% 82%;
+	--smui-surface-1: 218 27% 89%;
+	--smui-surface-2: 219 28% 84%;
+	--smui-surface-3: 219 20% 76%;
 
 	/* Interactive */
 	--smui-border-hover: 220 17% 50%;
@@ -160,17 +160,17 @@
 /* Light Theme Override — Nord Snow Storm */
 :root.light {
 	--color-bg-primary: #eceff4;
-	--color-bg-secondary: #e5e9f0;
-	--color-bg-tertiary: #d8dee9;
+	--color-bg-secondary: #dbe1eb;
+	--color-bg-tertiary: #cbd3e2;
 	--color-bg-canvas: #e5e9f0;
 
-	--color-border-default: #c9cfda;
-	--color-border-muted: #d4dae4;
-	--color-border-subtle: #b7bfcd;
+	--color-border-default: #abb4c4;
+	--color-border-muted: #bdc4d1;
+	--color-border-subtle: #9fa9bc;
 	--color-border-highlight: #6d7684;
 
 	--color-text-primary: #2e3440;
-	--color-text-secondary: #4c566a;
+	--color-text-secondary: #3b4354;
 	--color-text-tertiary: #6a7689;
 	--color-text-placeholder: #8a94a6;
 	--color-text-disabled: #b4bcc9;
