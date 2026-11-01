@@ -21,7 +21,9 @@
 					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 				/>
 			</svg>
-			<h3 class="text-lg font-semibold text-text-primary">Awards & Certificates</h3>
+			<h3 class="text-heading font-medium tracking-tight text-text-primary">
+				Awards & Certificates
+			</h3>
 		</div>
 		<div class="grid gap-4 sm:grid-cols-2">
 			{#each awards as award, i (i)}

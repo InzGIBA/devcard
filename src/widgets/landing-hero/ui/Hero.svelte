@@ -44,11 +44,9 @@
 		<!-- Badge -->
 		{#if totalPortfolios > 0}
 			<div
-				class="animate-fade-in-delay-1 mb-8 inline-flex items-center rounded-full border border-border-subtle bg-bg-secondary px-3 py-1 text-xs font-medium text-text-secondary shadow-sm backdrop-blur-sm"
+				class="animate-fade-in-delay-1 mb-8 inline-flex items-center border border-border-subtle bg-bg-secondary px-3 py-1 text-label tracking-wider text-text-secondary uppercase"
 			>
-				<span
-					class="mr-2 h-2 w-2 rounded-full bg-accent-green shadow-[0_0_8px_var(--color-accent-green)]"
-				></span>
+				<span class="mr-2 inline-block h-[5px] w-[5px] rounded-full bg-smui-green"></span>
 				<span class="mr-1 font-semibold text-text-primary">{formatNumber(totalPortfolios)}</span>
 				portfolios generated
 			</div>
@@ -57,7 +55,7 @@
 		<h1 class="mb-6 text-4xl font-bold tracking-tight md:text-7xl">
 			GitHub + CV
 			<br />
-			<span class="text-gradient">in one portfolio</span>
+			<span class="text-accent-blue">in one portfolio</span>
 		</h1>
 
 		<p class="mx-auto mb-10 w-full max-w-150 text-base text-text-secondary md:text-xl">
@@ -67,7 +65,7 @@
 
 		<!-- Input Container -->
 		<div
-			class="glass-panel mx-auto flex w-full max-w-130 items-center gap-2 rounded-2xl p-2 transition-all focus-within:ring-2 focus-within:ring-saas-green"
+			class="mx-auto flex w-full max-w-130 items-center gap-2 border border-border-default bg-bg-secondary p-2 transition-colors focus-within:border-smui-frost-3"
 		>
 			<div class="relative flex flex-1 items-center px-3">
 				<svg class="h-5 w-5 text-text-tertiary" fill="currentColor" viewBox="0 0 24 24">
@@ -89,7 +87,7 @@
 				size="md"
 				onclick={handleSubmit}
 				loading={isLoading}
-				class="h-10 rounded-xl px-6 font-semibold shadow-lg shadow-accent-green/20"
+				class="h-10 px-6"
 			>
 				Generate
 			</Button>
@@ -104,19 +102,19 @@
 			<button
 				type="button"
 				onclick={() => setUsername('torvalds')}
-				class="ml-1 cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-green"
+				class="ml-1 cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-blue"
 				>torvalds</button
 			>,
 			<button
 				type="button"
 				onclick={() => setUsername('rich-harris')}
-				class="cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-green"
+				class="cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-blue"
 				>rich-harris</button
 			>,
 			<button
 				type="button"
 				onclick={() => setUsername('whoisyurii')}
-				class="cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-green"
+				class="cursor-pointer font-medium text-text-secondary transition-colors hover:text-accent-blue"
 				>whoisyurii</button
 			>
 		</p>

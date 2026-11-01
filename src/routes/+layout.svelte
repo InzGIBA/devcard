@@ -23,7 +23,7 @@
 		name="description"
 		content="Create beautiful developer portfolios combining GitHub profile with CV data. Showcase your projects, contributions, and career in one place."
 	/>
-	<meta name="theme-color" content={themeState.isDark ? '#030303' : '#FFFFFF'} />
+	<meta name="theme-color" content={themeState.isDark ? '#1a1e24' : '#eceff4'} />
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </svelte:head>
 

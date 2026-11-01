@@ -62,10 +62,10 @@
 		{oninput}
 		{onkeydown}
 		class="
-			w-full rounded-[var(--radius-md)] border bg-[var(--color-bg-secondary)]
+			w-full border bg-[var(--color-bg-secondary)]
 			text-[var(--color-text-primary)] placeholder-[var(--color-text-placeholder)]
 			transition-colors
-			focus:border-[var(--color-saas-green)] focus:ring-1 focus:ring-[var(--color-saas-green)] focus:outline-none
+			focus:border-[var(--color-accent-blue)] focus:ring-1 focus:ring-[var(--color-accent-blue)] focus:outline-none
 			disabled:cursor-not-allowed disabled:opacity-50
 			{sizeClasses[size]}
 			{icon ? 'pl-10' : ''}

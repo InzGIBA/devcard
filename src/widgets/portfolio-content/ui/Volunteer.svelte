@@ -21,7 +21,9 @@
 					d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
 				/>
 			</svg>
-			<h3 class="text-lg font-semibold text-text-primary">Volunteer Experience</h3>
+			<h3 class="text-heading font-medium tracking-tight text-text-primary">
+				Volunteer Experience
+			</h3>
 		</div>
 		<div class="space-y-4">
 			{#each volunteer as vol, i (i)}

@@ -28,7 +28,7 @@
 			</svg>
 		</div>
 		<div class="flex-1">
-			<h3 class="font-semibold text-text-primary">{award.title || 'Award'}</h3>
+			<h3 class="font-medium text-text-primary">{award.title || 'Award'}</h3>
 			<div class="mt-1 flex flex-wrap items-center gap-2 text-sm text-text-secondary">
 				{#if award.awarder}
 					<span class="font-medium">{award.awarder}</span>

@@ -2,9 +2,11 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid gap-6 md:grid-cols-3">
 			<!-- Card 1 -->
-			<div class="card p-8 transition-all hover:border-border-highlight hover:shadow-lg">
+			<div
+				class="card-glow border border-border-default bg-bg-secondary p-8 transition-colors hover:border-border-highlight"
+			>
 				<div
-					class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-green shadow-inner"
+					class="mb-4 inline-flex h-12 w-12 items-center justify-center border border-border-default bg-bg-tertiary text-accent-blue"
 				>
 					<svg
 						class="h-6 w-6"
@@ -16,16 +18,18 @@
 						<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
 					</svg>
 				</div>
-				<h3 class="mb-2 text-xl font-semibold text-text-primary">Instant Generation</h3>
+				<h3 class="mb-2 text-base font-medium text-text-primary">Instant Generation</h3>
 				<p class="text-text-secondary">
 					No signup required. Just enter your username and watch the magic happen.
 				</p>
 			</div>
 
 			<!-- Card 2 -->
-			<div class="card p-8 transition-all hover:border-border-highlight hover:shadow-lg">
+			<div
+				class="card-glow border border-border-default bg-bg-secondary p-8 transition-colors hover:border-border-highlight"
+			>
 				<div
-					class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-green shadow-inner"
+					class="mb-4 inline-flex h-12 w-12 items-center justify-center border border-border-default bg-bg-tertiary text-accent-blue"
 				>
 					<svg
 						class="h-6 w-6"
@@ -41,16 +45,18 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="mb-2 text-xl font-semibold text-text-primary">Modern Themes</h3>
+				<h3 class="mb-2 text-base font-medium text-text-primary">Modern Themes</h3>
 				<p class="text-text-secondary">
 					Choose from Bento grid, Minimal, or GitHub-native inspired layouts.
 				</p>
 			</div>
 
 			<!-- Card 3 -->
-			<div class="card p-8 transition-all hover:border-border-highlight hover:shadow-lg">
+			<div
+				class="card-glow border border-border-default bg-bg-secondary p-8 transition-colors hover:border-border-highlight"
+			>
 				<div
-					class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-bg-tertiary text-accent-green shadow-inner"
+					class="mb-4 inline-flex h-12 w-12 items-center justify-center border border-border-default bg-bg-tertiary text-accent-blue"
 				>
 					<svg
 						class="h-6 w-6"
@@ -66,7 +72,7 @@
 						/>
 					</svg>
 				</div>
-				<h3 class="mb-2 text-xl font-semibold text-text-primary">Export & Share</h3>
+				<h3 class="mb-2 text-base font-medium text-text-primary">Export & Share</h3>
 				<p class="text-text-secondary">
 					Download as a high-res PNG or share your unique link with recruiters.
 				</p>

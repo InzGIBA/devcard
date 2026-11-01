@@ -1,125 +1,199 @@
-/* Inter font - must be at top */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+/* SMUI // spacemolt ui — Nord-inspired terminal aesthetic (adapted from statico/smui) */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
-/* Modern SaaS Palette - Dark Minimal inspired */
-@theme {
-	/* Background colors */
-	--color-bg-primary: #050505; /* Deep void black */
-	--color-bg-secondary: #0a0a0a; /* Surface */
-	--color-bg-tertiary: #121212; /* Surface highlight */
-	--color-bg-canvas: #000000;
+/*
+ * Extended SMUI palette — raw HSL triplets so they compose with alpha:
+ *   border-[hsl(var(--smui-green)/0.3)]
+ * Dark (Polar Night) is the default; :root.light switches to Snow Storm values.
+ */
+:root {
+	/* Frost blues */
+	--smui-frost-1: 176 25% 65%;
+	--smui-frost-2: 193 44% 67%;
+	--smui-frost-3: 210 34% 63%;
+	--smui-frost-4: 213 32% 52%;
 
-	/* Border colors */
-	--color-border-default: #222222;
-	--color-border-muted: #1a1a1a;
-	--color-border-subtle: #333333;
-	--color-border-highlight: #444444;
+	/* Aurora status colors */
+	--smui-green: 92 28% 65%;
+	--smui-yellow: 40 71% 73%;
+	--smui-orange: 14 51% 63%;
+	--smui-red: 355 52% 64%;
+	--smui-purple: 311 24% 63%;
 
-	/* Text colors */
-	--color-text-primary: #d4d4d8; /* Zinc 300 */
-	--color-text-secondary: #a1a1aa; /* Zinc 400 */
-	--color-text-tertiary: #52525b; /* Zinc 600 */
-	--color-text-placeholder: #555555;
-	--color-text-disabled: #333333;
+	/* Surface hierarchy */
+	--smui-surface-0: 213 16% 12%;
+	--smui-surface-1: 217 16% 15.5%;
+	--smui-surface-2: 216 15% 19%;
+	--smui-surface-3: 215 14% 22%;
 
-	/* Accent colors */
-	--color-accent-blue: #3b82f6; /* Blue 500 */
-	--color-accent-green: #10b981; /* Emerald 500 */
-	--color-accent-purple: #8b5cf6; /* Violet 500 */
-	--color-accent-yellow: #eab308; /* Yellow 500 */
-	--color-accent-orange: #f97316; /* Orange 500 */
-	--color-accent-red: #ef4444; /* Red 500 */
-	--color-accent-pink: #ec4899;
-	--color-accent-amber: #f59e0b; /* Amber 500 */
-	--color-accent-cyan: #06b6d4; /* Cyan 500 */
-	--color-saas-green: #10b981;
-
-	/* Design system colors */
-	--color-tertiary: #52525b; /* Zinc 600 */
-
-	/* Button colors */
-	--color-btn-primary-bg: #ffffff;
-	--color-btn-primary-text: #000000;
-	--color-btn-primary-hover: #e4e4e7;
-	--color-btn-secondary-bg: #121212;
-	--color-btn-secondary-text: #d4d4d8;
-	--color-btn-secondary-hover: #1a1a1a;
-
-	/* Shadows & Glows */
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-	--shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
-	--shadow-glow-hover: 0 0 25px rgba(255, 255, 255, 0.2);
-	--shadow-glow-blue: 0 0 40px -10px rgba(50, 145, 255, 0.3);
-	--shadow-glow-emerald: 0 0 8px rgba(16, 185, 129, 0.5);
-
-	/* Border radius */
-	--radius-sm: 4px;
-	--radius-md: 8px;
-	--radius-lg: 12px;
-	--radius-xl: 16px;
-	--radius-2xl: 24px;
-
-	/* Spacing */
-	--spacing-xs: 4px;
-	--spacing-sm: 8px;
-	--spacing-md: 16px;
-	--spacing-lg: 24px;
-	--spacing-xl: 32px;
-	--spacing-2xl: 64px;
-
-	/* Font family */
-	--font-sans:
-		'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial,
-		sans-serif;
-	--font-mono: 'SF Mono', 'Roboto Mono', Menlo, monospace;
-	--font-abril: 'Abril Fatface', serif;
+	/* Interactive */
+	--smui-border-hover: 216 12% 37%;
 }
 
-/* Light Theme Override */
 :root.light {
-	/* Background colors */
-	--color-bg-primary: #ffffff;
-	--color-bg-secondary: #fafafa;
-	--color-bg-tertiary: #f5f5f5;
-	--color-bg-canvas: #ffffff;
+	/* Frost (darkened for light backgrounds) */
+	--smui-frost-1: 176 30% 35%;
+	--smui-frost-2: 193 40% 38%;
+	--smui-frost-3: 210 34% 40%;
+	--smui-frost-4: 213 32% 36%;
 
-	/* Border colors */
-	--color-border-default: #e5e5e5;
-	--color-border-muted: #ebebeb;
-	--color-border-subtle: #d4d4d4;
-	--color-border-highlight: #c4c4c4;
+	/* Aurora (darkened for light backgrounds) */
+	--smui-green: 92 35% 34%;
+	--smui-yellow: 40 70% 34%;
+	--smui-orange: 14 55% 44%;
+	--smui-red: 355 55% 44%;
+	--smui-purple: 311 28% 40%;
 
-	/* Text colors */
-	--color-text-primary: #171717;
-	--color-text-secondary: #525252;
-	--color-text-tertiary: #737373;
-	--color-text-placeholder: #a3a3a3;
-	--color-text-disabled: #d4d4d4;
+	/* Surface hierarchy (Snow Storm) */
+	--smui-surface-0: 218 27% 94%;
+	--smui-surface-1: 218 27% 92%;
+	--smui-surface-2: 219 28% 88%;
+	--smui-surface-3: 219 20% 82%;
 
-	/* Button colors */
-	--color-btn-primary-bg: #171717;
+	/* Interactive */
+	--smui-border-hover: 220 17% 50%;
+}
+
+/* SMUI utilities: bg-smui-frost-2, text-smui-red, border-smui-surface-3, ... */
+@theme inline {
+	--color-smui-frost-1: hsl(var(--smui-frost-1));
+	--color-smui-frost-2: hsl(var(--smui-frost-2));
+	--color-smui-frost-3: hsl(var(--smui-frost-3));
+	--color-smui-frost-4: hsl(var(--smui-frost-4));
+	--color-smui-red: hsl(var(--smui-red));
+	--color-smui-orange: hsl(var(--smui-orange));
+	--color-smui-yellow: hsl(var(--smui-yellow));
+	--color-smui-green: hsl(var(--smui-green));
+	--color-smui-purple: hsl(var(--smui-purple));
+	--color-smui-surface-0: hsl(var(--smui-surface-0));
+	--color-smui-surface-1: hsl(var(--smui-surface-1));
+	--color-smui-surface-2: hsl(var(--smui-surface-2));
+	--color-smui-surface-3: hsl(var(--smui-surface-3));
+	--color-smui-border-hover: hsl(var(--smui-border-hover));
+}
+
+/*
+ * App tokens — Polar Night (dark) defaults.
+ * Values follow the SMUI palette; :root.light overrides them with Snow Storm.
+ */
+@theme {
+	/* Background surfaces */
+	--color-bg-primary: #1a1e24; /* surface-0 — page background */
+	--color-bg-secondary: #21262e; /* surface-1 — cards, panels */
+	--color-bg-tertiary: #282e37; /* surface-2 — elevated elements */
+	--color-bg-canvas: #16191e; /* below surface-0 */
+
+	/* Borders */
+	--color-border-default: #3b4252;
+	--color-border-muted: #333a47;
+	--color-border-subtle: #434c5c;
+	--color-border-highlight: #4c566a; /* = --smui-border-hover */
+
+	/* Text */
+	--color-text-primary: #d8dee9; /* Nord Snow Storm text */
+	--color-text-secondary: #9aa6b5;
+	--color-text-tertiary: #6f7a89;
+	--color-text-placeholder: #5a6572;
+	--color-text-disabled: #4c566a;
+
+	/* Accents — frost blues and aurora status colors */
+	--color-accent-blue: #88c0d0; /* frost-2, the SMUI primary */
+	--color-accent-cyan: #8fbcbb; /* frost-1 */
+	--color-accent-green: #a3be8c; /* aurora green */
+	--color-accent-yellow: #ebcb8b; /* aurora yellow */
+	--color-accent-orange: #d08770; /* aurora orange */
+	--color-accent-red: #d4737c; /* aurora red */
+	--color-accent-purple: #b48ead; /* aurora purple */
+	--color-accent-pink: #b48ead;
+	--color-accent-amber: #ebcb8b;
+	--color-saas-green: #88c0d0; /* legacy brand accent → SMUI frost primary */
+
+	/* Design system */
+	--color-tertiary: #6f7a89;
+
+	/* Buttons */
+	--color-btn-primary-bg: #88c0d0;
+	--color-btn-primary-text: #1a1e24;
+	--color-btn-primary-hover: #a5d3e0;
+	--color-btn-secondary-bg: #282e37;
+	--color-btn-secondary-text: #d8dee9;
+	--color-btn-secondary-hover: #2f3640;
+
+	/* SMUI: no shadows, no glows — everything is flat with hard borders */
+	--shadow-sm: none;
+	--shadow-md: none;
+	--shadow-lg: none;
+	--shadow-xl: none;
+	--shadow-2xl: none;
+	--shadow-glow: none;
+	--shadow-glow-hover: none;
+	--shadow-glow-blue: none;
+	--shadow-glow-emerald: none;
+
+	/* SMUI: zero border radius — sharp edges everywhere */
+	--radius-xs: 0px;
+	--radius-sm: 0px;
+	--radius-md: 0px;
+	--radius-lg: 0px;
+	--radius-xl: 0px;
+	--radius-2xl: 0px;
+	--radius-3xl: 0px;
+	--radius-4xl: 0px;
+
+	/* Fonts — JetBrains Mono is the only font */
+	--font-sans:
+		'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+	--font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+	/* SMUI typography scale */
+	--text-label: 11px;
+	--text-ui: 13px;
+	--text-heading: 22px;
+	--text-stat: 26px;
+	--text-hero: 42px;
+}
+
+/* Light Theme Override — Nord Snow Storm */
+:root.light {
+	--color-bg-primary: #eceff4;
+	--color-bg-secondary: #e5e9f0;
+	--color-bg-tertiary: #d8dee9;
+	--color-bg-canvas: #e5e9f0;
+
+	--color-border-default: #c9cfda;
+	--color-border-muted: #d4dae4;
+	--color-border-subtle: #b7bfcd;
+	--color-border-highlight: #6d7684;
+
+	--color-text-primary: #2e3440;
+	--color-text-secondary: #4c566a;
+	--color-text-tertiary: #6a7689;
+	--color-text-placeholder: #8a94a6;
+	--color-text-disabled: #b4bcc9;
+
+	--color-accent-blue: #407a95;
+	--color-accent-cyan: #478c89;
+	--color-accent-green: #558040;
+	--color-accent-yellow: #a57e1d;
+	--color-accent-orange: #be5637;
+	--color-accent-red: #be3744;
+	--color-accent-purple: #8d5283;
+	--color-accent-pink: #8d5283;
+	--color-accent-amber: #a57e1d;
+	--color-saas-green: #407a95;
+
+	--color-tertiary: #6a7689;
+
+	--color-btn-primary-bg: #4c6d94;
 	--color-btn-primary-text: #ffffff;
-	--color-btn-primary-hover: #262626;
-	--color-btn-secondary-bg: #f5f5f5;
-	--color-btn-secondary-text: #171717;
-	--color-btn-secondary-hover: #e5e5e5;
-
-	/* Adjusted accent for light background */
-	--color-saas-green: #d1fae5;
-
-	/* Shadows adjusted for light mode */
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-	--shadow-glow: 0 0 40px -10px rgba(0, 0, 0, 0.1);
-	--shadow-glow-blue: 0 0 40px -10px rgba(50, 145, 255, 0.2);
+	--color-btn-primary-hover: #5a7ba0;
+	--color-btn-secondary-bg: #d8dee9;
+	--color-btn-secondary-text: #2e3440;
+	--color-btn-secondary-hover: #c9cfda;
 }
 
 /* Base styles */
@@ -139,47 +213,36 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	background-color: var(--color-bg-primary);
-	background-image:
-		radial-gradient(circle at 50% 0%, rgba(120, 120, 120, 0.05) 0%, transparent 40%),
-		linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1));
-	transition:
-		background-color 0.2s ease,
-		background-image 0.2s ease;
+	transition: background-color 0.2s ease;
 }
 
-:root.light body {
-	background-image:
-		radial-gradient(circle at 50% 0%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
-		linear-gradient(to bottom, transparent, rgba(250, 250, 250, 1));
-}
-
-/* Scrollbar styling */
+/* Scrollbar styling — square, Nord colors */
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: transparent;
+	background: var(--color-bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--color-border-subtle);
-	border-radius: 4px;
+	background: var(--color-bg-tertiary);
+	border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-text-tertiary);
+	background: var(--color-border-highlight);
 }
 
-/* Selection */
+/* Selection — frost blue */
 ::selection {
-	background-color: var(--color-saas-green);
-	color: var(--color-text-primary); /* Ensure visibility */
+	background: hsl(var(--smui-frost-2) / 0.2);
+	color: hsl(var(--smui-frost-2));
 }
 
 :focus-visible {
-	outline: 2px solid var(--color-saas-green);
+	outline: 2px solid hsl(var(--smui-frost-2));
 	outline-offset: 2px;
 }
 
@@ -221,69 +284,25 @@ a {
 	opacity: 0;
 }
 
-/* Utilities */
+/* SMUI card hover — border brightens, no glow */
+.card-glow {
+	transition: border-color 0.15s;
+}
+
+.card-glow:hover {
+	border-color: hsl(var(--smui-border-hover));
+}
+
+/* Legacy panel helper: flat bordered panel, no glass/blur */
 .glass-panel {
-	background: rgba(22, 22, 22, 0.6);
-	backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	background: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-default);
 	transition:
 		background 0.2s ease,
-		border 0.2s ease,
-		box-shadow 0.2s ease;
+		border-color 0.2s ease;
 }
 
-:root.light .glass-panel {
-	background: rgba(255, 255, 255, 0.7);
-	border: 1px solid rgba(0, 0, 0, 0.08);
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-}
-
-.glow-text {
-	text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-:root.light .glow-text {
-	text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.grid-bg {
-	background-size: 50px 50px;
-	background-image:
-		linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-		linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-	mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 80%);
-}
-
-:root.light .grid-bg {
-	background-image:
-		linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-		linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-}
-
-.saas-glow {
-	position: absolute;
-	top: -100px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 1000px;
-	height: 500px;
-	background: var(--color-saas-green);
-	filter: blur(120px);
-	opacity: 0.7;
-	pointer-events: none;
-	z-index: 0;
-	transition:
-		background 0.2s ease,
-		opacity 0.2s ease;
-}
-
-:root.light .saas-glow {
-	background: #10b981;
-	opacity: 0.15;
-}
-
-/* Page Transition Animations - Slow liquid swipe bottom-to-top */
+/* Page Transition Animations */
 @keyframes pageExitUp {
 	0% {
 		opacity: 1;
@@ -340,7 +359,8 @@ body:has(.page-enter) {
 
 /* Pulse Slow Animation */
 @keyframes pulseSlow {
-	0%, 100% {
+	0%,
+	100% {
 		opacity: 1;
 	}
 	50% {
@@ -352,30 +372,6 @@ body:has(.page-enter) {
 	animation: pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Spotlight Card Effect */
-.spotlight-card {
-	position: relative;
-	overflow: hidden;
-}
-
-.spotlight-card::before {
-	content: "";
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	left: 0;
-	top: 0;
-	background: radial-gradient(800px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(255, 255, 255, 0.06), transparent 40%);
-	opacity: 0;
-	transition: opacity 0.3s;
-	pointer-events: none;
-	z-index: 10;
-}
-
-.spotlight-card:hover::before {
-	opacity: 1;
-}
-
 /* Contribution Grid */
 .contribution-grid {
 	display: grid;
@@ -384,18 +380,7 @@ body:has(.page-enter) {
 	gap: 3px;
 }
 
-/* Language Badge Glow Effects */
-.lang-badge-glow {
-	box-shadow: 0 0 8px var(--glow-color, rgba(255, 255, 255, 0.3));
-}
-
-/* Timeline Glow */
+/* Timeline accent for the current position — flat aurora green */
 .timeline-glow {
-	background: linear-gradient(to bottom, rgba(16, 185, 129, 0.5), transparent);
-}
-
-/* Selection color */
-::selection {
-	background-color: rgba(16, 185, 129, 0.2);
-	color: #10b981;
+	background: hsl(var(--smui-green));
 }

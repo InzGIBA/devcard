@@ -22,7 +22,7 @@
 	target="_blank"
 	rel="noopener noreferrer"
 	data-sveltekit-preload-data="off"
-	class="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-btn-secondary-bg)] px-4 py-2 text-sm font-medium text-[var(--color-btn-secondary-text)] transition-colors hover:border-[var(--color-border-muted)] hover:bg-[var(--color-btn-secondary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-saas-green)] focus-visible:ring-offset-2 focus-visible:outline-none {className}"
+	class="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-btn-secondary-bg)] px-4 py-2 text-sm font-medium text-[var(--color-btn-secondary-text)] transition-colors hover:border-[var(--color-border-muted)] hover:bg-[var(--color-btn-secondary-hover)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] focus-visible:ring-offset-2 focus-visible:outline-none {className}"
 >
 	<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
 		<path

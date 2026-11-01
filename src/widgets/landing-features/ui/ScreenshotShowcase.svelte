@@ -37,11 +37,8 @@
 			class="relative"
 			style="transform: rotateX({rotateX}deg); transform-origin: center bottom; will-change: transform;"
 		>
-			<!-- Subtle green glow at bottom -->
-			<div class="absolute inset-x-16 -bottom-6 h-20 bg-saas-green opacity-70 blur-3xl"></div>
-
 			<div
-				class="screenshot-card relative overflow-hidden rounded-2xl border border-border-subtle bg-bg-tertiary shadow-2xl md:rounded-3xl"
+				class="screenshot-card relative overflow-hidden border border-border-subtle bg-bg-tertiary"
 			>
 				<!-- Screenshot image -->
 				<img
@@ -49,11 +46,6 @@
 					alt="DevCard portfolio preview showing GitHub stats, contributions, and CV"
 					class="block h-auto w-full"
 				/>
-
-				<!-- Subtle overlay gradient at bottom -->
-				<div
-					class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-primary/50 to-transparent"
-				></div>
 			</div>
 		</div>
 	</div>

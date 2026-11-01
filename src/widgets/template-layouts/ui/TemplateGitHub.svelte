@@ -53,8 +53,9 @@
 			<!-- Tech Stack & Languages -->
 			<section class="animate-slide-up" style="animation-delay: 200ms;">
 				<div class="mb-6 flex items-center gap-2">
-					<iconify-icon icon="solar:code-circle-linear" width="20" class="text-text-tertiary"></iconify-icon>
-					<h2 class="text-lg font-medium tracking-tight text-white">Technologies</h2>
+					<iconify-icon icon="solar:code-circle-linear" width="20" class="text-text-tertiary"
+					></iconify-icon>
+					<h2 class="text-heading font-medium tracking-tight text-text-primary">Technologies</h2>
 				</div>
 
 				<div class="grid gap-6 md:grid-cols-2">
@@ -77,8 +78,11 @@
 				<section class="animate-slide-up" style="animation-delay: 300ms;">
 					<div class="mb-6 flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<iconify-icon icon="solar:rocket-2-linear" width="20" class="text-text-tertiary"></iconify-icon>
-							<h2 class="text-lg font-medium tracking-tight text-white">Notable Projects</h2>
+							<iconify-icon icon="solar:rocket-2-linear" width="20" class="text-text-tertiary"
+							></iconify-icon>
+							<h2 class="text-heading font-medium tracking-tight text-text-primary">
+								Notable Projects
+							</h2>
 						</div>
 						<Dropdown options={sortOptions} bind:value={sortBy} />
 					</div>
@@ -136,8 +140,14 @@
 			{/if}
 
 			<!-- Footer -->
-			<footer class="animate-slide-up pt-12 text-center text-xs text-text-tertiary" style="animation-delay: 600ms;">
-				<p>© {new Date().getFullYear()} {profile.user.name || profile.user.login}. Built with DevCard.</p>
+			<footer
+				class="animate-slide-up pt-12 text-center text-xs text-text-tertiary"
+				style="animation-delay: 600ms;"
+			>
+				<p>
+					© {new Date().getFullYear()}
+					{profile.user.name || profile.user.login}. Built with DevCard.
+				</p>
 			</footer>
 		</main>
 	</div>

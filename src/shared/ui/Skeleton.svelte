@@ -9,9 +9,9 @@
 	let { variant = 'text', width, height, class: className = '' }: Props = $props();
 
 	const variantClasses = {
-		text: 'h-4 w-full rounded',
+		text: 'h-4 w-full',
 		circular: 'rounded-full',
-		rectangular: 'rounded-[var(--radius-md)]'
+		rectangular: ''
 	};
 </script>
 
@@ -21,15 +21,16 @@
 ></div>
 
 <style>
+	/* SMUI skeleton shimmer across the surface hierarchy */
 	.skeleton-shimmer {
 		background: linear-gradient(
 			90deg,
-			var(--color-bg-tertiary) 0%,
-			var(--color-bg-secondary) 50%,
-			var(--color-bg-tertiary) 100%
+			hsl(var(--smui-surface-2)) 25%,
+			hsl(var(--smui-surface-3)) 50%,
+			hsl(var(--smui-surface-2)) 75%
 		);
 		background-size: 200% 100%;
-		animation: shimmer 1.5s ease-in-out infinite;
+		animation: shimmer 1.5s infinite;
 	}
 
 	@keyframes shimmer {

@@ -18,13 +18,13 @@
 >
 	<div class="flex items-start justify-between">
 		<div class="flex-1">
-			<h3 class="text-lg font-semibold text-text-primary">
+			<h3 class="text-lg font-medium text-text-primary">
 				{#if project.url}
 					<a
 						href={project.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-1 text-accent-green hover:underline"
+						class="inline-flex items-center gap-1 text-accent-blue hover:underline"
 					>
 						{project.name || 'Project'}
 						<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +64,7 @@
 		<ul class="mt-3 space-y-2 text-sm text-text-secondary">
 			{#each project.highlights as highlight, i (i)}
 				<li class="flex gap-2">
-					<span class="text-accent-green">•</span>
+					<span class="text-accent-blue">•</span>
 					<span class="flex-1">{highlight}</span>
 				</li>
 			{/each}

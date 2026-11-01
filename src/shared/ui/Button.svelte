@@ -28,23 +28,23 @@
 	}: Props = $props();
 
 	const baseClasses =
-		'inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer';
+		'inline-flex items-center justify-center font-medium uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer';
 
 	const variantClasses = {
 		primary:
-			'bg-white text-black hover:bg-zinc-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] focus-visible:ring-[var(--color-accent-green)]',
+			'bg-[var(--color-btn-primary-bg)] text-[var(--color-btn-primary-text)] hover:bg-[var(--color-btn-primary-hover)] focus-visible:ring-[var(--color-accent-blue)]',
 		secondary:
-			'bg-[var(--color-btn-secondary-bg)] text-[var(--color-btn-secondary-text)] border border-[var(--color-border-default)] hover:bg-[var(--color-btn-secondary-hover)] hover:border-[var(--color-border-highlight)] focus-visible:ring-[var(--color-accent-green)]',
+			'bg-[var(--color-btn-secondary-bg)] text-[var(--color-btn-secondary-text)] border border-[var(--color-border-default)] hover:bg-[var(--color-btn-secondary-hover)] hover:border-[var(--color-border-highlight)] focus-visible:ring-[var(--color-accent-blue)]',
 		ghost:
-			'text-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] focus-visible:ring-[var(--color-accent-green)]',
+			'text-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] focus-visible:ring-[var(--color-accent-blue)]',
 		danger:
-			'bg-[var(--color-accent-red)] text-white hover:bg-red-600 focus-visible:ring-[var(--color-accent-red)]'
+			'bg-[var(--color-accent-red)] text-[var(--color-btn-primary-text)] hover:opacity-90 focus-visible:ring-[var(--color-accent-red)]'
 	};
 
 	const sizeClasses = {
-		sm: 'h-8 px-3 text-sm rounded-[var(--radius-md)] gap-1.5',
-		md: 'h-10 px-4 text-sm rounded-[var(--radius-md)] gap-2',
-		lg: 'h-12 px-5 text-base rounded-[var(--radius-lg)] gap-2'
+		sm: 'h-8 px-3 text-sm gap-1.5',
+		md: 'h-10 px-4 text-sm gap-2',
+		lg: 'h-12 px-5 text-base gap-2'
 	};
 
 	const classes = $derived(

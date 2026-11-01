@@ -10,11 +10,11 @@
 
 	let { children, showWatermark = true }: Props = $props();
 
-	const bgColor = $derived(themeState.isDark ? '#030303' : '#FFFFFF');
-	// For light theme: no visible gradients to keep pure white background
-	const gradientOpacity = $derived(themeState.isDark ? 0.08 : 0);
+	const bgColor = $derived(themeState.isDark ? '#1a1e24' : '#eceff4');
+	// For light theme: no visible gradients to keep a clean background
+	const gradientOpacity = $derived(themeState.isDark ? 0.05 : 0);
 	const bottomGradientColor = $derived(
-		themeState.isDark ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0)'
+		themeState.isDark ? 'rgba(22,25,30,0.6)' : 'rgba(255,255,255,0)'
 	);
 </script>
 
@@ -26,10 +26,10 @@
 		xmlns="http://www.w3.org/2000/svg"
 	>
 		<defs>
-			<!-- Radial gradient: subtle light from top center -->
+			<!-- Radial gradient: subtle frost light from top center -->
 			<radialGradient id="export-radial" cx="50%" cy="0%" r="60%" fx="50%" fy="0%">
-				<stop offset="0%" stop-color="rgb(120, 120, 120)" stop-opacity={gradientOpacity} />
-				<stop offset="50%" stop-color="rgb(120, 120, 120)" stop-opacity="0" />
+				<stop offset="0%" stop-color="rgb(136, 192, 208)" stop-opacity={gradientOpacity} />
+				<stop offset="50%" stop-color="rgb(136, 192, 208)" stop-opacity="0" />
 			</radialGradient>
 			<!-- Linear gradient: fade to darker at bottom -->
 			<linearGradient id="export-linear" x1="0%" y1="0%" x2="0%" y2="100%">

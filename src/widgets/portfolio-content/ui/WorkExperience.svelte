@@ -13,8 +13,9 @@
 {#if work && work.length > 0}
 	<section class="animate-slide-up {className}" style="animation-delay: 400ms;">
 		<div class="mb-8 flex items-center gap-2">
-			<iconify-icon icon="solar:case-round-linear" width="20" class="text-text-tertiary"></iconify-icon>
-			<h2 class="text-lg font-medium tracking-tight text-white">Experience</h2>
+			<iconify-icon icon="solar:case-round-linear" width="20" class="text-text-tertiary"
+			></iconify-icon>
+			<h2 class="text-heading font-medium tracking-tight text-text-primary">Experience</h2>
 		</div>
 
 		<div class="relative ml-3 space-y-10 border-l border-border-default">

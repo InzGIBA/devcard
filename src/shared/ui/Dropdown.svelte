@@ -55,13 +55,13 @@
 		<button
 			type="button"
 			class="
-				flex h-9 w-full items-center justify-between rounded-lg
-				border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]
-				px-3 text-sm text-[var(--color-text-primary)] transition-colors
-				hover:bg-[var(--color-bg-tertiary)] hover:border-[var(--color-border-highlight)]
-				focus:border-[var(--color-accent-green)] focus:ring-1 focus:ring-[var(--color-accent-green)] focus:outline-none
-				disabled:cursor-not-allowed disabled:opacity-50
-			"
+					flex h-9 w-full items-center justify-between
+					border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]
+					px-3 text-sm text-[var(--color-text-primary)] transition-colors
+					hover:border-[var(--color-border-highlight)] hover:bg-[var(--color-bg-tertiary)]
+					focus:border-[var(--color-accent-blue)] focus:ring-1 focus:ring-[var(--color-accent-blue)] focus:outline-none
+					disabled:cursor-not-allowed disabled:opacity-50
+				"
 			onclick={() => !disabled && (isOpen = !isOpen)}
 			{disabled}
 		>
@@ -95,9 +95,8 @@
 		></div>
 		<div
 			class="
-				absolute right-0 z-50 mt-1 min-w-[180px] overflow-hidden rounded-lg
+				absolute right-0 z-50 mt-1 min-w-[180px] overflow-hidden
 				border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]
-				shadow-[var(--shadow-lg)]
 			"
 		>
 			{#each options as option (option.value)}

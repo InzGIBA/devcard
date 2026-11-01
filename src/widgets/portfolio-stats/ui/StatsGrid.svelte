@@ -21,31 +21,21 @@
 	function toggleStarsType() {
 		repoType = repoType === 'original' ? 'all' : 'original';
 	}
-
-	// Spotlight effect handler
-	function handleMouseMove(e: MouseEvent) {
-		const card = e.currentTarget as HTMLElement;
-		const rect = card.getBoundingClientRect();
-		const x = e.clientX - rect.left;
-		const y = e.clientY - rect.top;
-		card.style.setProperty('--spotlight-x', `${x}px`);
-		card.style.setProperty('--spotlight-y', `${y}px`);
-	}
 </script>
 
 <div class="grid grid-cols-2 gap-4 md:grid-cols-4 {className}">
 	<!-- Repos -->
 	<div
-		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
-		onmousemove={handleMouseMove}
-		role="presentation"
+		class="card-glow group border border-border-default bg-bg-secondary p-5 transition-colors hover:border-border-highlight"
 	>
-		<div class="relative z-20 flex flex-col gap-1">
+		<div class="flex flex-col gap-1">
 			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
 				<iconify-icon icon="solar:box-linear" width="20"></iconify-icon>
-				<span class="text-xs font-medium uppercase tracking-wider">Repos</span>
+				<span class="text-label font-normal tracking-[1.5px] uppercase">Repos</span>
 			</div>
-			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-accent-green">
+			<span
+				class="text-stat font-medium tracking-tight text-text-primary transition-colors group-hover:text-accent-green"
+			>
 				{formatNumber(profile.stats.totalRepos)}
 			</span>
 		</div>
@@ -53,25 +43,25 @@
 
 	<!-- Stars -->
 	<div
-		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
-		onmousemove={handleMouseMove}
-		role="presentation"
+		class="card-glow group border border-border-default bg-bg-secondary p-5 transition-colors hover:border-border-highlight"
 	>
-		<div class="relative z-20 flex flex-col gap-1">
+		<div class="flex flex-col gap-1">
 			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
 				<iconify-icon icon="solar:star-linear" width="20"></iconify-icon>
-				<span class="text-xs font-medium uppercase tracking-wider">Stars</span>
+				<span class="text-label font-normal tracking-[1.5px] uppercase">Stars</span>
 			</div>
 			{#if showStarsFilter}
 				<button
 					onclick={toggleStarsType}
-					class="text-left text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-amber-400"
+					class="text-left text-stat font-medium tracking-tight text-text-primary transition-colors group-hover:text-accent-yellow"
 					title="Click to toggle between own and all stars"
 				>
 					{formatNumber(displayStars)}
 				</button>
 			{:else}
-				<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-amber-400">
+				<span
+					class="text-stat font-medium tracking-tight text-text-primary transition-colors group-hover:text-accent-yellow"
+				>
 					{formatNumber(displayStars)}
 				</span>
 			{/if}
@@ -80,16 +70,16 @@
 
 	<!-- Community (Followers) -->
 	<div
-		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
-		onmousemove={handleMouseMove}
-		role="presentation"
+		class="card-glow group border border-border-default bg-bg-secondary p-5 transition-colors hover:border-border-highlight"
 	>
-		<div class="relative z-20 flex flex-col gap-1">
+		<div class="flex flex-col gap-1">
 			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
 				<iconify-icon icon="solar:users-group-rounded-linear" width="20"></iconify-icon>
-				<span class="text-xs font-medium uppercase tracking-wider">Community</span>
+				<span class="text-label font-normal tracking-[1.5px] uppercase">Community</span>
 			</div>
-			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-blue-400">
+			<span
+				class="text-stat font-medium tracking-tight text-text-primary transition-colors group-hover:text-accent-blue"
+			>
 				{formatNumber(profile.stats.followers)}
 			</span>
 		</div>
@@ -97,16 +87,16 @@
 
 	<!-- Years Active -->
 	<div
-		class="spotlight-card group rounded-xl border border-border-default bg-bg-secondary p-5 transition-colors duration-300 hover:border-border-highlight"
-		onmousemove={handleMouseMove}
-		role="presentation"
+		class="card-glow group border border-border-default bg-bg-secondary p-5 transition-colors hover:border-border-highlight"
 	>
-		<div class="relative z-20 flex flex-col gap-1">
+		<div class="flex flex-col gap-1">
 			<div class="mb-2 flex items-center gap-2 text-text-tertiary">
 				<iconify-icon icon="solar:clock-circle-linear" width="20"></iconify-icon>
-				<span class="text-xs font-medium uppercase tracking-wider">Years Exp</span>
+				<span class="text-label font-normal tracking-[1.5px] uppercase">Years Exp</span>
 			</div>
-			<span class="text-3xl font-medium tracking-tight text-white transition-colors group-hover:text-purple-400">
+			<span
+				class="text-stat font-medium tracking-tight text-text-primary transition-colors group-hover:text-accent-purple"
+			>
 				{formatNumber(profile.stats.yearsActive)}
 			</span>
 		</div>

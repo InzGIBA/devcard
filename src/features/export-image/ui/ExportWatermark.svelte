@@ -7,9 +7,9 @@
 
 	let { class: className = '' }: Props = $props();
 
-	const logoBgColor = $derived(themeState.isDark ? '#041B11' : '#D1FAE5');
-	const logoFillColor = $derived(themeState.isDark ? 'white' : '#065F46');
-	const textColorClass = $derived(themeState.isDark ? 'text-white/50' : 'text-black/40');
+	const logoBgColor = $derived(themeState.isDark ? '#1e2a30' : '#d8e8ee');
+	const logoFillColor = $derived(themeState.isDark ? '#88c0d0' : '#407a95');
+	const textColorClass = 'text-text-tertiary';
 </script>
 
 <div class="absolute right-5 bottom-4 flex items-center gap-2 {className}">

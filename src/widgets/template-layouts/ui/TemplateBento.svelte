@@ -52,7 +52,7 @@
 						class="h-20 w-20 rounded-full border-2 border-[var(--color-border-default)]"
 					/>
 					<div class="flex-1">
-						<h1 class="text-2xl font-bold text-[var(--color-text-primary)]">
+						<h1 class="text-stat font-medium tracking-tight text-[var(--color-text-primary)]">
 							{profile.user.name || profile.user.login}
 						</h1>
 						<p class="text-[var(--color-text-secondary)]">@{profile.user.login}</p>
@@ -97,7 +97,7 @@
 		<!-- Total Repos -->
 		<Card variant="elevated" padding="lg">
 			<div class="flex h-full flex-col items-center justify-center text-center">
-				<div class="text-4xl font-bold text-[var(--color-text-primary)]">
+				<div class="text-stat font-medium tracking-tight text-[var(--color-text-primary)]">
 					{profile.stats.totalRepos}
 				</div>
 				<div class="mt-1 text-xs tracking-wider text-[var(--color-text-secondary)] uppercase">
@@ -109,7 +109,7 @@
 		<!-- Total Stars -->
 		<Card variant="elevated" padding="lg">
 			<div class="flex h-full flex-col items-center justify-center text-center">
-				<div class="text-4xl font-bold text-[var(--color-accent-yellow)]">
+				<div class="text-stat font-medium tracking-tight text-[var(--color-accent-yellow)]">
 					{formatNumber(profile.stats.totalStars)}
 				</div>
 				<div class="mt-1 text-xs tracking-wider text-[var(--color-text-secondary)] uppercase">
@@ -121,7 +121,7 @@
 		<!-- Followers -->
 		<Card variant="elevated" padding="lg">
 			<div class="flex h-full flex-col items-center justify-center text-center">
-				<div class="text-4xl font-bold text-[var(--color-accent-green)]">
+				<div class="text-stat font-medium tracking-tight text-[var(--color-accent-green)]">
 					{formatNumber(profile.stats.followers)}
 				</div>
 				<div class="mt-1 text-xs tracking-wider text-[var(--color-text-secondary)] uppercase">
@@ -133,7 +133,7 @@
 		<!-- Years Active -->
 		<Card variant="elevated" padding="lg">
 			<div class="flex h-full flex-col items-center justify-center text-center">
-				<div class="text-4xl font-bold text-[var(--color-accent-purple)]">
+				<div class="text-stat font-medium tracking-tight text-[var(--color-accent-purple)]">
 					{profile.stats.yearsActive}
 				</div>
 				<div class="mt-1 text-xs tracking-wider text-[var(--color-text-secondary)] uppercase">
@@ -144,7 +144,11 @@
 
 		<!-- Language Chart (2 cols) -->
 		<Card variant="elevated" padding="lg" class="md:col-span-2">
-			<h3 class="mb-4 text-sm font-semibold text-[var(--color-text-secondary)]">Top Languages</h3>
+			<h3
+				class="mb-4 text-xs font-normal tracking-[1.5px] text-[var(--color-text-tertiary)] uppercase"
+			>
+				Top Languages
+			</h3>
 			<div class="flex items-center gap-6">
 				<!-- Mini donut -->
 				<svg width="80" height="80" class="flex-shrink-0 -rotate-90">
@@ -180,12 +184,14 @@
 
 		<!-- Productivity Insights (2 cols) -->
 		<Card variant="elevated" padding="lg" class="md:col-span-2">
-			<h3 class="mb-4 text-sm font-semibold text-[var(--color-text-secondary)]">
+			<h3
+				class="mb-4 text-xs font-normal tracking-[1.5px] text-[var(--color-text-tertiary)] uppercase"
+			>
 				Productivity Insights
 			</h3>
 			<div class="grid grid-cols-2 gap-4">
 				<!-- Streak -->
-				<div class="flex flex-col gap-1 rounded-xl bg-[var(--color-bg-primary)] p-4">
+				<div class="flex flex-col gap-1 bg-[var(--color-bg-primary)] p-4">
 					<div class="flex items-center gap-2 text-[var(--color-accent-orange)]">
 						<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path
@@ -203,14 +209,14 @@
 						</svg>
 						<span class="text-xs font-semibold tracking-wider uppercase">Current Streak</span>
 					</div>
-					<div class="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">
+					<div class="mt-2 text-stat font-medium tracking-tight text-[var(--color-text-primary)]">
 						{streak}
 						<span class="text-sm font-normal text-[var(--color-text-secondary)]">days</span>
 					</div>
 				</div>
 
 				<!-- Most Active -->
-				<div class="flex flex-col gap-1 rounded-xl bg-[var(--color-bg-primary)] p-4">
+				<div class="flex flex-col gap-1 bg-[var(--color-bg-primary)] p-4">
 					<div class="flex items-center gap-2 text-[var(--color-accent-green)]">
 						<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path
@@ -223,7 +229,7 @@
 						<span class="text-xs font-semibold tracking-wider uppercase">Top Day</span>
 					</div>
 					{#if activeDay}
-						<div class="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">
+						<div class="mt-2 text-stat font-medium tracking-tight text-[var(--color-text-primary)]">
 							{new Date(activeDay.date).toLocaleDateString('en-US', { weekday: 'short' })}
 							<span class="text-sm font-normal text-[var(--color-text-secondary)]">
 								({activeDay.contributionCount})
@@ -259,7 +265,7 @@
 			<div class="md:col-span-2 lg:col-span-4">
 				<div class="mb-4 flex items-center justify-between">
 					<h3
-						class="flex items-center gap-2 text-lg font-semibold text-[var(--color-text-primary)]"
+						class="flex items-center gap-2 text-heading font-medium tracking-tight text-[var(--color-text-primary)]"
 					>
 						<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path

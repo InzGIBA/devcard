@@ -16,13 +16,13 @@
 <div
 	class="group rounded-lg border border-border-default bg-bg-secondary p-4 transition-all hover:border-border-subtle hover:bg-bg-tertiary"
 >
-	<h3 class="font-semibold text-text-primary">
+	<h3 class="font-medium text-text-primary">
 		{#if publication.url}
 			<a
 				href={publication.url}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="inline-flex items-center gap-1 text-accent-green hover:underline"
+				class="inline-flex items-center gap-1 text-accent-blue hover:underline"
 			>
 				{publication.name || 'Publication'}
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

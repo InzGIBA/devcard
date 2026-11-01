@@ -12,10 +12,10 @@
 	class="group rounded-lg border border-border-default bg-bg-secondary p-4 transition-all hover:border-border-subtle hover:bg-bg-tertiary"
 >
 	<div class="flex items-center justify-between">
-		<h3 class="font-semibold text-text-primary">{skill.name || 'Skill'}</h3>
+		<h3 class="font-medium text-text-primary">{skill.name || 'Skill'}</h3>
 		{#if skill.level}
 			<span
-				class="rounded-full bg-accent-green/10 px-2.5 py-1 text-xs font-medium text-accent-green"
+				class="border border-accent-blue/30 bg-accent-blue/10 px-1.5 py-0.5 text-label tracking-wider text-accent-blue uppercase"
 			>
 				{skill.level}
 			</span>
@@ -26,7 +26,7 @@
 		<div class="mt-3 flex flex-wrap gap-2">
 			{#each skill.keywords as keyword (keyword)}
 				<span
-					class="rounded-md bg-bg-tertiary px-2.5 py-1 text-xs text-text-secondary transition-colors hover:bg-accent-green/10 hover:text-accent-green"
+					class="bg-bg-tertiary px-1.5 py-0.5 text-label tracking-wider text-text-secondary uppercase transition-colors hover:bg-accent-blue/10 hover:text-accent-blue"
 				>
 					{keyword}
 				</span>

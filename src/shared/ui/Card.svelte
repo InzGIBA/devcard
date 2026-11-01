@@ -19,13 +19,12 @@
 		onclick
 	}: Props = $props();
 
-	const baseClasses = 'rounded-[var(--radius-md)] transition-all';
+	const baseClasses = 'card-glow transition-colors';
 
 	const variantClasses = {
-		default: 'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl',
-		elevated:
-			'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] shadow-[var(--shadow-md)] rounded-xl',
-		outline: 'bg-transparent border border-[var(--color-border-default)] rounded-xl',
+		default: 'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)]',
+		elevated: 'bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)]',
+		outline: 'bg-transparent border border-[var(--color-border-default)]',
 		ghost: 'bg-transparent'
 	};
 
@@ -37,9 +36,7 @@
 	};
 
 	const hoverClasses = $derived(
-		hover
-			? 'cursor-pointer hover:border-[var(--color-border-subtle)] hover:bg-[var(--color-bg-tertiary)]'
-			: ''
+		hover ? 'cursor-pointer hover:border-[var(--color-border-highlight)]' : ''
 	);
 
 	const classes = $derived(

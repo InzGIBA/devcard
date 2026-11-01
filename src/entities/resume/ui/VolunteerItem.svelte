@@ -18,7 +18,7 @@
 >
 	<div class="flex items-start justify-between">
 		<div class="flex-1">
-			<h3 class="text-lg font-semibold text-text-primary">{volunteer.position || 'Volunteer'}</h3>
+			<h3 class="text-lg font-medium text-text-primary">{volunteer.position || 'Volunteer'}</h3>
 			<div class="mt-1 flex flex-wrap items-center gap-2 text-sm text-text-secondary">
 				{#if volunteer.organization}
 					{#if volunteer.url}
@@ -26,7 +26,7 @@
 							href={volunteer.url}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="font-medium text-accent-green hover:underline"
+							class="font-medium text-accent-blue hover:underline"
 						>
 							{volunteer.organization}
 						</a>

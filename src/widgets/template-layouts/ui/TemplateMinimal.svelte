@@ -68,7 +68,7 @@
 					target="_blank"
 					rel="noopener noreferrer"
 					data-sveltekit-preload-data="off"
-					class="text-accent-green hover:underline"
+					class="text-accent-blue hover:underline"
 				>
 					{profile.user.websiteUrl.replace(/^https?:\/\//, '')}
 				</a>
@@ -80,21 +80,21 @@
 	<section class="mb-16">
 		<div class="flex flex-wrap items-center justify-center gap-8 text-center">
 			<div>
-				<div class="text-3xl font-bold text-text-primary">
+				<div class="text-stat font-medium text-text-primary">
 					{profile.stats.totalRepos}
 				</div>
 				<div class="text-sm text-text-secondary">Repositories</div>
 			</div>
 			<div class="h-12 w-px bg-border-default"></div>
 			<div>
-				<div class="text-3xl font-bold text-text-primary">
+				<div class="text-stat font-medium text-text-primary">
 					{formatNumber(profile.stats.totalStars)}
 				</div>
 				<div class="text-sm text-text-secondary">Stars</div>
 			</div>
 			<div class="h-12 w-px bg-border-default"></div>
 			<div>
-				<div class="text-3xl font-bold text-text-primary">
+				<div class="text-stat font-medium text-text-primary">
 					{formatNumber(profile.stats.followers)}
 				</div>
 				<div class="text-sm text-text-secondary">Followers</div>
@@ -102,7 +102,7 @@
 			{#if totalContributions > 0}
 				<div class="h-12 w-px bg-border-default"></div>
 				<div>
-					<div class="text-3xl font-bold text-accent-green">
+					<div class="text-stat font-medium text-accent-blue">
 						{formatNumber(totalContributions)}
 					</div>
 					<div class="text-sm text-text-secondary">Contributions</div>
@@ -160,7 +160,7 @@
 					>
 						<div class="flex items-start justify-between">
 							<div>
-								<h3 class="text-lg font-semibold text-accent-green group-hover:underline">
+								<h3 class="text-base font-medium text-accent-blue group-hover:underline">
 									{repo.name}
 								</h3>
 								{#if repo.description}
@@ -173,7 +173,7 @@
 								{#if repo.primaryLanguage}
 									<span class="flex items-center gap-1">
 										<span
-											class="h-2 w-2 rounded-full"
+											class="inline-block h-[5px] w-[5px] rounded-full"
 											style="background-color: {repo.primaryLanguage.color}"
 										></span>
 										{repo.primaryLanguage.name}
@@ -204,7 +204,7 @@
 				target="_blank"
 				rel="noopener noreferrer"
 				data-sveltekit-preload-data="off"
-				class="text-accent-green hover:underline"
+				class="text-accent-blue hover:underline"
 			>
 				View on GitHub →
 			</a>

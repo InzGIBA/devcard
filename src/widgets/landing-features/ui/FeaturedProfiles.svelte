@@ -26,7 +26,7 @@
 				<button
 					type="button"
 					onclick={() => handleProfileClick(profile.username)}
-					class="group relative cursor-pointer overflow-hidden rounded-2xl border border-border-default bg-bg-tertiary p-6 text-left transition-all hover:border-border-highlight hover:shadow-xl"
+					class="group relative cursor-pointer border border-border-default bg-bg-tertiary p-6 text-left transition-colors hover:border-border-highlight"
 				>
 					<div class="flex items-center gap-4">
 						<div class="relative">
@@ -35,12 +35,12 @@
 								alt={profile.name}
 								class="h-12 w-12 rounded-full border border-border-subtle bg-bg-secondary"
 							/>
-							<div
-								class="absolute -right-1 -bottom-1 rounded-full border-2 border-bg-tertiary bg-accent-green p-1"
-							></div>
+							<span
+								class="absolute -right-0.5 -bottom-0.5 inline-block h-2.5 w-2.5 rounded-full border-2 border-bg-tertiary bg-smui-green"
+							></span>
 						</div>
 						<div>
-							<h3 class="font-semibold text-text-primary group-hover:text-accent-green">
+							<h3 class="font-medium text-text-primary group-hover:text-accent-blue">
 								{profile.name}
 							</h3>
 							<p class="text-xs text-text-tertiary">@{profile.username}</p>
