@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/private';
 const GITHUB_TOKEN = env.GH_TOKEN;
 const LINKEDIN_USERNAME = env.LINKEDIN_USERNAME;
 const TELEGRAM_USERNAME = env.TELEGRAM_USERNAME;
+const CONTACT_EMAIL = env.CONTACT_EMAIL;
 const JSONRESUME_URL = env.JSONRESUME_URL;
 import type {
 	GitHubProfile,
@@ -414,7 +415,7 @@ async function transformGraphQLResponse(data: GraphQLUserResponse): Promise<GitH
 			company: user.company,
 			websiteUrl: user.websiteUrl,
 			twitterUsername: user.twitterUsername,
-			email: user.email,
+			email: user.email || CONTACT_EMAIL || null,
 			linkedinUsername: LINKEDIN_USERNAME || null,
 			telegramUsername: TELEGRAM_USERNAME || null,
 			followers: user.followers.totalCount,
@@ -490,7 +491,7 @@ async function transformRESTResponse(
 			company: userData.company,
 			websiteUrl: userData.blog,
 			twitterUsername: userData.twitter_username,
-			email: userData.email,
+			email: userData.email || CONTACT_EMAIL || null,
 			linkedinUsername: LINKEDIN_USERNAME || null,
 			telegramUsername: TELEGRAM_USERNAME || null,
 			followers: userData.followers,

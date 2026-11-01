@@ -30,8 +30,8 @@
 
 	// Copy email function
 	function copyEmail() {
-		const email = profile.user.email || `${profile.user.login}@github.com`;
-		navigator.clipboard.writeText(email);
+		if (!profile.user.email) return;
+		navigator.clipboard.writeText(profile.user.email);
 	}
 </script>
 
@@ -118,22 +118,24 @@
 		{/if}
 
 		<!-- Email (clickable to copy) -->
-		<button
-			onclick={copyEmail}
-			class="group flex w-full items-center gap-3 text-left text-text-tertiary transition-colors duration-200 hover:text-text-primary"
-		>
-			<iconify-icon
-				icon="solar:letter-linear"
-				width="18"
-				class="transition-colors group-hover:text-text-primary"
-			></iconify-icon>
-			<span class="truncate">{profile.user.email || `${profile.user.login}@github.com`}</span>
-			<iconify-icon
-				icon="solar:copy-linear"
-				width="14"
-				class="ml-auto opacity-0 transition-opacity group-hover:opacity-100"
-			></iconify-icon>
-		</button>
+		{#if profile.user.email}
+			<button
+				onclick={copyEmail}
+				class="group flex w-full items-center gap-3 text-left text-text-tertiary transition-colors duration-200 hover:text-text-primary"
+			>
+				<iconify-icon
+					icon="solar:letter-linear"
+					width="18"
+					class="transition-colors group-hover:text-text-primary"
+				></iconify-icon>
+				<span class="truncate">{profile.user.email}</span>
+				<iconify-icon
+					icon="solar:copy-linear"
+					width="14"
+					class="ml-auto opacity-0 transition-opacity group-hover:opacity-100"
+				></iconify-icon>
+			</button>
+		{/if}
 
 		<!-- Social Links -->
 		<div class="flex gap-4 pt-2">
