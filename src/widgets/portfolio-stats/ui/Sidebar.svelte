@@ -204,7 +204,11 @@
 				{ label: 'stars', value: formatNumber(profile.stats.totalStars), tone: 'yellow' },
 				{ label: 'followers', value: formatNumber(profile.stats.followers), tone: 'green' },
 				{ label: 'following', value: formatNumber(profile.stats.following), tone: 'purple' },
-				{ label: 'years', value: formatNumber(profile.stats.yearsActive), tone: 'yellow' }
+				{
+					label: 'on github',
+					value: `${profile.stats.yearsActive} yrs`,
+					tone: 'yellow'
+				}
 			]}
 		/>
 	</div>
