@@ -16,6 +16,22 @@
 	// Get the last 52 weeks of contributions
 	const weeks = $derived(calendar?.weeks.slice(-52) ?? []);
 
+	// The first and last weeks of the window are often partial (the calendar
+	// only contains real days). Pad them so every column renders 7 cells and
+	// the grid stays a solid rectangle.
+	const normalizedWeeks = $derived(
+		weeks.map((week) => {
+			const days = week.contributionDays;
+			const startsOnSunday = !days[0] || new Date(`${days[0].date}T00:00:00Z`).getUTCDay() === 0;
+			const missing = 7 - days.length;
+			return {
+				days,
+				padTop: missing > 0 && !startsOnSunday ? missing : 0,
+				padBottom: missing > 0 && startsOnSunday ? missing : 0
+			};
+		})
+	);
+
 	// Last 30 days for the header sparkline
 	const last30 = $derived(
 		weeks
@@ -49,9 +65,10 @@
 		return 4;
 	}
 
-	// SMUI heatmap: five-step primary ramp — empty cells take surface-2
+	// SMUI heatmap: five-step primary ramp. Zero days get a subtle border so
+	// they read as cells instead of holes in the grid.
 	const LEVEL_CLASSES = [
-		'bg-bg-tertiary border-transparent',
+		'bg-bg-tertiary border-border-muted',
 		'bg-accent-blue/25 border-transparent',
 		'bg-accent-blue/45 border-transparent',
 		'bg-accent-blue/70 border-transparent',
@@ -106,9 +123,13 @@
 					<span>sa</span>
 				</div>
 				<div class="flex gap-[3px] overflow-x-auto">
-					{#each weeks as week, w (w)}
+					{#each normalizedWeeks as week, w (w)}
 						<div class="flex flex-col gap-[3px]">
-							{#each week.contributionDays as day (day.date)}
+							{#each Array.from({ length: week.padTop }) as _, i (i)}
+								<span class="h-[9px] w-[9px] bg-bg-canvas" aria-hidden="true" title="No data"
+								></span>
+							{/each}
+							{#each week.days as day (day.date)}
 								{@const level = getContributionLevel(day.contributionCount)}
 								<span
 									class="h-[9px] w-[9px] cursor-pointer border transition-transform duration-200 hover:scale-125 {LEVEL_CLASSES[
@@ -117,6 +138,10 @@
 									onmouseenter={(e) => showTooltip(e, day.contributionCount)}
 									onmouseleave={hideTooltip}
 									role="gridcell"
+								></span>
+							{/each}
+							{#each Array.from({ length: week.padBottom }) as _, i (i)}
+								<span class="h-[9px] w-[9px] bg-bg-canvas" aria-hidden="true" title="No data"
 								></span>
 							{/each}
 						</div>
