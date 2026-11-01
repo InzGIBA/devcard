@@ -109,30 +109,32 @@
 		</div>
 	</div>
 
-	<!-- SMUI terminal heatmap: weeks x week-days grid, fixed 9px cells -->
+	<!-- SMUI terminal heatmap: weeks x week-days grid, fluid square cells -->
 	<div class="border border-border-default bg-bg-secondary p-3">
 		{#if calendar}
 			<div class="flex items-start gap-1.5 select-none">
 				<!-- Weekday labels: GitHub weeks start on Sunday -->
 				<div
-					class="flex h-[81px] flex-col justify-between py-px text-label tracking-wider text-text-tertiary/70 uppercase"
+					class="flex flex-col justify-between self-stretch py-px text-label tracking-wider text-text-tertiary/70 uppercase"
 				>
 					<span>su</span>
 					<span>tu</span>
 					<span>th</span>
 					<span>sa</span>
 				</div>
-				<div class="flex gap-[3px] overflow-x-auto">
+				<!-- Week columns share the width equally; cells keep a 9px floor,
+				     below which the strip scrolls horizontally -->
+				<div class="flex min-w-0 flex-1 gap-[3px] overflow-x-auto">
 					{#each normalizedWeeks as week, w (w)}
-						<div class="flex flex-col gap-[3px]">
+						<div class="flex min-w-[9px] flex-1 flex-col gap-[3px]">
 							{#each Array.from({ length: week.padTop }) as _, i (i)}
-								<span class="h-[9px] w-[9px] bg-bg-canvas" aria-hidden="true" title="No data"
+								<span class="aspect-square w-full bg-bg-canvas" aria-hidden="true" title="No data"
 								></span>
 							{/each}
 							{#each week.days as day (day.date)}
 								{@const level = getContributionLevel(day.contributionCount)}
 								<span
-									class="h-[9px] w-[9px] cursor-pointer border transition-transform duration-200 hover:scale-125 {LEVEL_CLASSES[
+									class="aspect-square w-full cursor-pointer border transition-transform duration-200 hover:scale-125 {LEVEL_CLASSES[
 										level
 									]}"
 									onmouseenter={(e) => showTooltip(e, day.contributionCount)}
@@ -141,7 +143,7 @@
 								></span>
 							{/each}
 							{#each Array.from({ length: week.padBottom }) as _, i (i)}
-								<span class="h-[9px] w-[9px] bg-bg-canvas" aria-hidden="true" title="No data"
+								<span class="aspect-square w-full bg-bg-canvas" aria-hidden="true" title="No data"
 								></span>
 							{/each}
 						</div>
