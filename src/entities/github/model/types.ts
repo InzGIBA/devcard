@@ -188,6 +188,7 @@ export interface GraphQLUserResponse {
 					owner: { login: string };
 					primaryLanguage: { name: string; color: string } | null;
 					stargazerCount: number;
+					isPrivate: boolean;
 				};
 				contributions: {
 					totalCount: number;
@@ -198,6 +199,7 @@ export interface GraphQLUserResponse {
 					nameWithOwner: string;
 					owner: { login: string };
 					primaryLanguage: { name: string; color: string } | null;
+					isPrivate: boolean;
 				};
 				contributions: {
 					totalCount: number;

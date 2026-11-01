@@ -100,6 +100,7 @@ query GetUserProfile($username: String!) {
           owner { login }
           primaryLanguage { name color }
           stargazerCount
+          isPrivate
         }
         contributions {
           totalCount
@@ -110,6 +111,7 @@ query GetUserProfile($username: String!) {
           nameWithOwner
           owner { login }
           primaryLanguage { name color }
+          isPrivate
         }
         contributions {
           totalCount
@@ -310,28 +312,34 @@ async function transformGraphQLResponse(data: GraphQLUserResponse): Promise<GitH
 		createdAt: repo.createdAt
 	}));
 
-	const pinnedRepositories: GitHubRepository[] = user.pinnedItems.nodes.map((repo) => ({
-		name: repo.name,
-		description: repo.description,
-		url: repo.url,
-		homepageUrl: repo.homepageUrl,
-		stargazerCount: repo.stargazerCount,
-		forkCount: repo.forkCount,
-		primaryLanguage: repo.primaryLanguage,
-		isPrivate: repo.isPrivate,
-		isFork: repo.isFork,
-		isArchived: repo.isArchived,
-		topics: repo.repositoryTopics.nodes.map((t) => t.topic.name),
-		pushedAt: repo.pushedAt,
-		createdAt: repo.createdAt
-	}));
+	// Never expose private pinned repositories (possible when the build
+	// token can see them)
+	const pinnedRepositories: GitHubRepository[] = user.pinnedItems.nodes
+		.filter((repo) => !repo.isPrivate)
+		.map((repo) => ({
+			name: repo.name,
+			description: repo.description,
+			url: repo.url,
+			homepageUrl: repo.homepageUrl,
+			stargazerCount: repo.stargazerCount,
+			forkCount: repo.forkCount,
+			primaryLanguage: repo.primaryLanguage,
+			isPrivate: repo.isPrivate,
+			isFork: repo.isFork,
+			isArchived: repo.isArchived,
+			topics: repo.repositoryTopics.nodes.map((t) => t.topic.name),
+			pushedAt: repo.pushedAt,
+			createdAt: repo.createdAt
+		}));
 
 	// Process external contributions (repos not owned by the user)
 	const userLogin = user.login.toLowerCase();
 	const externalContributionsMap = new Map<string, ExternalContribution>();
 
-	// Process PR contributions to external repos
+	// Process PR contributions to external repos (skip private ones —
+	// they are only visible because the build token has access to them)
 	for (const prContrib of user.contributionsCollection.pullRequestContributionsByRepository) {
+		if (prContrib.repository.isPrivate) continue;
 		const ownerLogin = prContrib.repository.owner.login.toLowerCase();
 		if (ownerLogin !== userLogin) {
 			const repoKey = prContrib.repository.nameWithOwner;
@@ -351,8 +359,9 @@ async function transformGraphQLResponse(data: GraphQLUserResponse): Promise<GitH
 		}
 	}
 
-	// Process commit contributions to external repos
+	// Process commit contributions to external repos (skip private ones)
 	for (const commitContrib of user.contributionsCollection.commitContributionsByRepository) {
+		if (commitContrib.repository.isPrivate) continue;
 		const ownerLogin = commitContrib.repository.owner.login.toLowerCase();
 		if (ownerLogin !== userLogin) {
 			const repoKey = commitContrib.repository.nameWithOwner;
