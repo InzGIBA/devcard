@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$entities/github/model/types';
-	import { formatJoinDate, generateProfileTags } from '$shared/lib/github-transform';
+	import { formatJoinDate, formatNumber, generateProfileTags } from '$shared/lib/github-transform';
+	import DotLeaderList from '$shared/ui/DotLeaderList.svelte';
 	import { onMount } from 'svelte';
 
 	interface Props {
@@ -194,26 +195,16 @@
 		Follow on GitHub
 	</a>
 
-	<!-- Followers Stats -->
-	<div class="flex items-center justify-center gap-4 text-xs text-text-tertiary lg:justify-start">
-		<a
-			href="https://github.com/{profile.user.login}?tab=followers"
-			target="_blank"
-			rel="noopener noreferrer"
-			data-sveltekit-preload-data="off"
-			class="flex items-center gap-1 transition-colors hover:text-text-primary"
-		>
-			<span class="font-medium text-text-primary">{profile.stats.followers}</span> followers
-		</a>
-		<span>·</span>
-		<a
-			href="https://github.com/{profile.user.login}?tab=following"
-			target="_blank"
-			rel="noopener noreferrer"
-			data-sveltekit-preload-data="off"
-			class="flex items-center gap-1 transition-colors hover:text-text-primary"
-		>
-			<span class="font-medium text-text-primary">{profile.stats.following}</span> following
-		</a>
+	<!-- Stats Readout (SMUI dot leaders) -->
+	<div class="w-full border-t border-border-default pt-4">
+		<DotLeaderList
+			width={26}
+			rows={[
+				{ label: 'repos', value: formatNumber(profile.stats.totalRepos), tone: 'primary' },
+				{ label: 'stars', value: formatNumber(profile.stats.totalStars), tone: 'yellow' },
+				{ label: 'followers', value: formatNumber(profile.stats.followers), tone: 'green' },
+				{ label: 'following', value: formatNumber(profile.stats.following), tone: 'purple' }
+			]}
+		/>
 	</div>
 </aside>

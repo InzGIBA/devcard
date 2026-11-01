@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$entities/github/model/types';
 	import { formatNumber } from '$shared/lib/github-transform';
+	import AsciiSparkline from '$shared/ui/AsciiSparkline.svelte';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -17,6 +18,9 @@
 
 	// Flatten all days for grid display
 	const allDays = $derived(weeks.flatMap((week) => week.contributionDays));
+
+	// Last 30 days for the header sparkline
+	const last30 = $derived(allDays.slice(-30).map((day) => day.contributionCount));
 
 	// Tooltip state
 	let tooltip = $state<{ text: string; x: number; y: number } | null>(null);
@@ -72,11 +76,21 @@
 			<iconify-icon icon="solar:graph-new-linear" class="text-tertiary"></iconify-icon>
 			Contributions
 		</h2>
-		<span
-			class="border border-border-default bg-bg-tertiary px-2 py-1 text-xs font-medium text-text-tertiary"
-		>
-			{formatNumber(totalContributions)} in last year
-		</span>
+		<div class="flex items-center gap-3">
+			<span
+				class="hidden items-center gap-2 sm:flex"
+				title="Contributions, last 30 days"
+				aria-hidden="true"
+			>
+				<AsciiSparkline values={last30} />
+				<span class="text-label tracking-wider text-text-tertiary uppercase">30d</span>
+			</span>
+			<span
+				class="border border-border-default bg-bg-tertiary px-2 py-1 text-xs font-medium text-text-tertiary"
+			>
+				{formatNumber(totalContributions)} in last year
+			</span>
+		</div>
 	</div>
 
 	<div class="group relative border border-border-default bg-bg-secondary p-1">
@@ -88,19 +102,44 @@
 
 			{#if calendar}
 				<div class="min-w-[700px] p-2">
-					<div class="contribution-grid h-[120px] w-full">
-						{#each allDays as day (day.date)}
-							{@const level = getContributionLevel(day.contributionCount)}
-							<div
-								class="cursor-pointer transition-transform duration-200 hover:z-10 hover:scale-125 {getContributionColorClass(
-									level
-								)}"
-								style="width: 100%; height: 100%;"
-								onmouseenter={(e) => showTooltip(e, day.contributionCount)}
-								onmouseleave={hideTooltip}
-								role="gridcell"
-							></div>
-						{/each}
+					<div class="flex items-start gap-1.5">
+						<!-- Weekday labels: GitHub weeks start on Sunday -->
+						<div
+							class="flex h-[120px] flex-col justify-between py-px text-label tracking-wider text-text-tertiary/70 uppercase"
+						>
+							<span>su</span>
+							<span>tu</span>
+							<span>th</span>
+							<span>sa</span>
+						</div>
+						<div class="contribution-grid h-[120px] w-full">
+							{#each allDays as day (day.date)}
+								{@const level = getContributionLevel(day.contributionCount)}
+								<div
+									class="cursor-pointer transition-transform duration-200 hover:z-10 hover:scale-125 {getContributionColorClass(
+										level
+									)}"
+									style="width: 100%; height: 100%;"
+									onmouseenter={(e) => showTooltip(e, day.contributionCount)}
+									onmouseleave={hideTooltip}
+									role="gridcell"
+								></div>
+							{/each}
+						</div>
+					</div>
+					<!-- SMUI heatmap footer: summary + less/more legend -->
+					<div
+						class="mt-2 flex items-center justify-between text-label tracking-wider text-text-tertiary uppercase"
+					>
+						<span>{weeks.length} weeks // {formatNumber(totalContributions)} contributions</span>
+						<span class="flex items-center gap-1">
+							less
+							{#each [0, 1, 2, 3, 4] as level (level)}
+								<span class="inline-block h-[9px] w-[9px] {getContributionColorClass(level)}"
+								></span>
+							{/each}
+							more
+						</span>
 					</div>
 				</div>
 			{:else}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$shared/ui/Button.svelte';
+	import BootSequence from '$shared/ui/BootSequence.svelte';
 	import { validateGitHubUsername } from '$entities/portfolio/model/types';
 	import { formatNumber } from '$shared/lib/github-transform';
 	import { navigationState } from '$appConfig/navigation-store.svelte';
@@ -118,5 +119,21 @@
 				>whoisyurii</button
 			>
 		</p>
+
+		<!-- SMUI boot sequence: the generation pipeline, terminal-style -->
+		<div class="animate-fade-in-delay-2 mx-auto mt-10 max-w-130">
+			<BootSequence
+				title="devcard bios v1.0"
+				prompt="devcard"
+				charMs={12}
+				lines={[
+					'init devcard v1.0',
+					'fetch github profile ........ [ OK ]',
+					'parse contributions .......... [ OK ]',
+					'merge cv data ................ [ OK ]',
+					'render portfolio ............. [ OK ]'
+				]}
+			/>
+		</div>
 	</div>
 </section>
