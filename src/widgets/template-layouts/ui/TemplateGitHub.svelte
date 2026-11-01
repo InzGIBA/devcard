@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { GitHubProfile } from '$entities/github/model/types';
 	import Sidebar from '$widgets/portfolio-stats/ui/Sidebar.svelte';
-	import StatsGrid from '$widgets/portfolio-stats/ui/StatsGrid.svelte';
 	import ContributionGraph from '$entities/github/ui/ContributionGraph.svelte';
 	import ExternalContributions from '$widgets/portfolio-content/ui/ExternalContributions.svelte';
 	import LanguageChart from '$entities/github/ui/LanguageChart.svelte';
@@ -64,9 +63,6 @@
 
 		<!-- Main Content -->
 		<main class="space-y-12">
-			<!-- Stats Grid -->
-			<StatsGrid {profile} />
-
 			<!-- Contributions -->
 			{#if profile.contributions}
 				<ContributionGraph {profile} />
