@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LanguageStats } from '$entities/github/model/types';
-	import RetroProgress from '$shared/ui/RetroProgress.svelte';
 
 	interface Props {
 		languages: LanguageStats[];
@@ -9,9 +8,6 @@
 	}
 
 	let { languages, bio: _bio, class: className = '' }: Props = $props();
-
-	// Top languages shown as SMUI retro progress bars
-	const topLanguages = $derived(languages.slice(0, 5));
 
 	// Convert hex to RGB for dynamic styling
 	function hexToRgb(hex: string): string {
@@ -44,30 +40,4 @@
 			</span>
 		{/each}
 	</div>
-
-	<!-- SMUI retro progress bars: language share -->
-	{#if topLanguages.length > 0}
-		<div class="mt-4 space-y-1.5 border-t border-border-muted pt-4">
-			{#each topLanguages as lang (lang.name)}
-				<div class="flex items-center gap-2">
-					<span
-						class="w-20 shrink-0 truncate text-label tracking-wider text-text-tertiary uppercase"
-						title={lang.name}
-					>
-						{lang.name}
-					</span>
-					<RetroProgress
-						value={lang.percentage}
-						width={14}
-						showPercent={false}
-						color={lang.color}
-						class="flex-1"
-					/>
-					<span class="w-11 shrink-0 text-right text-label text-text-secondary tabular-nums">
-						{lang.percentage.toFixed(1)}%
-					</span>
-				</div>
-			{/each}
-		</div>
-	{/if}
 </div>
