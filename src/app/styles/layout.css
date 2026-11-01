@@ -389,24 +389,6 @@ body:has(.page-enter) {
 	animation: blink 1s step-end infinite;
 }
 
-/* SMUI ticker tape marquee */
-@keyframes marquee {
-	0% {
-		transform: translateX(0);
-	}
-	100% {
-		transform: translateX(-50%);
-	}
-}
-
-.ticker-marquee {
-	animation: marquee 32s linear infinite;
-}
-
-.ticker-marquee:hover {
-	animation-play-state: paused;
-}
-
 /* Contribution Grid */
 .contribution-grid {
 	display: grid;

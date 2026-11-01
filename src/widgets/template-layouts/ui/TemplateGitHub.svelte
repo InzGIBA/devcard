@@ -13,8 +13,6 @@
 	import Volunteer from '$widgets/portfolio-content/ui/Volunteer.svelte';
 	import Awards from '$widgets/portfolio-content/ui/Awards.svelte';
 	import Publications from '$widgets/portfolio-content/ui/Publications.svelte';
-	import TickerTape from '$shared/ui/TickerTape.svelte';
-	import { formatNumber } from '$shared/lib/github-transform';
 
 	interface Props {
 		profile: GitHubProfile;
@@ -34,29 +32,9 @@
 			? [...profile.pinnedRepositories].sort((a, b) => b.stargazerCount - a.stargazerCount)
 			: profile.pinnedRepositories
 	);
-
-	// Real activity readouts for the SMUI ticker tape
-	const activityItems = $derived.by(() => {
-		const c = profile.contributions;
-		if (!c) return [];
-		return [
-			{ symbol: 'commits', value: formatNumber(c.totalCommitContributions) },
-			{ symbol: 'pull reqs', value: formatNumber(c.totalPullRequestContributions) },
-			{ symbol: 'issues', value: formatNumber(c.totalIssueContributions) },
-			{ symbol: 'reviews', value: formatNumber(c.totalPullRequestReviewContributions) },
-			c.externalPRCount ? { symbol: 'ext prs', value: formatNumber(c.externalPRCount) } : null,
-			c.externalCommitCount
-				? { symbol: 'ext commits', value: formatNumber(c.externalCommitCount) }
-				: null,
-			{ symbol: 'total', value: formatNumber(c.contributionCalendar.totalContributions) }
-		].filter((item): item is { symbol: string; value: string } => item !== null);
-	});
 </script>
 
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 {className}">
-	{#if activityItems.length > 0}
-		<TickerTape label="activity" items={activityItems} class="mb-8" />
-	{/if}
 	<div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
 		<!-- Sidebar -->
 		<Sidebar {profile} />
